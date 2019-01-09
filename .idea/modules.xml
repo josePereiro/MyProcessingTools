@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GObjects/ProcessingTools.GObjects.iml" filepath="$PROJECT_DIR$/GObjects/ProcessingTools.GObjects.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PaintCode/ProcessingTools.PaintCode.iml" filepath="$PROJECT_DIR$/PaintCode/ProcessingTools.PaintCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GObjects/ProcessingTools.GObjects.iml" filepath="$PROJECT_DIR$/GObjects/ProcessingTools.GObjects.iml" group="ProcessingTools" />
+      <module fileurl="file://$PROJECT_DIR$/PaintCode/ProcessingTools.PaintCode.iml" filepath="$PROJECT_DIR$/PaintCode/ProcessingTools.PaintCode.iml" group="ProcessingTools" />
+      <module fileurl="file://$PROJECT_DIR$/ProcessingTools.Tests/ProcessingTools.Tests.iml" filepath="$PROJECT_DIR$/ProcessingTools.Tests/ProcessingTools.Tests.iml" group="ProcessingTools" />
     </modules>
   </component>
 </project>
