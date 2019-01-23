@@ -4,6 +4,8 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import BuiltIn.*;
+
 public class Line extends GObject {
 
     protected int x1;
@@ -28,12 +30,27 @@ public class Line extends GObject {
         context.stroke(color);
         context.strokeWeight(weight);
         context.line(x, y, x1, y1);
+
     }
 
     @Override
     public boolean belong(int x, int y) {
 
-        return false;
+        float d = weight / 2;
+        if (Point.distance(x, y, this.x, this.y) <= d) return true;
+        if (Point.distance(x, y, x1, y1) <= d) return true;
+
+        Point p1 = BuiltIn.GeometryTools.Points.getPerpendicular(this.x, this.y, x1, y1, d);
+        Point p2 = BuiltIn.GeometryTools.Points.getCollinear(this.x, this.y, p1.x, p1.y, -d);
+        Point p3 = BuiltIn.GeometryTools.Points.getPerpendicular(x1, y1, this.x, this.y, d);
+        Point p4 = BuiltIn.GeometryTools.Points.getCollinear(x1, y1, p3.x, p3.y, -d);
+
+        Polygon polygon = new Polygon();
+        polygon.addPoint(p1.x, p1.y);
+        polygon.addPoint(p2.x, p2.y);
+        polygon.addPoint(p3.x, p3.y);
+        polygon.addPoint(p4.x, p4.y);
+        return polygon.contains(x, y);
     }
 
     @Override

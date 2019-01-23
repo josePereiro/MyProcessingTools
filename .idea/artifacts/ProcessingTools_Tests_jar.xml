@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProcessingTools.Tests:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProcessingTools_Tests_jar</output-path>
+    <root id="archive" name="ProcessingTools.Tests.jar">
+      <element id="module-output" name="ProcessingTools.Tests" />
+      <element id="module-output" name="ProcessingTools.PaintCode" />
+      <element id="module-output" name="ProcessingTools.Common" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../MyJavaTools/out/artifacts/BuiltIn_jar/BuiltIn.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../Libraries_and_Dependencies/Java/ProcessingCore/core.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
