@@ -1,13 +1,15 @@
-package P2DPrimitiveWrappers;
+package PGUIObject;
 
 import Common.Tools;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
 import java.util.ArrayList;
 
-public class MultiLineTextBox extends RectangleWrapper {
+public class MultiLineTextBox extends PGUIObject {
 
-    private int MaxVisibleLinesCount;
+    private int maxVisibleLinesCount;
     private final ArrayList<SingleLineTextBox> textBoxes;
     private final ArrayList<String> textAsLines;
     private final StringBuilder textSB;
@@ -19,7 +21,7 @@ public class MultiLineTextBox extends RectangleWrapper {
                             float x, float y, float width,
                             float height, PApplet context) {
         super(x, y, width, height, context);
-        this.MaxVisibleLinesCount = MaxVisibleLinesCount;
+        this.maxVisibleLinesCount = MaxVisibleLinesCount;
         firstVisibleLine = 0;
         textSB = new StringBuilder();
         textBoxes = new ArrayList<>();
@@ -28,12 +30,12 @@ public class MultiLineTextBox extends RectangleWrapper {
     }
 
     private void setUpTextBoxes() {
-        float textBoxH = height / MaxVisibleLinesCount;
+        float textBoxH = height / maxVisibleLinesCount;
         textBoxes.clear();
         SingleLineTextBox textBox;
-        for (int l = 0; l < MaxVisibleLinesCount; l++) {
+        for (int l = 0; l < maxVisibleLinesCount; l++) {
             textBox = new SingleLineTextBox("", x, y + l * textBoxH, width, textBoxH, context);
-            textBox.stroke(false);
+            textBox.drawStroke(false);
             textBox.drawBackground(false);
             textBoxes.add(textBox);
         }
@@ -114,20 +116,6 @@ public class MultiLineTextBox extends RectangleWrapper {
         return splitText;
     }
 
-    public void scrollDown() {
-        if (firstVisibleLine < textAsLines.size() - MaxVisibleLinesCount) {
-            firstVisibleLine++;
-            putLinesInTextBoxes();
-        }
-    }
-
-    public void scrollUp() {
-        if (firstVisibleLine > 0) {
-            firstVisibleLine--;
-            putLinesInTextBoxes();
-        }
-    }
-
     private void putLinesInTextBoxes() {
 
         //Cleaning
@@ -137,6 +125,20 @@ public class MultiLineTextBox extends RectangleWrapper {
 
         for (int c = firstVisibleLine; c < textAsLines.size() && c - firstVisibleLine < textBoxes.size(); c++) {
             textBoxes.get(c - firstVisibleLine).setText(textAsLines.get(c));
+        }
+    }
+
+    public void scrollDown() {
+        if (firstVisibleLine < textAsLines.size() - maxVisibleLinesCount) {
+            firstVisibleLine++;
+            putLinesInTextBoxes();
+        }
+    }
+
+    public void scrollUp() {
+        if (firstVisibleLine > 0) {
+            firstVisibleLine--;
+            putLinesInTextBoxes();
         }
     }
 
@@ -156,20 +158,52 @@ public class MultiLineTextBox extends RectangleWrapper {
             textBox.draw();
 
         //scroll
-        if (textAsLines.size() > MaxVisibleLinesCount) {
+        if (textAsLines.size() > maxVisibleLinesCount) {
             float margin = textBoxes.get(0).getMargin();
-            context.ellipse(x + width, y + ((height * firstVisibleLine) / (textAsLines.size() - MaxVisibleLinesCount)),
+            context.ellipse(x + width,
+                    y + height * firstVisibleLine / (textAsLines.size() - maxVisibleLinesCount),
                     margin, margin);
         }
 
     }
 
+    @Override
+    public void drawFocus() {
+
+    }
+
+    @Override
+    public boolean onKeyPressed(KeyEvent keyEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseClick(MouseEvent mouseEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseWheel(MouseEvent mouseEvent) {
+        int wheelCount = mouseEvent.getCount();
+        if (wheelCount > 0) {
+            for (int t = 0; t < wheelCount && t < maxVisibleLinesCount; t++) {
+                scrollDown();
+            }
+        } else {
+            wheelCount *= -1;
+            for (int t = 0; t < wheelCount && t <  maxVisibleLinesCount; t++) {
+                scrollUp();
+            }
+        }
+        return true;
+    }
+
     public int getMaxVisibleLinesCount() {
-        return MaxVisibleLinesCount;
+        return maxVisibleLinesCount;
     }
 
     public void setMaxVisibleLinesCount(int MaxVisibleLinesCount) {
-        this.MaxVisibleLinesCount = MaxVisibleLinesCount;
+        this.maxVisibleLinesCount = MaxVisibleLinesCount;
         setUpTextBoxes();
         setUpTextLines();
         firstVisibleLine = 0;
@@ -195,14 +229,14 @@ public class MultiLineTextBox extends RectangleWrapper {
     }
 
     public void scrollTillBottom() {
-        firstVisibleLine = textAsLines.size() - MaxVisibleLinesCount;
+        firstVisibleLine = textAsLines.size() - maxVisibleLinesCount;
         if (firstVisibleLine < 0) {
             firstVisibleLine = 0;
         }
         putLinesInTextBoxes();
     }
 
-    public void scrollToTop() {
+    public void scrollTillTop() {
         firstVisibleLine = 0;
         putLinesInTextBoxes();
     }
@@ -233,4 +267,6 @@ public class MultiLineTextBox extends RectangleWrapper {
     public char getForceNewLineChar() {
         return forceNewLineChar;
     }
+
+
 }

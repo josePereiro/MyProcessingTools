@@ -1,10 +1,8 @@
 //package PaintCode;
 //
 //import BuiltIn.LayoutTools;
-//import NonGUIObjects.Scanner;
-//import GObjects.*;
-//import GObjects.Rectangle;
-//import P2DPrimitiveWrappers.P2DPrimitiveWrapper;
+//import Common.Tools;
+//import P2DPrimitiveWrappers.*;
 //import processing.core.PApplet;
 //import processing.event.MouseEvent;
 //
@@ -25,15 +23,15 @@
 //    private int margin = (int) (Math.min(DW, DH) * 0.01);
 //
 //    //ToolsBox
-//    private static Rectangle toolsBox;
+//    private static RectangleWrapper toolsBox;
 //    private static GUIComponent<ColorSelector> colorSelector;
-//    private static Rectangle bottomsGrid;
-//    private static GUIComponent<Rectangle> newRectBtm, newEllipseBtm, newLineBtm, newImageBtm, newTextBtn;
+//    private static RectangleWrapper bottomsGrid;
+//    private static GUIComponent<RectangleWrapper> newRectBtm, newEllipseBtm, newLineBtm, newImageBtm, newTextBtn;
 //    private static SingleLineTextBox[] objectPropertiesBoxes;
 //    private static int propertiesCount = 10;
 //    private static ZoomComponent zoom;
 //
-//    //Console
+//    //PUIConsole
 //    private static Console console;
 //    private boolean focusChanged = false;
 //
@@ -142,15 +140,15 @@
 //        drawBoard = new DrawBoard(new GuidedBoard(margin, margin,
 //                (int) (width * 0.65), (int) (height * 0.7), margin, margin, this));
 //
-//        //Console
+//        //PUIConsole
 //        console = new Console(
-//                new GObjects.Console(10, margin, drawBoard.getGComponent().getHeight() + 2 * margin,
+//                new P2DPrimitiveWrappers.Console(10, margin, drawBoard.getGComponent().getHeight() + 2 * margin,
 //                        drawBoard.getGComponent().getWidth(), height - (drawBoard.getGComponent().getHeight() + 3 * margin), this));
 //        console.setLastLine("This is the console. It will show you the program flow!!!");
 //        console.println();
 //
 //
-//        toolsBox = new Rectangle(drawBoard.getGComponent().getWidth() + 2 * margin, margin,
+//        toolsBox = new RectangleWrapper(drawBoard.getGComponent().getWidth() + 2 * margin, margin,
 //                width - (drawBoard.getGComponent().getWidth() + 3 * margin), height - 2 * margin, this);
 //
 //        //ZoomBox
@@ -175,10 +173,10 @@
 //        createBottoms();
 //
 //        //Properties
-//        int firstPropertiesY = bottomsGrid.getY() + bottomsGrid.getHeight();
-//        int totalPropertiesHeight = toolsBox.getY() +
+//        float firstPropertiesY = bottomsGrid.getY() + bottomsGrid.getHeight();
+//        float totalPropertiesHeight = toolsBox.getY() +
 //                toolsBox.getHeight() - bottomsGrid.getY() - bottomsGrid.getHeight();
-//        int propertyHeight = totalPropertiesHeight / propertiesCount;
+//        float propertyHeight = totalPropertiesHeight / propertiesCount;
 //        SingleLineTextBox propertyBox;
 //        objectPropertiesBoxes = new SingleLineTextBox[propertiesCount];
 //        for (int pi = 0; pi < propertiesCount; pi++) {
@@ -196,32 +194,32 @@
 //        //BottomGrid
 //        int bottomsGridColumnsCount = 5;
 //        int bottomsGridRowsCount = 1;
-//        bottomsGrid = new Rectangle(toolsBox.getX(),
+//        bottomsGrid = new RectangleWrapper(toolsBox.getX(),
 //                colorSelector.getY() + colorSelector.getGComponent().getHeight(),
 //                toolsBox.getWidth(),
 //                (colorSelector.getGComponent().getHeight() + 4 * margin) * bottomsGridRowsCount,
 //                this);
 //        Point bottomsDimension = LayoutTools.getGridItemDimention(bottomsGridRowsCount, bottomsGridColumnsCount,
-//                margin, margin, toolsBox.getWidth(), bottomsGrid.getHeight());
-//        Point[] bottomsPositions = LayoutTools.getGridItemPositions(bottomsGrid.getX(), bottomsGrid.getY(),
+//                margin, margin, (int) toolsBox.getWidth(), (int) bottomsGrid.getHeight());
+//        Point.Float[] bottomsPositions = LayoutTools.getGridItemPositions(bottomsGrid.getX(), bottomsGrid.getY(),
 //                bottomsGridRowsCount, bottomsGridColumnsCount, margin, margin, bottomsDimension.x,
 //                bottomsDimension.y);
 //
 //        //New Rect
-//        newRectBtm = new GUIComponent<Rectangle>(
-//                new Rectangle(bottomsPositions[0].x, bottomsPositions[0].y,
+//        newRectBtm = new GUIComponent<RectangleWrapper>(
+//                new RectangleWrapper(bottomsPositions[0].x, bottomsPositions[0].y,
 //                        bottomsDimension.x, bottomsDimension.y, this) {
 //
 //                    float n = context.random(500);
-//                    int r1 = this.getWidth() / 2;
-//                    int r2 = this.getHeight() / 2;
+//                    float r1 = this.getWidth() / 2;
+//                    float r2 = this.getHeight() / 2;
 //
 //                    @Override
 //                    public void draw() {
 //                        super.draw();
-//                        context.stroke(0);
+//                        context.drawStroke(0);
 //                        context.strokeWeight(1.0F);
-//                        context.drawBackground(colorSelector.getGComponent().getSelectedColor());
+//                        context.fill(colorSelector.getGComponent().getSelectedColor());
 //                        context.rect(this.getX() + this.getWidth() / 2 - r1 / 2,
 //                                this.getY() + this.getHeight() / 2 - r2 / 2, r1, r2);
 //                        randomizeLook();
@@ -237,25 +235,25 @@
 //                }) {
 //            @Override
 //            public void listenForMouseClick() {
-//                DrawComponent<Rectangle> newRect = null;
+//                DrawComponent<RectangleWrapper> newRect = null;
 //                DrawComponent.drawComponentCreationRoutine(newRect, context);
 //            }
 //        };
 //
 //        //newEllipseBtm
-//        newEllipseBtm = new GUIComponent<Rectangle>(new Rectangle(bottomsPositions[1].x, bottomsPositions[1].y,
+//        newEllipseBtm = new GUIComponent<RectangleWrapper>(new RectangleWrapper(bottomsPositions[1].x, bottomsPositions[1].y,
 //                bottomsDimension.x, bottomsDimension.y, this) {
 //
 //            float n = context.random(500);
-//            int r1 = this.getWidth() / 2;
-//            int r2 = this.getHeight() / 2;
+//            float r1 = this.getWidth() / 2;
+//            float r2 = this.getHeight() / 2;
 //
 //            @Override
 //            public void draw() {
 //                super.draw();
-//                context.stroke(0);
+//                context.drawStroke(0);
 //                context.strokeWeight(1.0F);
-//                context.drawBackground(colorSelector.getGComponent().getSelectedColor());
+//                context.fill(colorSelector.getGComponent().getSelectedColor());
 //                context.ellipse(this.getX() + this.getWidth() / 2,
 //                        this.getY() + this.getHeight() / 2, r1, r2);
 //                randomizeLook();
@@ -271,7 +269,7 @@
 //        });
 //
 //        //newLineBtm
-//        newLineBtm = new GUIComponent<Rectangle>(new Rectangle(bottomsPositions[2].x, bottomsPositions[2].y,
+//        newLineBtm = new GUIComponent<RectangleWrapper>(new RectangleWrapper(bottomsPositions[2].x, bottomsPositions[2].y,
 //                bottomsDimension.x, bottomsDimension.y, this) {
 //
 //            float n = context.random(500);
@@ -280,7 +278,7 @@
 //            @Override
 //            public void draw() {
 //                super.draw();
-//                context.stroke(colorSelector.getGComponent().getSelectedColor());
+//                context.drawStroke(colorSelector.getGComponent().getSelectedColor());
 //                randomizeLook();
 //                context.line(rx1, ry1, rx2, ry2);
 //
@@ -298,7 +296,7 @@
 //        });
 //
 //        //newImageBtm
-//        newImageBtm = new GUIComponent<Rectangle>(new Rectangle(bottomsPositions[3].x, bottomsPositions[3].y,
+//        newImageBtm = new GUIComponent<RectangleWrapper>(new RectangleWrapper(bottomsPositions[3].x, bottomsPositions[3].y,
 //                bottomsDimension.x, bottomsDimension.y, this) {
 //
 //            float n = random(345);
@@ -313,7 +311,7 @@
 //                super.draw();
 //                context.noStroke();
 //                for (int i = 0; i < rectPositions.length; i++) {
-//                    context.drawBackground(colorSelector.getGComponent().getSelectedColor(), noise(n + i) * 255);
+//                    context.fill(colorSelector.getGComponent().getSelectedColor(), noise(n + i) * 255);
 //                    context.rect(rectPositions[i].x, rectPositions[i].y, rectW, rectH);
 //                    n += 0.001;
 //                }
@@ -322,7 +320,7 @@
 //        });
 //
 //        //newTextBtn
-//        newTextBtn = new GUIComponent<Rectangle>(new Rectangle(bottomsPositions[4].x, bottomsPositions[4].y,
+//        newTextBtn = new GUIComponent<RectangleWrapper>(new RectangleWrapper(bottomsPositions[4].x, bottomsPositions[4].y,
 //                bottomsDimension.x, bottomsDimension.y, this) {
 //
 //            float n = 0F;
@@ -333,7 +331,7 @@
 //            @Override
 //            public void draw() {
 //                super.draw();
-//                textBox.stroke(false);
+//                textBox.drawStroke(false);
 //                textBox.setStrokeColor(colorSelector.getGComponent().getSelectedColor());
 //                textBox.setText(text);
 //                textBox.setTextSize((int) (getHeight() * 0.3 + context.noise(n) * getHeight() * 0.5));
@@ -367,11 +365,11 @@
 //    private void drawFocus() {
 //
 //        noFill();
-//        stroke(0);
+//        drawStroke(0);
 //        strokeWeight(6);
 //        rect(focusedPPComponent.getX(), focusedPPComponent.getY(),
 //                focusedPPComponent.getWidth(), focusedPPComponent.getHeight());
-//        stroke(255);
+//        drawStroke(255);
 //        strokeWeight(3);
 //        rect(focusedPPComponent.getX(), focusedPPComponent.getY(),
 //                focusedPPComponent.getWidth(), focusedPPComponent.getHeight());
@@ -409,41 +407,41 @@
 //        focusedPPComponent = component;
 //    }
 //
-////    private class PPComponent<T extends Rectangle> extends Rectangle {
-////
-////        private T component;
-////
-////        public PPComponent(T rectangle) {
-////            super(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-////                    rectangle.getHeight(), rectangle.getContext());
-////            this.component = rectangle;
-////        }
-////
-////        public final T getGObject() {
-////            return component;
-////        }
-////
-////        public void loadProperties(){}
-////
-////        public final void listenForClick() {
-////            if (isThisOverMe(mouseX, mouseY)) {
-////                onClick();
-////            }
-////        }
-////
-////        @Override
-////        public void listenForKeyPressed() {
-////        }
-////
-////        public void onClick() {
-////            setFocusTo(this);
-////        }
-////
-////        @Override
-////        public void draw() {
-////            getGObject().draw();
-////        }
-////    }
+//    //    private class PPComponent<T extends Rectangle> extends Rectangle {
+//    //
+//    //        private T component;
+//    //
+//    //        public PPComponent(T rectangle) {
+//    //            super(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+//    //                    rectangle.getHeight(), rectangle.getContext());
+//    //            this.component = rectangle;
+//    //        }
+//    //
+//    //        public final T getGObject() {
+//    //            return component;
+//    //        }
+//    //
+//    //        public void loadProperties(){}
+//    //
+//    //        public final void listenForClick() {
+//    //            if (isThisOverMe(mouseX, mouseY)) {
+//    //                onClick();
+//    //            }
+//    //        }
+//    //
+//    //        @Override
+//    //        public void listenForKeyPressed() {
+//    //        }
+//    //
+//    //        public void onClick() {
+//    //            setFocusTo(this);
+//    //        }
+//    //
+//    //        @Override
+//    //        public void draw() {
+//    //            getGObject().draw();
+//    //        }
+//    //    }
 //
 //    private class ZoomComponent extends GUIComponent<ZoomBox> {
 //
@@ -452,8 +450,8 @@
 //
 //        ZoomComponent(ZoomBox component) {
 //            super(component);
-//            mx = (component.getWidth() / 2) + component.getX();
-//            my = (component.getHeight() / 2) + component.getY();
+//            mx = (int)((component.getWidth() / 2) + component.getX());
+//            my = (int)((component.getHeight() / 2) + component.getY());
 //            component.setFactor(0.81F);
 //        }
 //
@@ -486,12 +484,12 @@
 //        }
 //    }
 //
-//    private class Console extends GUIComponent<GObjects.Console> {
+//    private class Console extends GUIComponent<P2DPrimitiveWrappers.Console> {
 //
 //
 //        private boolean forcingUserForInput = false;
 //        private String PROMPT = "$: ";
-//        private Scanner scanner;
+//        private Tools.KeyScanner scanner;
 //        private UserInputHandler.Console inputHandler;
 //        private UserInputHandler.Console consoleCommandDecoder = new UserInputHandler.Console() {
 //            @Override
@@ -507,9 +505,9 @@
 //            }
 //        };
 //
-//        public Console(GObjects.Console component) {
+//        public Console(P2DPrimitiveWrappers.Console component) {
 //            super(component);
-//            scanner = new Scanner();
+//            scanner = new Tools.KeyScanner();
 //        }
 //
 //        @Override
@@ -550,7 +548,7 @@
 //                    scanner.clear();
 //                    inputHandler = consoleCommandDecoder;
 //                } else {
-//                    console.setLastLine(scanner.getBufferLine());
+//                    console.setLastLine(scanner.getBufferedLine());
 //                }
 //            }
 //        }
@@ -626,7 +624,7 @@
 //            this.gObject = gObject;
 //        }
 //
-//        public static void drawComponentCreationRoutine(DrawComponent<Rectangle> rect, PApplet context) {
+//        public static void drawComponentCreationRoutine(DrawComponent<RectangleWrapper> rect, PApplet context) {
 //            drawBoard.askAndForceUserInput("Crating a new rectangle!!! Click in the drawBoard to set the left" +
 //                    "-top corner of the rectangle!!!", new UserInputHandler.DrawBoard() {
 //                @Override

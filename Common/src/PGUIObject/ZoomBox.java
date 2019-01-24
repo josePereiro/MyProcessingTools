@@ -1,14 +1,15 @@
-package P2DPrimitiveWrappers;
+package PGUIObject;
 
 import Common.Tools;
-import PGUIObject.PGUIObject;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
 /**
  * Implement a Graphics in a Processing Applet.
  */
-public class ZoomBox extends RectangleWrapper implements PGUIObject {
+public class ZoomBox extends PGUIObject {
 
     private final Tools.Zoom zoom;
 
@@ -44,6 +45,7 @@ public class ZoomBox extends RectangleWrapper implements PGUIObject {
      * Draw the amplified area in the given coordinates.
      * The size of the area is defined by {@code size}.
      */
+    @Override
     public void draw() {
         if (zoom.getAmplifiedImage() != null) {
             drawBackground(false);
@@ -109,4 +111,18 @@ public class ZoomBox extends RectangleWrapper implements PGUIObject {
         zoom.setMinFactor(minFactor);
     }
 
+    @Override
+    public boolean onKeyPressed(KeyEvent keyEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseClick(MouseEvent mouseEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseWheel(MouseEvent mouseEvent) {
+        return false;
+    }
 }

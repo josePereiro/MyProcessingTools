@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * This wrap a rectangle.
  */
-public class RectangleWrapper extends P2DPrimitiveWrapper {
+public class RectangleWrapper extends P2DPrimitiveWrapper implements PRectangle{
 
 
     protected float strokeWeight = 1.0F;
@@ -46,18 +46,22 @@ public class RectangleWrapper extends P2DPrimitiveWrapper {
         return x >= this.x && x <= this.x + width && y >= this.y && y <= this.y + height;
     }
 
+    @Override
     public float getWidth() {
         return width;
     }
 
+    @Override
     public void setWidth(float width) {
         this.width = width;
     }
 
+    @Override
     public float getHeight() {
         return height;
     }
 
+    @Override
     public void setHeight(float height) {
         this.height = height;
     }
@@ -90,7 +94,7 @@ public class RectangleWrapper extends P2DPrimitiveWrapper {
         this.fillBackground = fill;
     }
 
-    public void stroke(boolean stroke) {
+    public void drawStroke(boolean stroke) {
         this.drawStroke = stroke;
     }
 

@@ -11,7 +11,6 @@ public class PObject {
     protected final PApplet context;
 
     public PObject(PApplet context){
-
         this.context = context;
     }
 

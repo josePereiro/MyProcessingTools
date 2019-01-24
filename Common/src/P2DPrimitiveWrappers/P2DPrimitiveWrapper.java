@@ -1,7 +1,6 @@
 package P2DPrimitiveWrappers;
 
 import Common.PObject;
-import PGUIObject.PGUIObject;
 import processing.core.PApplet;
 
 /**
@@ -16,7 +15,7 @@ import processing.core.PApplet;
  * Regards
  * Pereiro
  */
-public abstract class P2DPrimitiveWrapper extends PObject implements PGUIObject {
+public abstract class P2DPrimitiveWrapper extends PObject implements PDrawable, PLocatable {
 
 
     protected float x;
@@ -33,12 +32,13 @@ public abstract class P2DPrimitiveWrapper extends PObject implements PGUIObject 
      * Processing API in every context, only when performance is not an issue.
      * Regards
      * Pereiro
-     *<p>
-     *<p>
+     * <p>
+     * <p>
      * The objective of each wrapper is to be drawn in a processing sketch. So it will have at least a
      * position and a PApplet context.
-     * @param x the x value of the position of the wrapper.
-     * @param y the y value of the position of the wrapper.
+     *
+     * @param x       the x value of the position of the wrapper.
+     * @param y       the y value of the position of the wrapper.
      * @param context an instance of the PApplet where this wrapper will be drawn.
      */
     public P2DPrimitiveWrapper(float x, float y, PApplet context) {
@@ -50,31 +50,34 @@ public abstract class P2DPrimitiveWrapper extends PObject implements PGUIObject 
     /**
      * Will draw the P2DPrimitiveWrapper into the context
      */
+    @Override
     public abstract void draw();
 
     /**
-     * Return true if the given point is over the P2DPrimitiveWrapper area.
-     *
      * @param x A global x coordinate
      * @param y A global y coordinate
-     * @return
+     * @return Return true if the given point is over the P2DPrimitiveWrapper area.
      */
+    @Override
     public abstract boolean isThisOverMe(float x, float y);
 
+    @Override
     public float getX() {
         return x;
     }
 
+    @Override
     public float getY() {
         return y;
     }
 
+    @Override
     public void setX(float x) {
         this.x = x;
     }
 
+    @Override
     public void setY(float y) {
         this.y = y;
     }
-
 }

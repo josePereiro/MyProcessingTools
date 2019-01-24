@@ -15,7 +15,7 @@ public class ColorSelector extends RectangleWrapper {
         super(x, y, width, height, context);
 
         //Defaults
-        stroke(false);
+        drawStroke(false);
         drawBackground(false);
 
         //Colors

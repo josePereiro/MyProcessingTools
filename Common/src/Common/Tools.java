@@ -52,6 +52,84 @@ public class Tools {
         }
     }
 
+    public static abstract class TimeOscillator {
+
+        private long lastOscillationTime;
+        private int interval;
+        private int count;
+        private boolean oscillationJustHappened;
+        private boolean oscillationState;
+        private boolean running;
+
+        public TimeOscillator(int period) {
+            this.interval = period;
+            running = false;
+        }
+
+        public boolean isRunning() {
+            return running;
+        }
+
+        public final void run(boolean startRightNow) {
+            if (startRightNow) {
+                onOscillationHappened();
+                lastOscillationTime = System.currentTimeMillis();
+                oscillationJustHappened = true;
+                count++;
+            } else {
+                count = 0;
+                this.lastOscillationTime = System.currentTimeMillis();
+                oscillationJustHappened = false;
+            }
+            running = true;
+        }
+
+        public final void stop() {
+            running = false;
+        }
+
+        public final void step() {
+            if (System.currentTimeMillis() - lastOscillationTime > interval) {
+                oscillationState = !oscillationState;
+                onOscillationHappened();
+                lastOscillationTime = System.currentTimeMillis();
+                oscillationJustHappened = true;
+                count++;
+            } else {
+                oscillationJustHappened = false;
+                onOscillationDidNotHappen();
+            }
+        }
+
+        public abstract void onOscillationHappened();
+
+        public abstract void onOscillationDidNotHappen();
+
+        public int getInterval() {
+            return interval;
+        }
+
+        public void setInterval(int interval) {
+            this.interval = interval;
+        }
+
+        public long getLastOscillationTime() {
+            return lastOscillationTime;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public boolean getOscillationState() {
+            return oscillationState;
+        }
+
+        public boolean isOscillationJustHappened() {
+            return oscillationJustHappened;
+        }
+    }
+
     public static class KeyScanner {
 
         private String lastLine = "";
@@ -89,6 +167,8 @@ public class Tools {
                 }
                 lastValidChar = "";
                 newLine = false;
+            } else {
+                newLine = false;
             }
         }
 
@@ -121,7 +201,7 @@ public class Tools {
          *
          * @return
          */
-        public String getBufferLine() {
+        public String getBufferedLine() {
             return bufferLine.toString();
         }
 
@@ -156,7 +236,7 @@ public class Tools {
         }
     }
 
-    public static class Zoom extends PObject{
+    public static class Zoom extends PObject {
 
         private float factor = 2.0F;
         private PImage amplifiedImage;
@@ -215,7 +295,9 @@ public class Tools {
          * @param factor
          */
         public void setFactor(float factor) {
-            if (factor <= minFactor || factor > maxFactor) return;
+            if (factor <= minFactor || factor > maxFactor) {
+                return;
+            }
             this.factor = factor;
             factorizedWidth = (int) (width / factor);
             factorizedHeight = (int) (height / factor);

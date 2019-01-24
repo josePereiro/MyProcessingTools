@@ -3,7 +3,7 @@ package GObjectTests;
 import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.P2DPrimitiveWrapper;
 import P2DPrimitiveWrappers.RectangleWrapper;
-import P2DPrimitiveWrappers.ZoomBox;
+import PGUIObject.ZoomBox;
 import processing.core.PApplet;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package P2DPrimitiveWrappers;
 
+import PGUIObject.SingleLineTextBox;
 import processing.core.PApplet;
 
 public class MovingTextBox extends RectangleWrapper {
@@ -33,7 +34,7 @@ public class MovingTextBox extends RectangleWrapper {
         initializeData();
         automaticStepping = true;
         textBox.drawBackground(false);
-        textBox.stroke(false);
+        textBox.drawStroke(false);
     }
 
     @Override
@@ -96,7 +97,6 @@ public class MovingTextBox extends RectangleWrapper {
         textBox.setText(textToDisplay.substring(currentChar));
         textBox.fixTextLength();
     }
-
 
     public String getText() {
         return text;

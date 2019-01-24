@@ -1,9 +1,11 @@
-package P2DPrimitiveWrappers;
+package PGUIObject;
 
 import Common.Tools;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
-public class SingleLineTextBox extends RectangleWrapper {
+public class SingleLineTextBox extends PGUIObject {
 
     private String text;
     private float textSize;
@@ -27,15 +29,52 @@ public class SingleLineTextBox extends RectangleWrapper {
         super(x, y, width, height, context);
         this.text = text.replaceAll("\n", "");
         margin = height * 0.25F;
-        if (margin < 1) margin = 1;
+        if (margin < 1) {
+            margin = 1;
+        }
         textY = y + height - margin;
         textSize = height * 0.70F;
         textX = x + margin;
     }
 
-    private void updateLayout() {
+    @Override
+    public void draw() {
+        super.draw();
+
+        //Tools
+        context.fill(strokeColor);
+        context.textSize(textSize);
+        context.text(text, textX, textY);
 
     }
+
+    @Override
+    public boolean onKeyPressed(KeyEvent keyEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseClick(MouseEvent mouseEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseWheel(MouseEvent mouseEvent) {
+        return false;
+    }
+
+    //region IO methods
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text.replaceAll("\n", "");
+    }
+    //endregion
+
+    //region Layout Methods ....
 
     /**
      * Cut {@code text}, if necessary, to make sure it fit in the {@code SingleLineTextBox} box.
@@ -65,26 +104,9 @@ public class SingleLineTextBox extends RectangleWrapper {
         textX = x + margin;
         textY = y + height - margin;
     }
+    //endregion
 
-    @Override
-    public void draw() {
-        super.draw();
-
-        //Tools
-        context.fill(strokeColor);
-        context.textSize(textSize);
-        context.text(text, textX, textY);
-
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text.replaceAll("\n", "");
-    }
-
+    //region Getters and Setters
     public float getTextSize() {
         return textSize;
     }
@@ -116,4 +138,7 @@ public class SingleLineTextBox extends RectangleWrapper {
     public void setTextX(float textX) {
         this.textX = textX;
     }
+    //endregion
+
+
 }

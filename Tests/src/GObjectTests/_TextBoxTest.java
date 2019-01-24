@@ -1,6 +1,6 @@
 package GObjectTests;
 
-import P2DPrimitiveWrappers.SingleLineTextBox;
+import PGUIObject.SingleLineTextBox;
 import processing.core.PApplet;
 
 public class _TextBoxTest extends PApplet {

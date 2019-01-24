@@ -1,17 +1,25 @@
 package P2DPrimitiveWrappers;
 
 import Common.Tools;
+import PGUIObject.MultiLineTextBox;
 import processing.core.PApplet;
 
 public class Console extends MultiLineTextBox {
 
+    /* TODO
+        Use multilineTextBox only for managing draw and
+        store data in Console
+     */
+
     private String prompt = "$: ";
     private final Tools.KeyScanner scanner;
     private boolean autoScroll = false;
+    private boolean highlightSpaces = true;
+    private String spacesHighlightString = "_";
 
-    public Console(int MaxVisibleLinesCount, float x, float y,
+    public Console(int maxVisibleLinesCount, float x, float y,
                    float width, float height, PApplet context) {
-        super(MaxVisibleLinesCount, x, y, width, height, context);
+        super(maxVisibleLinesCount, x, y, width, height, context);
         scanner = new Tools.KeyScanner();
     }
 
@@ -23,6 +31,9 @@ public class Console extends MultiLineTextBox {
     }
 
     public final void println(String s) {
+        if (highlightSpaces) {
+            s = s.replaceAll(" ", spacesHighlightString);
+        }
         addText(s);
         addText("\n" + prompt);
         if (autoScroll) {
@@ -31,14 +42,12 @@ public class Console extends MultiLineTextBox {
     }
 
     @Override
-    public final void setLastLine(String s) {
-        super.setLastLine(prompt + s);
-        if (autoScroll) {
-            scrollTillBottom();
-        }
+    public void draw() {
+        super.draw();
+
     }
 
-    public void clear(){
+    public void clear() {
         setText(prompt);
     }
 
@@ -60,5 +69,21 @@ public class Console extends MultiLineTextBox {
 
     public void setAutoScroll(boolean autoScroll) {
         this.autoScroll = autoScroll;
+    }
+
+    public boolean isHighlightSpaces() {
+        return highlightSpaces;
+    }
+
+    public void setHighlightSpaces(boolean highlightSpaces) {
+        this.highlightSpaces = highlightSpaces;
+    }
+
+    public String getSpacesHighlightString() {
+        return spacesHighlightString;
+    }
+
+    public void setSpacesHighlightString(String spacesHighlightString) {
+        this.spacesHighlightString = spacesHighlightString;
     }
 }

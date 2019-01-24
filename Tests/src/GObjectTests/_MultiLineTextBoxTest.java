@@ -1,7 +1,8 @@
 package GObjectTests;
 
-import P2DPrimitiveWrappers.MultiLineTextBox;
+import PGUIObject.MultiLineTextBox;
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 public class _MultiLineTextBoxTest extends PApplet {
 
@@ -18,7 +19,7 @@ public class _MultiLineTextBoxTest extends PApplet {
     }
 
     MultiLineTextBox multiLineTextBox;
-    String longText = "bla\nbla\nbla\nbla\nbla\nbla\nbla\nbla\nbla\n";
+    String longText = "jose jose jose jowih wec oc ouirhc oiuc oiauhoiuhvoie oviv oivrsoiu gbvru yvg iueyvct wuycv uwygvf iewhbgsekbcvkajshbc iugf wehbvcsdiuyg wiehcv bekjbhvmdbv isu veshvb ieuwv we";
 
     @Override
     public void setup() {
@@ -37,7 +38,11 @@ public class _MultiLineTextBoxTest extends PApplet {
 
     @Override
     public void mousePressed() {
-        multiLineTextBox.addNewLine("blo");
+        multiLineTextBox.setText("blo");
+    }
 
+    @Override
+    public void mouseWheel(MouseEvent mouseEvent) {
+        multiLineTextBox.listeningForMouseWheel(mouseEvent);
     }
 }

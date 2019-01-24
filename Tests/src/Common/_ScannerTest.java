@@ -1,6 +1,6 @@
 //package Common;
 //
-//import P2DPrimitiveWrappers.SingleLineTextBox;
+//import PGUIObject.SingleLineTextBox;
 //import processing.core.PApplet;
 //
 //public class _ScannerTest extends PApplet {
@@ -41,7 +41,7 @@
 //    public void keyPressed() {
 //
 //        scanner.scan(key);
-//        buffer.setText(scanner.getBufferLine());
+//        buffer.setText(scanner.getBufferedLine());
 //        lastLine.setText(scanner.getLastLine());
 //
 //    }

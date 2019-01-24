@@ -31,7 +31,7 @@
 //        int textX = 20;
 //        int textY = 50;
 //        drawBackground(0);
-//        stroke(0);
+//        drawStroke(0);
 //        text(text, textX, textY);
 //        line(textX, textY + 20, textX + textWidth(text), textY + 20);
 //        line(textX, textY + 40, textX + Tools.getAverageCommonCharsWidth(this) * text.length(), textY + 40);
