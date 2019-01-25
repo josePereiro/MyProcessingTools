@@ -27,7 +27,7 @@ public class ZoomBox extends PGUIObject {
      * @param centerY the y coordinate of the center
      */
     public void magnifyCenteredArea(int centerX, int centerY) {
-        zoom.magnifyCenteredArea(centerX,centerY);
+        zoom.magnifyCenteredArea(centerX, centerY);
     }
 
     /**
@@ -38,7 +38,7 @@ public class ZoomBox extends PGUIObject {
      * @param y the y coordinate of the top left corner
      */
     public void magnifyArea(int x, int y) {
-        zoom.magnifyArea(x,y);
+        zoom.magnifyArea(x, y);
     }
 
     /**
@@ -123,6 +123,20 @@ public class ZoomBox extends PGUIObject {
 
     @Override
     public boolean onMouseWheel(MouseEvent mouseEvent) {
-        return false;
+        int wheelCount = mouseEvent.getCount();
+        float zoomFactor = zoom.getFactor();
+        if (wheelCount > 0) {
+            for (int t = 0; t < wheelCount && t < 10; t++) {
+                zoomFactor += zoomFactor * 0.1F;
+            }
+        } else if (wheelCount < 0) {
+            wheelCount *= -1;
+            for (int t = 0; t < wheelCount && t < 10; t++) {
+                zoomFactor -= zoomFactor * 0.1F;
+            }
+        }
+        zoom.setFactor(zoomFactor);
+        return true;
     }
+
 }

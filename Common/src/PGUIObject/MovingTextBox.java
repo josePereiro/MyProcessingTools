@@ -1,9 +1,10 @@
-package P2DPrimitiveWrappers;
+package PGUIObject;
 
-import PGUIObject.SingleLineTextBox;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
-public class MovingTextBox extends RectangleWrapper {
+public class MovingTextBox extends PGUIObject {
 
     private String text, textToDisplay;
     private SingleLineTextBox textBox;
@@ -105,5 +106,20 @@ public class MovingTextBox extends RectangleWrapper {
     public void setText(String text) {
         this.text = text;
         initializeData();
+    }
+
+    @Override
+    public boolean onKeyPressed(KeyEvent keyEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseClick(MouseEvent mouseEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseWheel(MouseEvent mouseEvent) {
+        return false;
     }
 }

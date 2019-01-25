@@ -82,32 +82,6 @@ public class Console extends PGUIObject {
         return outputBox.onMouseWheel(mouseEvent);
     }
 
-    //    @Override
-    //    public void mouseWheel(MouseEvent event) {
-    //
-    //        if (console.isForcingUserForInput()) {
-    //            return;
-    //        }
-    //        int wheelCount = event.getCount();
-    //
-    //        if (console.isThisOverMe(mouseX, mouseY)) {
-    //
-    //        } else if (drawBoard.isThisOverMe(mouseX, mouseY) || zoom.isThisOverMe(mouseX, mouseY)) {
-    //            if (wheelCount > 0) {
-    //                for (int t = 0; t < wheelCount && t < 10; t++) {
-    //                    zoom.getGComponent().setFactor(zoom.getGComponent().getFactor() - 0.01F);
-    //                }
-    //            } else {
-    //                wheelCount *= -1;
-    //                for (int t = 0; t < wheelCount && t < 10; t++) {
-    //                    zoom.getGComponent().setFactor(zoom.getGComponent().getFactor() + 0.01F);
-    //                }
-    //            }
-    //        }
-    //
-    //    }
-    //
-
     public int getMaxVisibleLinesCount() {
         return maxVisibleLinesCount;
     }

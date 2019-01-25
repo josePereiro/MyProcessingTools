@@ -1,6 +1,6 @@
 package PGUIObject;
 
-public interface Focusable {
+public interface PFocusable {
 
     boolean isFocused();
 

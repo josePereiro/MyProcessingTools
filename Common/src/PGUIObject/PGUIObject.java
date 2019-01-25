@@ -15,7 +15,7 @@ import processing.event.MouseEvent;
  * will be handle for a implementation of a {@link RectangleWrapper}
  */
 public abstract class PGUIObject extends RectangleWrapper
-        implements PListener, PDrawable, PLocatable, Focusable, PRectangle {
+        implements PListener, PDrawable, PLocatable, PFocusable, PRectangle {
 
     private static FocusEffect focusEffect;
 

@@ -251,8 +251,8 @@ public class Tools {
             super(context);
             this.width = width;
             this.height = height;
-            factorizedWidth = (int) (width / factor);
-            factorizedHeight = (int) (height / factor);
+            factorizedWidth = Math.round (width / factor);
+            factorizedHeight = Math.round (height / factor);
         }
 
 
@@ -299,18 +299,18 @@ public class Tools {
                 return;
             }
             this.factor = factor;
-            factorizedWidth = (int) (width / factor);
-            factorizedHeight = (int) (height / factor);
+            factorizedWidth = Math.round (width / factor);
+            factorizedHeight = Math.round (height / factor);
         }
 
         public void setWidth(int width) {
             this.width = width;
-            factorizedWidth = (int) (width / factor);
+            factorizedWidth = Math.round(width / factor);
         }
 
         public void setHeight(int height) {
             this.height = height;
-            factorizedHeight = (int) (height / factor);
+            factorizedHeight = Math.round (height / factor);
         }
 
         public int getMagnifiedAreaWidth() {

@@ -1,6 +1,6 @@
 package GObjectTests;
 
-import P2DPrimitiveWrappers.GuidedBoard;
+import PGUIObject.GuidedBoard;
 import processing.core.PApplet;
 
 public class _DrawBoardTest extends PApplet {

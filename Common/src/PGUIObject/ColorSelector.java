@@ -1,10 +1,13 @@
-package P2DPrimitiveWrappers;
+package PGUIObject;
 
+import P2DPrimitiveWrappers.RectangleWrapper;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
 import java.awt.*;
 
-public class ColorSelector extends RectangleWrapper {
+public class ColorSelector extends PGUIObject {
 
     private int[] colors;
     private RectangleWrapper[] colorsRectangles;
@@ -93,18 +96,6 @@ public class ColorSelector extends RectangleWrapper {
 
     }
 
-    public void setSelectedColor(int x, int y) {
-
-        if (!isThisOverMe(x, y)) return;
-
-        for (int sc = 0; sc < colorsRectangles.length; sc++) {
-            if (colorsRectangles[sc].isThisOverMe(x, y)) {
-                selectedColor = colors[sc];
-                selectedColorIndex = sc;
-                return;
-            }
-        }
-    }
 
     public int getSelectedColor() {
         return selectedColor;
@@ -128,15 +119,40 @@ public class ColorSelector extends RectangleWrapper {
     public void moveRight() {
         if (selectedColorIndex < colors.length - 1) {
             selectedColorIndex++;
-        } else selectedColorIndex = 0;
+        } else {
+            selectedColorIndex = 0;
+        }
         selectedColor = colors[selectedColorIndex];
     }
 
     public void moveLeft() {
         if (selectedColorIndex > 1) {
             selectedColorIndex--;
-        } else selectedColorIndex = colors.length - 1;
+        } else {
+            selectedColorIndex = colors.length - 1;
+        }
         selectedColor = colors[selectedColorIndex];
     }
 
+    @Override
+    public boolean onKeyPressed(KeyEvent keyEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseClick(MouseEvent mouseEvent) {
+        for (int sc = 0; sc < colorsRectangles.length; sc++) {
+            if (colorsRectangles[sc].isThisOverMe(context.mouseX, context.mouseY)) {
+                selectedColor = colors[sc];
+                selectedColorIndex = sc;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onMouseWheel(MouseEvent mouseEvent) {
+        return false;
+    }
 }

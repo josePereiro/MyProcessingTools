@@ -1,6 +1,6 @@
 package GObjectTests;
 
-import P2DPrimitiveWrappers.MovingTextBox;
+import PGUIObject.MovingTextBox;
 import processing.core.PApplet;
 
 public class _MovingTextBoxTest extends PApplet {

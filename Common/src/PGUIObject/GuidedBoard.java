@@ -1,9 +1,11 @@
-package P2DPrimitiveWrappers;
+package PGUIObject;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.event.KeyEvent;
+import processing.event.MouseEvent;
 
-public class GuidedBoard extends RectangleWrapper {
+public class GuidedBoard extends PGUIObject {
 
     //Fields
     private float dx;
@@ -192,4 +194,18 @@ public class GuidedBoard extends RectangleWrapper {
         return backgroundImageAlpha;
     }
 
+    @Override
+    public boolean onKeyPressed(KeyEvent keyEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseClick(MouseEvent mouseEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onMouseWheel(MouseEvent mouseEvent) {
+        return false;
+    }
 }

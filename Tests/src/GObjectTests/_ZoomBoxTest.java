@@ -5,6 +5,7 @@ import P2DPrimitiveWrappers.P2DPrimitiveWrapper;
 import P2DPrimitiveWrappers.RectangleWrapper;
 import PGUIObject.ZoomBox;
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class _ZoomBoxTest extends PApplet {
 
     @Override
     public void setup() {
-        zoomBox = new ZoomBox(10, 10, 50, 50, this);
+        zoomBox = new ZoomBox(10, 10, 120, 120, this);
         //noCursor();
         zoomBox.setFactor(4.5F);
         p2DPrimitiveWrappers = new ArrayList<>();
@@ -54,8 +55,10 @@ public class _ZoomBoxTest extends PApplet {
         }
         zoomBox.magnifyCenteredArea(mouseX, mouseY);
         zoomBox.draw();
-        zoomBox.setFactor(map(mouseX, 0, width, 0.5F, 5));
-        zoomBox.setWidth((int) map(mouseY, 0, height, 50, 200));
-        zoomBox.setHeight((int) map(mouseY, 0, height, 50, 200));
+    }
+
+    @Override
+    public void mouseWheel(MouseEvent event) {
+        zoomBox.onMouseWheel(event);
     }
 }
