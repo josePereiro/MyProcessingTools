@@ -33,6 +33,7 @@ public class SingleLineTextBox extends PGuiObject {
         textY = y + height - margin;
         textSize = height * 0.70F;
         textX = x + margin;
+        setFocusable(false);
     }
 
     @Override

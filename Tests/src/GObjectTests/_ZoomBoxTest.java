@@ -3,6 +3,8 @@ package GObjectTests;
 import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.P2DPrimitiveWrapper;
 import P2DPrimitiveWrappers.RectangleWrapper;
+import PGUIObject.PGuiManager;
+import PGUIObject.PGuiObject;
 import PGUIObject.ZoomBox;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -24,11 +26,20 @@ public class _ZoomBoxTest extends PApplet {
     }
 
     ZoomBox zoomBox;
+    PGuiManager pGuiManager;
     ArrayList<P2DPrimitiveWrapper> p2DPrimitiveWrappers;
 
     @Override
     public void setup() {
+        pGuiManager = PGuiManager.createPGuiManager(this);
         zoomBox = new ZoomBox(10, 10, 120, 120, this);
+        pGuiManager.addPGUIObject(zoomBox);
+        pGuiManager.setOnMouseWheelHandler(new PGuiObject.OnMouseWheelHandler() {
+            @Override
+            public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+                return zoomBox.getOnMouseWheelHandler().handlePEvent(event, zoomBox);
+            }
+        });
         //noCursor();
         zoomBox.setFactor(4.5F);
         p2DPrimitiveWrappers = new ArrayList<>();
@@ -59,6 +70,6 @@ public class _ZoomBoxTest extends PApplet {
 
     @Override
     public void mouseWheel(MouseEvent event) {
-        zoomBox.listeningForMouseWheel(event);
+        pGuiManager.listeningForMouseWheel(event);
     }
 }

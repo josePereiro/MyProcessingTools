@@ -113,22 +113,28 @@ public class ZoomBox extends PGuiObject {
 
     private final static OnMouseWheelHandler DEFAULT_ON_MOUSE_WHEEL_HANDLER = new OnMouseWheelHandler() {
 
+        int lastDir = 1;
+
         @Override
         public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
             int wheelCount = event.getCount();
             ZoomBox zoom = (ZoomBox) pGuiObject;
             float zoomFactor = zoom.getFactor();
             if (wheelCount > 0) {
-                for (int t = 0; t < wheelCount && t < 10; t++) {
-                    zoomFactor += zoomFactor * 0.01F;
+                for (int t = 0; lastDir > 0 &&
+                        t < wheelCount && t < 10; t++) {
+                    zoomFactor += zoomFactor * 0.05F;
                     zoom.setFactor(zoomFactor);
                 }
+                lastDir = 1;
             } else if (wheelCount < 0) {
                 wheelCount *= -1;
-                for (int t = 0; t < wheelCount && t < 10; t++) {
-                    zoomFactor -= zoomFactor * 0.01F;
+                for (int t = 0; lastDir < 0 &&
+                        t < wheelCount && t < 10; t++) {
+                    zoomFactor -= zoomFactor * 0.05F;
                     zoom.setFactor(zoomFactor);
                 }
+                lastDir = -1;
             }
             return true;
         }

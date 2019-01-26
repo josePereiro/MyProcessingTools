@@ -1,6 +1,7 @@
 package GObjectTests;
 
 import PGUIObject.ColorSelector;
+import PGUIObject.PGuiManager;
 import processing.core.PApplet;
 
 public class _ColorSelectorTest extends PApplet {
@@ -17,13 +18,15 @@ public class _ColorSelectorTest extends PApplet {
         size(DW, DH);
     }
 
+    private PGuiManager pGuiManager;
     private ColorSelector colorSelector;
-    boolean vertical = true;
 
     @Override
     public void setup() {
         colorSelector = new ColorSelector(0, (int) (height * 0.8), width,
                 (int) (height * 0.2), this);
+        pGuiManager = PGuiManager.createPGuiManager(this);
+        pGuiManager.addPGUIObject(colorSelector);
     }
 
 
@@ -37,6 +40,6 @@ public class _ColorSelectorTest extends PApplet {
 
     @Override
     public void mouseClicked() {
-        colorSelector.listeningForMouseClicked(null);
+        pGuiManager.listeningForMouseClicked(null);
     }
 }

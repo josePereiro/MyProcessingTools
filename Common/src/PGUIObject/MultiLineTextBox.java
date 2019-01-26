@@ -53,6 +53,7 @@ public class MultiLineTextBox extends PGuiObject {
         textAsLines = new ArrayList<>();
         setUpTextBoxes();
         setOnMouseWheelHandler(DEFAULT_ON_MOUSE_WHEEL_HANDLER);
+        setFocusable(false);
     }
 
     private void setUpTextBoxes() {

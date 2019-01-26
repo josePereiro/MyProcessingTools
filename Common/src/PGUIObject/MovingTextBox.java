@@ -34,6 +34,7 @@ public class MovingTextBox extends PGuiObject {
         automaticStepping = true;
         textBox.drawBackground(false);
         textBox.drawStroke(false);
+        setFocusable(false);
     }
 
     @Override

@@ -46,6 +46,7 @@ public class ColorSelector extends PGuiObject {
         selectedColor = colors[selectedColorIndex];
 
         setOnMouseClickedHandler(DEFAULT_ON_MOUSE_CLICKED_HANDLER);
+        setFocusable(false);
 
     }
 

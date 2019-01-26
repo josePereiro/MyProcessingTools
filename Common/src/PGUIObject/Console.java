@@ -30,7 +30,8 @@ public class Console extends PGuiObject {
 
         @Override
         public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
-            return ((Console) pGuiObject).outputBox.listeningForMouseWheel(event);
+            MultiLineTextBox multiLineTextBox = ((Console) pGuiObject).outputBox;
+            return multiLineTextBox.getOnMouseWheelHandler().handlePEvent(event,multiLineTextBox);
         }
     };
     private final int maxVisibleLinesCount;
