@@ -2,13 +2,27 @@ package PGUIObject;
 
 import P2DPrimitiveWrappers.RectangleWrapper;
 import processing.core.PApplet;
-import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 import java.awt.*;
 
-public class ColorSelector extends PGUIObject {
+public class ColorSelector extends PGuiObject {
 
+    private static final OnMouseClickedHandler DEFAULT_ON_MOUSE_CLICKED_HANDLER = new OnMouseClickedHandler() {
+        @Override
+        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+            ColorSelector colorSelector = (ColorSelector) pGuiObject;
+            for (int sc = 0; sc < colorSelector.colorsRectangles.length; sc++) {
+                if (colorSelector.colorsRectangles[sc].isThisOverMe(colorSelector.context.mouseX,
+                        colorSelector.context.mouseY)) {
+                    colorSelector.selectedColor = colorSelector.colors[sc];
+                    colorSelector.selectedColorIndex = sc;
+                    return true;
+                }
+            }
+            return false;
+        }
+    };
     private int[] colors;
     private RectangleWrapper[] colorsRectangles;
     private int selectedColor, selectedColorIndex;
@@ -30,6 +44,8 @@ public class ColorSelector extends PGUIObject {
         //selectedColor
         selectedColorIndex = 0;
         selectedColor = colors[selectedColorIndex];
+
+        setOnMouseClickedHandler(DEFAULT_ON_MOUSE_CLICKED_HANDLER);
 
     }
 
@@ -134,25 +150,4 @@ public class ColorSelector extends PGUIObject {
         selectedColor = colors[selectedColorIndex];
     }
 
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        for (int sc = 0; sc < colorsRectangles.length; sc++) {
-            if (colorsRectangles[sc].isThisOverMe(context.mouseX, context.mouseY)) {
-                selectedColor = colors[sc];
-                selectedColorIndex = sc;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        return false;
-    }
 }

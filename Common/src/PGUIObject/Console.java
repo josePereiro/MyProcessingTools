@@ -5,17 +5,40 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
-public class Console extends PGUIObject {
+public class Console extends PGuiObject {
 
 
+    private static final OnKeyTypedHandler DEFAULT_ON_KEY_TYPE_HANDLER = new OnKeyTypedHandler() {
+        @Override
+        public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
+            Console console = (Console) pGuiObject;
+            console.scanner.scan(console.context.key);
+            if (console.scanner.newLineJustHappen()) {
+                console.println(console.scanner.getLastLine());
+                console.setInputText("");
+                console.onInputEntered(console.scanner.getLastLine());
+            } else {
+                console.setInputText(console.scanner.getBufferedLine());
+            }
+
+            return true;
+
+        }
+    };
+    private static final OnMouseWheelHandler DEFAULT_ON_MOUSE_WHEEL_HANDLER = new OnMouseWheelHandler() {
+
+
+        @Override
+        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+            return ((Console) pGuiObject).outputBox.listeningForMouseWheel(event);
+        }
+    };
     private final int maxVisibleLinesCount;
 
     private MultiLineTextBox outputBox;
     private SingleLineTextBox inputBox;
     private Tools.KeyScanner scanner;
     private String prompt = "$:";
-
-
 
 
     public Console(int maxVisibleLinesCount, float x, float y,
@@ -34,6 +57,9 @@ public class Console extends PGUIObject {
         drawStroke(false);
         outputBox.setFocusable(false);
         inputBox.setFocusable(false);
+
+        setOnKeyTypedHandler(DEFAULT_ON_KEY_TYPE_HANDLER);
+        setOnMouseWheelHandler(DEFAULT_ON_MOUSE_WHEEL_HANDLER);
     }
 
     void initializeLayout() {
@@ -51,36 +77,11 @@ public class Console extends PGUIObject {
     public void draw() {
         outputBox.draw();
         inputBox.draw();
-        if (focus)
-            inputBox.drawFocus();
-    }
-
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
         if (focus) {
-            scanner.scan(context.key);
-            if (scanner.newLineJustHappen()) {
-                println(scanner.getLastLine());
-                setInputText("");
-                onInputEntered(scanner.getLastLine());
-            } else {
-                setInputText(scanner.getBufferedLine());
-            }
-
-            return true;
+            inputBox.drawFocus();
         }
-        return false;
     }
 
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        return outputBox.onMouseWheel(mouseEvent);
-    }
 
     public int getMaxVisibleLinesCount() {
         return maxVisibleLinesCount;
@@ -97,6 +98,7 @@ public class Console extends PGUIObject {
 
     /**
      * Get the actual text
+     *
      * @return
      */
     public String getInputText() {
@@ -108,7 +110,7 @@ public class Console extends PGUIObject {
         inputBox.fixTextLength();
     }
 
-    public void onInputEntered(String input){
+    public void onInputEntered(String input) {
 
     }
 

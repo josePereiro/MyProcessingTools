@@ -22,14 +22,10 @@ public class _ColorSelectorTest extends PApplet {
 
     @Override
     public void setup() {
-        if (vertical)
-            colorSelector = new ColorSelector(0, (int) (height * 0.8), width,
-                    (int) (height * 0.2), this);
-        else {
-            colorSelector = new ColorSelector(0, 0, (int) (width * 0.2), height, this);
-            colorSelector.vertical(false);
-        }
+        colorSelector = new ColorSelector(0, (int) (height * 0.8), width,
+                (int) (height * 0.2), this);
     }
+
 
     @Override
     public void draw() {
@@ -40,12 +36,7 @@ public class _ColorSelectorTest extends PApplet {
     }
 
     @Override
-    public void keyPressed() {
-        colorSelector.setFocus(!colorSelector.isFocused());
-    }
-
-    @Override
     public void mouseClicked() {
-        colorSelector.listenForMouseClicked(null);
+        colorSelector.listeningForMouseClicked(null);
     }
 }

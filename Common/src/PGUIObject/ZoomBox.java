@@ -3,13 +3,12 @@ package PGUIObject;
 import Common.Tools;
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 /**
  * Implement a Graphics in a Processing Applet.
  */
-public class ZoomBox extends PGUIObject {
+public class ZoomBox extends PGuiObject {
 
     private final Tools.Zoom zoom;
 
@@ -17,6 +16,7 @@ public class ZoomBox extends PGUIObject {
         super(x, y, width, height, context);
         drawBackground(false);
         zoom = new Tools.Zoom((int) width, (int) height, context);
+        setOnMouseWheelHandler(DEFAULT_ON_MOUSE_WHEEL_HANDLER);
     }
 
     /**
@@ -111,32 +111,28 @@ public class ZoomBox extends PGUIObject {
         zoom.setMinFactor(minFactor);
     }
 
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
-        return false;
-    }
+    private final static OnMouseWheelHandler DEFAULT_ON_MOUSE_WHEEL_HANDLER = new OnMouseWheelHandler() {
 
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        int wheelCount = mouseEvent.getCount();
-        float zoomFactor = zoom.getFactor();
-        if (wheelCount > 0) {
-            for (int t = 0; t < wheelCount && t < 10; t++) {
-                zoomFactor += zoomFactor * 0.1F;
+        @Override
+        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+            int wheelCount = event.getCount();
+            ZoomBox zoom = (ZoomBox) pGuiObject;
+            float zoomFactor = zoom.getFactor();
+            if (wheelCount > 0) {
+                for (int t = 0; t < wheelCount && t < 10; t++) {
+                    zoomFactor += zoomFactor * 0.01F;
+                    zoom.setFactor(zoomFactor);
+                }
+            } else if (wheelCount < 0) {
+                wheelCount *= -1;
+                for (int t = 0; t < wheelCount && t < 10; t++) {
+                    zoomFactor -= zoomFactor * 0.01F;
+                    zoom.setFactor(zoomFactor);
+                }
             }
-        } else if (wheelCount < 0) {
-            wheelCount *= -1;
-            for (int t = 0; t < wheelCount && t < 10; t++) {
-                zoomFactor -= zoomFactor * 0.1F;
-            }
+            return true;
         }
-        zoom.setFactor(zoomFactor);
-        return true;
-    }
+
+    };
 
 }

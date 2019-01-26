@@ -2,10 +2,8 @@ package PGUIObject;
 
 import Common.Tools;
 import processing.core.PApplet;
-import processing.event.KeyEvent;
-import processing.event.MouseEvent;
 
-public class SingleLineTextBox extends PGUIObject {
+public class SingleLineTextBox extends PGuiObject {
 
     private String text;
     private float textSize;
@@ -46,21 +44,6 @@ public class SingleLineTextBox extends PGUIObject {
         context.textSize(textSize);
         context.text(text, textX, textY);
 
-    }
-
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        return false;
     }
 
     //region IO methods

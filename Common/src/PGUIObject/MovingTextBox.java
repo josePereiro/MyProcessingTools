@@ -1,10 +1,8 @@
 package PGUIObject;
 
 import processing.core.PApplet;
-import processing.event.KeyEvent;
-import processing.event.MouseEvent;
 
-public class MovingTextBox extends PGUIObject {
+public class MovingTextBox extends PGuiObject {
 
     private String text, textToDisplay;
     private SingleLineTextBox textBox;
@@ -108,18 +106,4 @@ public class MovingTextBox extends PGUIObject {
         initializeData();
     }
 
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        return false;
-    }
 }

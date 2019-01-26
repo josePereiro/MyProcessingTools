@@ -1,6 +1,7 @@
 package GObjectTests;
 
 import PGUIObject.Console;
+import PGUIObject.PGuiObject;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
 
@@ -24,6 +25,14 @@ public class _ConsoleTest extends PApplet {
     public void setup() {
 
         console = new Console(height / 20, 0, 0, width, height, this);
+        console.setOnMouseClickedHandler(new PGuiObject.OnMouseClickedHandler() {
+            @Override
+            public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+                console.setFocus(true);
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -34,15 +43,16 @@ public class _ConsoleTest extends PApplet {
 
     @Override
     public void mouseWheel(MouseEvent event) {
-        if (console.listeningForMouseWheel(event)) {
-            return;
-        }
+        console.listeningForMouseWheel(event);
     }
 
     @Override
-    public void keyPressed() {
-        console.setFocus(true);
-        console.listenForKeyPressed(null);
+    public void mouseClicked() {
+        console.listeningForMouseClicked(null);
     }
 
+    @Override
+    public void keyTyped() {
+        console.listeningForKeyTyped(null);
+    }
 }

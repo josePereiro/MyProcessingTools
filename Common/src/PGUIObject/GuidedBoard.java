@@ -2,10 +2,8 @@ package PGUIObject;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.event.KeyEvent;
-import processing.event.MouseEvent;
 
-public class GuidedBoard extends PGUIObject {
+public class GuidedBoard extends PGuiObject {
 
     //Fields
     private float dx;
@@ -194,18 +192,4 @@ public class GuidedBoard extends PGUIObject {
         return backgroundImageAlpha;
     }
 
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        return false;
-    }
 }

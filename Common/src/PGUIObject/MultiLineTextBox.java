@@ -2,13 +2,38 @@ package PGUIObject;
 
 import Common.Tools;
 import processing.core.PApplet;
-import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 import java.util.ArrayList;
 
-public class MultiLineTextBox extends PGUIObject {
+public class MultiLineTextBox extends PGuiObject {
 
+    private static final OnMouseWheelHandler DEFAULT_ON_MOUSE_WHEEL_HANDLER = new OnMouseWheelHandler() {
+
+        int lastSign = 1;
+
+        @Override
+        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+            int wheelCount = event.getCount();
+            MultiLineTextBox multiLineTextBox = (MultiLineTextBox) pGuiObject;
+            if (wheelCount > 0) {
+                for (int t = 0; lastSign > 0 && t < wheelCount &&
+                        t < multiLineTextBox.getMaxVisibleLinesCount(); t++) {
+                    multiLineTextBox.scrollDown();
+                }
+                lastSign = 1;
+            } else if (wheelCount < 0) {
+                wheelCount *= -1;
+                for (int t = 0; lastSign < 0 && t < wheelCount &&
+                        t < multiLineTextBox.getMaxVisibleLinesCount(); t++) {
+                    multiLineTextBox.scrollUp();
+                }
+                lastSign = -1;
+            }
+            return true;
+        }
+    };
     private int maxVisibleLinesCount;
     private final ArrayList<SingleLineTextBox> textBoxes;
     private final ArrayList<String> textAsLines;
@@ -27,6 +52,7 @@ public class MultiLineTextBox extends PGUIObject {
         textBoxes = new ArrayList<>();
         textAsLines = new ArrayList<>();
         setUpTextBoxes();
+        setOnMouseWheelHandler(DEFAULT_ON_MOUSE_WHEEL_HANDLER);
     }
 
     private void setUpTextBoxes() {
@@ -170,32 +196,6 @@ public class MultiLineTextBox extends PGUIObject {
     @Override
     public void drawFocus() {
 
-    }
-
-    @Override
-    public boolean onKeyPressed(KeyEvent keyEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseClick(MouseEvent mouseEvent) {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseWheel(MouseEvent mouseEvent) {
-        int wheelCount = mouseEvent.getCount();
-        if (wheelCount > 0) {
-            for (int t = 0; t < wheelCount && t < maxVisibleLinesCount; t++) {
-                scrollDown();
-            }
-        } else {
-            wheelCount *= -1;
-            for (int t = 0; t < wheelCount && t <  maxVisibleLinesCount; t++) {
-                scrollUp();
-            }
-        }
-        return true;
     }
 
     public int getMaxVisibleLinesCount() {

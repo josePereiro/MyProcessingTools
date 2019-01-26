@@ -9,5 +9,5 @@ public abstract class FocusEffect extends PObject {
         super(context);
     }
 
-    public abstract void draw(PGUIObject pGuiObject);
+    public abstract void draw(PGuiObject pGuiObject);
 }

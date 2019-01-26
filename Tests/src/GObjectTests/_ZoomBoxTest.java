@@ -59,6 +59,6 @@ public class _ZoomBoxTest extends PApplet {
 
     @Override
     public void mouseWheel(MouseEvent event) {
-        zoomBox.onMouseWheel(event);
+        zoomBox.listeningForMouseWheel(event);
     }
 }

@@ -8,7 +8,7 @@ import processing.core.PApplet;
  */
 public class PObject {
 
-    protected final PApplet context;
+    protected PApplet context;
 
     public PObject(PApplet context){
         this.context = context;
