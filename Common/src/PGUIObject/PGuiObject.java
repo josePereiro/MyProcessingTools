@@ -6,7 +6,6 @@ import P2DPrimitiveWrappers.PLocatable;
 import P2DPrimitiveWrappers.PRectangle;
 import P2DPrimitiveWrappers.RectangleWrapper;
 import processing.core.PApplet;
-import processing.event.Event;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
@@ -70,7 +69,7 @@ public abstract class PGuiObject extends RectangleWrapper
         }
     }
 
-    public class DefaultFocusEffect extends FocusEffect {
+    public static class DefaultFocusEffect extends FocusEffect {
 
         private Tools.TimeOscillator focusStrokeOscillator;
 
@@ -134,7 +133,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onMouseReleasedHandler = onMouseReleasedHandler;
     }
 
-    public abstract static class OnMouseReleasedHandler extends PEventHandler<MouseEvent> {
+    public abstract static class OnMouseReleasedHandler extends PGuiManager.PEventHandler<MouseEvent> {
 
     }
 
@@ -153,7 +152,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onMouseWheelHandler = onMouseWheelHandler;
     }
 
-    public abstract static class OnMouseWheelHandler extends PEventHandler<MouseEvent> {
+    public abstract static class OnMouseWheelHandler extends PGuiManager.PEventHandler<MouseEvent> {
 
     }
 
@@ -172,7 +171,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onMousePressedHandler = onMousePressedHandler;
     }
 
-    public abstract static class OnMousePressedHandler extends PEventHandler<MouseEvent> {
+    public abstract static class OnMousePressedHandler extends PGuiManager.PEventHandler<MouseEvent> {
 
     }
 
@@ -191,7 +190,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onMouseClickedHandler = onMouseClickedHandler;
     }
 
-    public abstract static class OnMouseClickedHandler extends PEventHandler<MouseEvent> {
+    public abstract static class OnMouseClickedHandler extends PGuiManager.PEventHandler<MouseEvent> {
 
     }
 
@@ -210,7 +209,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onMouseDraggedHandler = onMouseDraggedHandler;
     }
 
-    public abstract static class OnMouseDraggedHandler extends PEventHandler<MouseEvent> {
+    public abstract static class OnMouseDraggedHandler extends PGuiManager.PEventHandler<MouseEvent> {
 
     }
 
@@ -229,7 +228,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onMouseMovedHandler = onMouseMovedHandler;
     }
 
-    public abstract static class OnMouseMovedHandler extends PEventHandler<MouseEvent> {
+    public abstract static class OnMouseMovedHandler extends PGuiManager.PEventHandler<MouseEvent> {
 
     }
 
@@ -248,7 +247,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onKeyPressedHandler = onKeyPressedHandler;
     }
 
-    public abstract static class OnKeyPressedHandler extends PEventHandler<KeyEvent> {
+    public abstract static class OnKeyPressedHandler extends PGuiManager.PEventHandler<KeyEvent> {
 
 
     }
@@ -268,7 +267,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onKeyReleasedHandler = onKeyReleasedHandler;
     }
 
-    public abstract static class OnKeyReleasedHandler extends PEventHandler<KeyEvent> {
+    public abstract static class OnKeyReleasedHandler extends PGuiManager.PEventHandler<KeyEvent> {
 
 
     }
@@ -288,23 +287,7 @@ public abstract class PGuiObject extends RectangleWrapper
         this.onKeyTypedHandler = onKeyTypedHandler;
     }
 
-    public abstract static class OnKeyTypedHandler extends PEventHandler<KeyEvent> {
-    }
-
-    public static abstract class PEventHandler<T extends Event> {
-
-        /**
-         * The implementation of the method will be called in any
-         * listening event methods of the {@link PGuiObject} objects.
-         * It will be passed the implicated {@link Event} and {@link PGuiObject}
-         * to be used inside this method. You are welcome!!!
-         *
-         * @param event
-         * @param pGuiObject
-         * @return
-         */
-        public abstract boolean handlePEvent(T event, PGuiObject pGuiObject);
-
+    public abstract static class OnKeyTypedHandler extends PGuiManager.PEventHandler<KeyEvent> {
     }
 
 }

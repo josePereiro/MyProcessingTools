@@ -151,25 +151,30 @@ public class Tools {
          *
          * @param key the key to scan
          */
-        public void scan(char key) {
+        public boolean scan(char key) {
             if (isLineSeparator(key)) {
                 lastLine = bufferLine.toString();
                 bufferLine.delete(0, bufferLine.length());
                 lastValidChar = "";
                 newLine = true;
+                return true;
             } else if (checkValidChar(key)) {
                 bufferLine.append(key);
                 lastValidChar = String.valueOf(key);
                 newLine = false;
+                return true;
             } else if (isDeleteChar(key)) {
                 if (bufferLine.length() > 0) {
                     bufferLine.deleteCharAt(bufferLine.length() - 1);
                 }
                 lastValidChar = "";
                 newLine = false;
+                return true;
             } else {
                 newLine = false;
+                return false;
             }
+
         }
 
         private boolean checkValidChar(char key) {

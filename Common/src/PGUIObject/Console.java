@@ -12,7 +12,7 @@ public class Console extends PGuiObject {
         @Override
         public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
             Console console = (Console) pGuiObject;
-            console.scanner.scan(console.context.key);
+            boolean scanResult = console.scanner.scan(console.context.key);
             if (console.scanner.newLineJustHappen()) {
                 console.println(console.scanner.getLastLine());
                 console.setInputText("");
@@ -21,7 +21,7 @@ public class Console extends PGuiObject {
                 console.setInputText(console.scanner.getBufferedLine());
             }
 
-            return true;
+            return scanResult;
 
         }
     };
