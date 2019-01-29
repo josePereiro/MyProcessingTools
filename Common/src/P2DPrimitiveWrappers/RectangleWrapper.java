@@ -2,21 +2,14 @@ package P2DPrimitiveWrappers;
 
 import processing.core.PApplet;
 
-import java.awt.*;
-
 /**
  * This wrap a rectangle.
  */
-public class RectangleWrapper extends P2DPrimitiveWrapper implements PRectangle{
+public class RectangleWrapper extends P2DPrimitiveWrapper implements PRectangle {
 
 
-    protected float strokeWeight = 1.0F;
     protected float height;
     protected float width;
-    protected int backgroundColor = Color.WHITE.getRGB();
-    protected int strokeColor = Color.BLACK.getRGB();
-    protected boolean fillBackground = true;
-    protected boolean drawStroke = true;
 
     public RectangleWrapper(float x, float y, float width, float height, PApplet context) {
         super(x, y, context);
@@ -26,19 +19,27 @@ public class RectangleWrapper extends P2DPrimitiveWrapper implements PRectangle{
 
     @Override
     public void draw() {
+        draw(x, y);
+    }
 
-        if (fillBackground) context.fill(backgroundColor);
-        else context.noFill();
+    @Override
+    public void draw(float x, float y) {
+        if (fillEnable) {
+            context.fill(fillColor, fillAlpha);
+        } else {
+            context.noFill();
+        }
 
-        if (drawStroke) {
+        if (strokeEnable) {
             context.strokeWeight(strokeWeight);
-            context.stroke(strokeColor);
-        } else context.noStroke();
+            context.stroke(strokeColor, strokeAlpha);
+        } else {
+            context.noStroke();
+        }
 
-        if (drawStroke || fillBackground)
+        if (strokeEnable || fillEnable) {
             context.rect(x, y, width, height);
-
-
+        }
     }
 
     @Override
@@ -64,38 +65,6 @@ public class RectangleWrapper extends P2DPrimitiveWrapper implements PRectangle{
     @Override
     public void setHeight(float height) {
         this.height = height;
-    }
-
-    public float getStrokeWeight() {
-        return strokeWeight;
-    }
-
-    public void setStrokeWeight(float strokeWeight) {
-        this.strokeWeight = strokeWeight;
-    }
-
-    public int getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public void setBackgroundColor(int backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public int getStrokeColor() {
-        return strokeColor;
-    }
-
-    public void setStrokeColor(int strokeColor) {
-        this.strokeColor = strokeColor;
-    }
-
-    public void drawBackground(boolean fill) {
-        this.fillBackground = fill;
-    }
-
-    public void drawStroke(boolean stroke) {
-        this.drawStroke = stroke;
     }
 
 }

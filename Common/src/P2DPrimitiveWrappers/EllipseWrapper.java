@@ -1,19 +1,11 @@
 package P2DPrimitiveWrappers;
 
 import processing.core.PApplet;
-import processing.core.PConstants;
-
-import java.awt.*;
 
 public class EllipseWrapper extends P2DPrimitiveWrapper {
 
     private float vr;
     private float hr;
-    private float strokeWeight = 1.0F;
-    private int backgroundColor = Color.WHITE.getRGB();
-    private int strokeColor = Color.BLACK.getRGB();
-    private boolean fillBackground = true;
-    private boolean drawStroke = true;
 
     public EllipseWrapper(float x, float y, float vr, float hr, PApplet context) {
         super(x, y, context);
@@ -23,63 +15,31 @@ public class EllipseWrapper extends P2DPrimitiveWrapper {
 
     @Override
     public void draw() {
-        context.ellipseMode(PConstants.CORNER);
-        if (fillBackground) {
-            context.fill(backgroundColor);
+        draw(x, y);
+    }
+
+    @Override
+    public void draw(float x, float y) {
+        if (fillEnable) {
+            context.fill(fillColor, fillAlpha);
         } else {
             context.noFill();
         }
-        if (drawStroke) {
+        if (strokeEnable) {
             context.strokeWeight(strokeWeight);
-            context.stroke(strokeColor);
+            context.stroke(strokeColor, strokeAlpha);
         } else {
             context.noStroke();
         }
-        if (drawStroke || fillBackground) {
+        if (strokeEnable || fillEnable) {
             context.ellipse(x, y, hr, vr);
         }
     }
 
     @Override
     public boolean isThisOverMe(float x, float y) {
-        if (hr <= 0.0 || vr <= 0.0) {
-            return false;
-        }
-        float nx = (x - getX()) / hr - 0.5F;
-        float ny = (y - getY()) / vr - 0.5F;
-        return (nx * nx + ny * ny) < 0.25;
-    }
-
-    public float getStrokeWeight() {
-        return strokeWeight;
-    }
-
-    public void setStrokeWeight(float strokeWeight) {
-        this.strokeWeight = strokeWeight;
-    }
-
-    public int getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public void setBackgroundColor(int backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public int getStrokeColor() {
-        return strokeColor;
-    }
-
-    public void setStrokeColor(int strokeColor) {
-        this.strokeColor = strokeColor;
-    }
-
-    public void fill(boolean fill) {
-        this.fillBackground = fill;
-    }
-
-    public void stroke(boolean stroke) {
-        this.drawStroke = stroke;
+        return Math.pow(this.x - x, 2) / Math.pow(getHr() / 2, 2) +
+                Math.pow(this.y - y, 2) / Math.pow(getVr() / 2, 2) <= 1;
     }
 
     public float getVr() {
@@ -97,23 +57,5 @@ public class EllipseWrapper extends P2DPrimitiveWrapper {
     public void setHr(float hr) {
         this.hr = hr;
     }
-
-    public boolean isFillBackground() {
-        return fillBackground;
-    }
-
-    public void setFillBackground(boolean fillBackground) {
-        this.fillBackground = fillBackground;
-    }
-
-    public boolean isDrawStroke() {
-        return drawStroke;
-    }
-
-    public void setDrawStroke(boolean drawStroke) {
-        this.drawStroke = drawStroke;
-    }
-
-
 
 }

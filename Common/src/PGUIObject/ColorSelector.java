@@ -15,8 +15,7 @@ public class ColorSelector extends PGuiObject {
             for (int sc = 0; sc < colorSelector.colorsRectangles.length; sc++) {
                 if (colorSelector.colorsRectangles[sc].isThisOverMe(colorSelector.context.mouseX,
                         colorSelector.context.mouseY)) {
-                    colorSelector.selectedColor = colorSelector.colors[sc];
-                    colorSelector.selectedColorIndex = sc;
+                    colorSelector.setSelectedColor(colorSelector.colors[sc]);
                     return true;
                 }
             }
@@ -26,17 +25,23 @@ public class ColorSelector extends PGuiObject {
     private int[] colors;
     private RectangleWrapper[] colorsRectangles;
     private int selectedColor, selectedColorIndex;
-    private boolean vertical = true;
+    private boolean vertical;
+    private OnSelectedColorChanged onSelectedColorChanged;
+    private boolean selectedColorChanged;
+
 
     public ColorSelector(float x, float y, float width, float height, PApplet context) {
         super(x, y, width, height, context);
 
         //Defaults
-        drawStroke(false);
-        drawBackground(false);
+        setStrokeEnable(false);
+        setFillEnable(false);
 
         //Colors
         setColors();
+
+        selectedColorChanged = false;
+        vertical = true;
 
         //colorRectangles
         setColorsRectangles();
@@ -73,7 +78,7 @@ public class ColorSelector extends PGuiObject {
                 colorRectangle = new RectangleWrapper(x + c * colorRectangleW, y,
                         colorRectangleW, height, context);
                 colorRectangle.setStrokeWeight(1);
-                colorRectangle.setBackgroundColor(colors[c]);
+                colorRectangle.setFillColor(colors[c]);
                 colorsRectangles[c] = colorRectangle;
             }
         } else {
@@ -82,7 +87,7 @@ public class ColorSelector extends PGuiObject {
                 colorRectangle = new RectangleWrapper(x, y + c * colorRectangleH,
                         width, colorRectangleH, context);
                 colorRectangle.setStrokeWeight(1);
-                colorRectangle.setBackgroundColor(colors[c]);
+                colorRectangle.setFillColor(colors[c]);
                 colorsRectangles[c] = colorRectangle;
             }
         }
@@ -113,18 +118,23 @@ public class ColorSelector extends PGuiObject {
 
     }
 
-
     public int getSelectedColor() {
         return selectedColor;
     }
 
     public void setSelectedColor(int color) {
-        for (int ci = 0; ci < colors.length; ci++) {
-            if (color == colors[ci]) {
-                selectedColorIndex = ci;
-                selectedColor = color;
+        selectedColorChanged = false;
+        if (color != selectedColor) {
+            for (int ci = 0; ci < colors.length; ci++) {
+                if (color == colors[ci]) {
+                    selectedColorIndex = ci;
+                    selectedColor = color;
+                    selectedColorChanged = true;
+                    if (onSelectedColorChanged != null) {
+                        onSelectedColorChanged.handleEvent(this, selectedColor);
+                    }
+                }
             }
-
         }
     }
 
@@ -149,6 +159,27 @@ public class ColorSelector extends PGuiObject {
             selectedColorIndex = colors.length - 1;
         }
         selectedColor = colors[selectedColorIndex];
+    }
+
+    public boolean isSelectedColorChanged() {
+        return selectedColorChanged;
+    }
+
+    public void setSelectedColorChanged(boolean selectedColorChanged) {
+        this.selectedColorChanged = selectedColorChanged;
+    }
+
+    public OnSelectedColorChanged getOnSelectedColorChanged() {
+        return onSelectedColorChanged;
+    }
+
+    public void setOnSelectedColorChanged(OnSelectedColorChanged onSelectedColorChanged) {
+        this.onSelectedColorChanged = onSelectedColorChanged;
+    }
+
+    public abstract static class OnSelectedColorChanged {
+
+        public abstract boolean handleEvent(ColorSelector colorSelector, int newColor);
     }
 
 }

@@ -3,6 +3,8 @@ package PGUIObject;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.awt.*;
+
 public class GuidedBoard extends PGuiObject {
 
     //Fields
@@ -84,12 +86,22 @@ public class GuidedBoard extends PGuiObject {
         return guidesYs[guidesYs.length - 1];
     }
 
+    public Point.Float getCloserGuidedPoint(float x, float y) {
+        return new Point.Float(getCloserGuideX(x), getCloserGuideY(y));
+    }
+
     public void setDx(float dx) {
+        if (dx < 1) {
+            dx = 1;
+        }
         this.dx = dx;
         updateGuidesXs();
     }
 
     public void setDy(float dy) {
+        if (dy < 1) {
+            dy = 1;
+        }
         this.dy = dy;
         updateGuidesYs();
     }

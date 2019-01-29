@@ -2,6 +2,7 @@ package PGUIObject;
 
 import P2DPrimitiveWrappers.RectangleWrapper;
 import processing.core.PApplet;
+import processing.event.Event;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
@@ -33,22 +34,85 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         }
     }
 
-    private void handleFocus() {
-        for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.isFocusable() &&
-                    pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
+    public boolean setFocusTo(PGuiObject pGuiObject) {
+        for (PGuiObject guiObject : pGuiObjects) {
+            if (pGuiObject.equals(guiObject)) {
+                //Focus
+                if (pGuiObject.isFocusable()) {
+                    if (focusedPGuiObject != null) {
+                        focusChanged = !focusedPGuiObject.equals(pGuiObject);
+                        if (focusChanged) {
+                            focusedPGuiObject = pGuiObject;
+                        }
+                    } else {
+                        focusChanged = true;
+                        focusedPGuiObject = pGuiObject;
+                    }
 
+                    for (PGuiObject pGO : pGuiObjects) {
+                        pGO.setFocus(focusedPGuiObject.equals(pGO));
+                    }
+
+                    if (focusChanged) {
+                        if (onFocusChangedHandler != null) {
+                            onFocusChangedHandler.handlePEvent(guiObject);
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void focusNext() {
+
+        boolean afterFocused = false;
+        for (int oi = 0; oi < pGuiObjects.size(); oi++) {
+            if (pGuiObjects.get(oi).equals(focusedPGuiObject)) {
+                afterFocused = true;
+            }
+            if (afterFocused && pGuiObjects.get(oi).isFocusable()) {
+                setFocusTo(pGuiObjects.get(oi));
+                return;
+            }
+        }
+
+        for (PGuiObject pGuiObject : pGuiObjects) {
+            if (pGuiObject.isFocusable()) {
+                setFocusTo(pGuiObject);
             }
         }
     }
 
+    private boolean listeningForMouseReleased = true;
+
+    @Override
+    public final boolean isListeningForMouseReleased() {
+        return listeningForMouseReleased;
+    }
+
+    @Override
+    public final void setListeningForMouseReleased(boolean enable) {
+        listeningForMouseReleased = enable;
+    }
+
     @Override
     public final boolean listeningForMouseReleased(MouseEvent event) {
+
+        if (!isListeningForMouseReleased()) {
+            return false;
+        }
+
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.getOnMouseReleasedHandler() != null &&
+            if (pGuiObject.isOnMouseReleasedHandlerEnable() &&
+                    pGuiObject.getOnMouseReleasedHandler() != null &&
                     pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
-                return pGuiObject.getOnMouseReleasedHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnMouseReleasedHandler().handlePEvent(event, pGuiObject)) {
+                    return true;
+                }
             }
         }
 
@@ -59,14 +123,33 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         return false;
     }
 
+    private boolean listeningForMouseWheel = true;
+
+    @Override
+    public final boolean isListeningForMouseWheel() {
+        return listeningForMouseWheel;
+    }
+
+    @Override
+    public final void setListeningForMouseWheel(boolean enable) {
+        listeningForMouseWheel = enable;
+    }
+
     @Override
     public final boolean listeningForMouseWheel(MouseEvent event) {
 
+        if (!isListeningForMouseWheel()) {
+            return false;
+        }
+
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.getOnMouseWheelHandler() != null &&
+            if (pGuiObject.isOnMouseWheelHandlerEnable() && pGuiObject.getOnMouseWheelHandler() != null &&
                     pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
-                return pGuiObject.getOnMouseWheelHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnMouseWheelHandler().handlePEvent(event, pGuiObject)) {
+                    return true;
+                }
             }
         }
 
@@ -77,11 +160,28 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         return false;
     }
 
+    private boolean listeningForMousePressed = true;
+
+    @Override
+    public final boolean isListeningForMousePressed() {
+        return listeningForMousePressed;
+    }
+
+    @Override
+    public final void setListeningForMousePressed(boolean enable) {
+        listeningForMousePressed = enable;
+    }
+
     @Override
     public final boolean listeningForMousePressed(MouseEvent event) {
+
+        if (!isListeningForMousePressed()) {
+            return false;
+        }
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.getOnMousePressedHandler() != null &&
+            if (pGuiObject.isOnMousePressedHandlerEnable() && pGuiObject.getOnMousePressedHandler() != null &&
                     pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
                 return pGuiObject.getOnMousePressedHandler().handlePEvent(event, pGuiObject);
             }
@@ -94,31 +194,38 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         return false;
     }
 
+    private boolean listeningForMouseClicked = true;
+
+    @Override
+    public final boolean isListeningForMouseClicked() {
+        return listeningForMouseClicked;
+    }
+
+    @Override
+    public final void setListeningForMouseClicked(boolean enable) {
+        listeningForMouseClicked = enable;
+    }
+
     @Override
     public final boolean listeningForMouseClicked(MouseEvent event) {
+
+        if (!isListeningForMouseClicked()) {
+            return false;
+        }
+
         //PGuiObjects
-        boolean eventResult = false;
         for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
+            if (pGuiObject.isOnMouseClickedHandlerEnable() &&
+                    pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
 
                 //Focus
-                pGuiObject.setFocus(false);
-                if (pGuiObject.isFocusable()) {
-                    if (focusedPGuiObject != null) {
-                        focusChanged = !focusedPGuiObject.equals(pGuiObject);
-                        if (!focusChanged) {
-                            focusedPGuiObject = pGuiObject;
-                        }
-                    } else {
-                        focusChanged = true;
-                        focusedPGuiObject = pGuiObject;
-                        pGuiObject.setFocus(true);
-                    }
-                }
+                setFocusTo(pGuiObject);
 
                 //EventHandler
                 if (pGuiObject.getOnMouseClickedHandler() != null) {
-                    eventResult = pGuiObject.getOnMouseClickedHandler().handlePEvent(event, pGuiObject);
+                    return pGuiObject.getOnMouseClickedHandler().handlePEvent(event, pGuiObject);
+                } else {
+                    return false;
                 }
             }
         }
@@ -126,93 +233,191 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         //Manager
         if (getOnMouseClickedHandler() != null) {
             return getOnMouseClickedHandler().handlePEvent(event, null);
+        } else {
+            return false;
         }
-        return eventResult;
+    }
+
+    private boolean listeningForMouseDragged = true;
+
+    @Override
+    public final boolean isListeningForMouseDragged() {
+        return listeningForMouseDragged;
+    }
+
+    @Override
+    public final void setListeningForMouseDragged(boolean enable) {
+        listeningForMouseDragged = enable;
     }
 
     @Override
     public final boolean listeningForMouseDragged(MouseEvent event) {
+
+        if (!isListeningForMouseDragged()) {
+            return false;
+        }
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.getOnMouseDraggedHandler() != null &&
+            if (pGuiObject.isOnMouseDraggedHandlerEnable() && pGuiObject.getOnMouseDraggedHandler() != null &&
                     pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
-                return pGuiObject.getOnMouseDraggedHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnMouseDraggedHandler().handlePEvent(event, pGuiObject)) {
+                    return true;
+                }
             }
         }
 
         //Manager
         if (getOnMouseDraggedHandler() != null) {
             return getOnMouseDraggedHandler().handlePEvent(event, null);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    private boolean listeningForMouseMoved = true;
+
+    @Override
+    public final boolean isListeningForMouseMoved() {
+        return listeningForMouseMoved;
+    }
+
+    @Override
+    public final void setListeningForMouseMoved(boolean enable) {
+        listeningForMouseMoved = enable;
     }
 
     @Override
     public final boolean listeningForMouseMoved(MouseEvent event) {
+
+        if (!isListeningForMouseMoved()) {
+            return false;
+        }
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
-            if (pGuiObject.getOnMouseMovedHandler() != null &&
+            if (pGuiObject.isOnMouseMovedHandlerEnable() && pGuiObject.getOnMouseMovedHandler() != null &&
                     pGuiObject.isThisOverMe(context.mouseX, context.mouseY)) {
-                return pGuiObject.getOnMouseMovedHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnMouseMovedHandler().handlePEvent(event, pGuiObject)) {
+                    return true;
+                }
             }
         }
 
         //Manager
         if (getOnMouseMovedHandler() != null) {
             return getOnMouseMovedHandler().handlePEvent(event, null);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    private boolean listeningForKeyPressed = true;
+
+    @Override
+    public final boolean isListeningForKeyPressed() {
+        return listeningForKeyPressed;
+    }
+
+    @Override
+    public final void setListeningForKeyPressed(boolean enable) {
+        listeningForKeyPressed = enable;
     }
 
     @Override
     public final boolean listeningForKeyPressed(KeyEvent event) {
+        if (!isListeningForKeyPressed()) {
+            return false;
+        }
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
             if (pGuiObject.getOnKeyPressedHandler() != null &&
                     pGuiObject.isFocusable() && pGuiObject.isFocused()) {
-                return pGuiObject.getOnKeyPressedHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnKeyPressedHandler().handlePEvent(event, pGuiObject)) {
+                    return true;
+                }
             }
         }
 
         //Manager
         if (getOnKeyPressedHandler() != null) {
             return getOnKeyPressedHandler().handlePEvent(event, null);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    private boolean listeningForKeyReleased = true;
+
+    @Override
+    public final boolean isListeningForKeyReleased() {
+        return listeningForKeyReleased;
+    }
+
+    @Override
+    public final void setListeningForKeyReleased(boolean enable) {
+        listeningForKeyReleased = enable;
     }
 
     @Override
     public final boolean listeningForKeyReleased(KeyEvent event) {
+        if (!isListeningForKeyReleased()) {
+            return false;
+        }
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
             if (pGuiObject.getOnKeyReleasedHandler() != null &&
                     pGuiObject.isFocusable() && pGuiObject.isFocused()) {
-                return pGuiObject.getOnKeyReleasedHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnKeyReleasedHandler().handlePEvent(event, pGuiObject)) {
+                    return false;
+                }
             }
         }
 
         //Manager
         if (getOnKeyReleasedHandler() != null) {
             return getOnKeyReleasedHandler().handlePEvent(event, null);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    private boolean listeningForKeyTyped = true;
+
+    @Override
+    public final boolean isListeningForKeyTyped() {
+        return listeningForKeyTyped;
+    }
+
+    @Override
+    public final void setListeningForKeyTyped(boolean enable) {
+        listeningForKeyTyped = enable;
     }
 
     @Override
     public final boolean listeningForKeyTyped(KeyEvent event) {
+        if (!isListeningForKeyTyped()) {
+            return false;
+        }
+
         //PGuiObjects
         for (PGuiObject pGuiObject : pGuiObjects) {
             if (pGuiObject.getOnKeyTypedHandler() != null &&
                     pGuiObject.isFocusable() && pGuiObject.isFocused()) {
-                return pGuiObject.getOnKeyTypedHandler().handlePEvent(event, pGuiObject);
+                if (pGuiObject.getOnKeyTypedHandler().handlePEvent(event, pGuiObject)) {
+                    return true;
+                }
             }
         }
 
         //Manager
         if (getOnKeyTypedHandler() != null) {
             return getOnKeyTypedHandler().handlePEvent(event, null);
+        } else {
+            return false;
         }
-        return false;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -229,7 +434,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onMouseReleasedHandler = onMouseReleasedHandler;
     }
 
-    public abstract static class OnMouseReleasedHandler extends PGuiObject.PEventHandler<MouseEvent> {
+    public abstract static class OnMouseReleasedHandler extends PEventHandler<MouseEvent> {
 
     }
 
@@ -248,7 +453,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onMouseWheelHandler = onMouseWheelHandler;
     }
 
-    public abstract static class OnMouseWheelHandler extends PGuiObject.PEventHandler<MouseEvent> {
+    public abstract static class OnMouseWheelHandler extends PEventHandler<MouseEvent> {
 
     }
 
@@ -267,7 +472,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onMousePressedHandler = onMousePressedHandler;
     }
 
-    public abstract static class OnMousePressedHandler extends PGuiObject.PEventHandler<MouseEvent> {
+    public abstract static class OnMousePressedHandler extends PEventHandler<MouseEvent> {
 
     }
 
@@ -286,7 +491,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onMouseClickedHandler = onMouseClickedHandler;
     }
 
-    public abstract static class OnMouseClickedHandler extends PGuiObject.PEventHandler<MouseEvent> {
+    public abstract static class OnMouseClickedHandler extends PEventHandler<MouseEvent> {
 
     }
 
@@ -305,7 +510,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onMouseDraggedHandler = onMouseDraggedHandler;
     }
 
-    public abstract static class OnMouseDraggedHandler extends PGuiObject.PEventHandler<MouseEvent> {
+    public abstract static class OnMouseDraggedHandler extends PEventHandler<MouseEvent> {
 
     }
 
@@ -324,7 +529,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onMouseMovedHandler = onMouseMovedHandler;
     }
 
-    public abstract static class OnMouseMovedHandler extends PGuiObject.PEventHandler<MouseEvent> {
+    public abstract static class OnMouseMovedHandler extends PEventHandler<MouseEvent> {
 
     }
 
@@ -343,7 +548,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onKeyPressedHandler = onKeyPressedHandler;
     }
 
-    public abstract static class OnKeyPressedHandler extends PGuiObject.PEventHandler<KeyEvent> {
+    public abstract static class OnKeyPressedHandler extends PEventHandler<KeyEvent> {
 
 
     }
@@ -363,7 +568,7 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onKeyReleasedHandler = onKeyReleasedHandler;
     }
 
-    public abstract static class OnKeyReleasedHandler extends PGuiObject.PEventHandler<KeyEvent> {
+    public abstract static class OnKeyReleasedHandler extends PEventHandler<KeyEvent> {
 
 
     }
@@ -383,6 +588,46 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
         this.onKeyTypedHandler = onKeyTypedHandler;
     }
 
-    public abstract static class OnKeyTypedHandler extends PGuiObject.PEventHandler<KeyEvent> {
+    public abstract static class OnKeyTypedHandler extends PEventHandler<KeyEvent> {
     }
+
+    private OnFocusChangedHandler onFocusChangedHandler;
+
+    public OnFocusChangedHandler getOnFocusChangedHandler() {
+        return onFocusChangedHandler;
+    }
+
+    public void setOnFocusChangedHandler(OnFocusChangedHandler onFocusChangedHandler) {
+        this.onFocusChangedHandler = onFocusChangedHandler;
+    }
+
+    public abstract static class OnFocusChangedHandler {
+
+        public abstract void handlePEvent(PGuiObject pGuiObject);
+    }
+
+    public static abstract class PEventHandler<T extends Event> {
+
+        /**
+         * The implementation of the method will be called in any
+         * listening event methods of the {@link PGuiObject} objects.
+         * It will be passed the implicated {@link Event} and {@link PGuiObject}
+         * to be used inside this method. You are welcome!!!
+         *
+         * @param event
+         * @param pGuiObject
+         * @return
+         */
+        public abstract boolean handlePEvent(T event, PGuiObject pGuiObject);
+
+    }
+
+    public boolean focusChanged() {
+        return focusChanged;
+    }
+
+    public PGuiObject getFocusedPGuiObject() {
+        return focusedPGuiObject;
+    }
+
 }

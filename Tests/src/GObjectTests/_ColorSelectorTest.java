@@ -20,13 +20,23 @@ public class _ColorSelectorTest extends PApplet {
 
     private PGuiManager pGuiManager;
     private ColorSelector colorSelector;
+    private ColorSelector colorSelector2;
 
     @Override
     public void setup() {
         colorSelector = new ColorSelector(0, (int) (height * 0.8), width,
                 (int) (height * 0.2), this);
+        colorSelector2 = new ColorSelector(0, 0, width, colorSelector.getHeight(), this );
         pGuiManager = PGuiManager.createPGuiManager(this);
         pGuiManager.addPGUIObject(colorSelector);
+        colorSelector.setOnSelectedColorChanged(new ColorSelector.OnSelectedColorChanged() {
+            @Override
+            public boolean handleEvent(ColorSelector colorSelector, int newColor) {
+                System.out.println("Color Selected changed!!");
+                colorSelector2.setSelectedColor(colorSelector.getSelectedColor());
+                return false;
+            }
+        });
     }
 
 
@@ -35,6 +45,7 @@ public class _ColorSelectorTest extends PApplet {
 
         background(colorSelector.getSelectedColor());
         colorSelector.draw();
+        colorSelector2.draw();
 
     }
 

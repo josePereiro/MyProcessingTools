@@ -10,7 +10,7 @@ public class MultiLineTextBox extends PGuiObject {
 
     private static final OnMouseWheelHandler DEFAULT_ON_MOUSE_WHEEL_HANDLER = new OnMouseWheelHandler() {
 
-        int lastSign = 1;
+        int lastDir = 1;
 
         @Override
         public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
@@ -18,18 +18,18 @@ public class MultiLineTextBox extends PGuiObject {
             int wheelCount = event.getCount();
             MultiLineTextBox multiLineTextBox = (MultiLineTextBox) pGuiObject;
             if (wheelCount > 0) {
-                for (int t = 0; lastSign > 0 && t < wheelCount &&
+                for (int t = 0; lastDir > 0 && t < wheelCount &&
                         t < multiLineTextBox.getMaxVisibleLinesCount(); t++) {
                     multiLineTextBox.scrollDown();
                 }
-                lastSign = 1;
+                lastDir = 1;
             } else if (wheelCount < 0) {
                 wheelCount *= -1;
-                for (int t = 0; lastSign < 0 && t < wheelCount &&
+                for (int t = 0; lastDir < 0 && t < wheelCount &&
                         t < multiLineTextBox.getMaxVisibleLinesCount(); t++) {
                     multiLineTextBox.scrollUp();
                 }
-                lastSign = -1;
+                lastDir = -1;
             }
             return true;
         }
@@ -62,8 +62,8 @@ public class MultiLineTextBox extends PGuiObject {
         SingleLineTextBox textBox;
         for (int l = 0; l < maxVisibleLinesCount; l++) {
             textBox = new SingleLineTextBox("", x, y + l * textBoxH, width, textBoxH, context);
-            textBox.drawStroke(false);
-            textBox.drawBackground(false);
+            textBox.setStrokeEnable(false);
+            textBox.setFillEnable(false);
             textBoxes.add(textBox);
         }
     }

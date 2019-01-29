@@ -29,7 +29,7 @@ public class _MovingTextBoxTest extends PApplet {
     @Override
     public void draw() {
         background(255);
-        movingTextBox.setBackgroundColor((int)random(255));
+        movingTextBox.setStrokeColor((int)random(255));
         movingTextBox.draw();
     }
 }

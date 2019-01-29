@@ -14,7 +14,6 @@ public class ZoomBox extends PGuiObject {
 
     public ZoomBox(float x, float y, float width, float height, PApplet context) {
         super(x, y, width, height, context);
-        drawBackground(false);
         zoom = new Tools.Zoom((int) width, (int) height, context);
         setOnMouseWheelHandler(DEFAULT_ON_MOUSE_WHEEL_HANDLER);
     }
@@ -48,11 +47,11 @@ public class ZoomBox extends PGuiObject {
     @Override
     public void draw() {
         if (zoom.getAmplifiedImage() != null) {
-            drawBackground(false);
+            setFillEnable(false);
             context.imageMode(PConstants.CORNER);
             context.image(zoom.getAmplifiedImage(), x, y);
         } else {
-            drawBackground(true);
+            setFillEnable(true);
         }
         super.draw();
     }

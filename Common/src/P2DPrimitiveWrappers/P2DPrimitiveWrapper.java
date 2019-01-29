@@ -3,6 +3,8 @@ package P2DPrimitiveWrappers;
 import Common.PObject;
 import processing.core.PApplet;
 
+import java.awt.*;
+
 /**
  * This is the base object for building Processing 2d primitive graphic wrappers.
  * All wrapper will be a subclass of this class.
@@ -20,6 +22,13 @@ public abstract class P2DPrimitiveWrapper extends PObject implements PDrawable, 
 
     protected float x;
     protected float y;
+    protected int fillColor;
+    protected int fillAlpha;
+    protected int strokeColor;
+    protected int strokeAlpha;
+    protected float strokeWeight;
+    protected boolean strokeEnable;
+    protected boolean fillEnable;
 
     /**
      * This is the base object for building Processing 2d primitive graphic wrappers.
@@ -45,6 +54,13 @@ public abstract class P2DPrimitiveWrapper extends PObject implements PDrawable, 
         super(context);
         this.x = x;
         this.y = y;
+        fillAlpha = 255;
+        strokeAlpha = 255;
+        strokeEnable = true;
+        fillEnable = true;
+        strokeColor = Color.BLACK.getRGB();
+        fillColor = Color.WHITE.getRGB();
+        strokeWeight = 1.0F;
     }
 
     /**
@@ -79,5 +95,61 @@ public abstract class P2DPrimitiveWrapper extends PObject implements PDrawable, 
     @Override
     public void setY(float y) {
         this.y = y;
+    }
+
+    public int getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(int fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public int getFillAlpha() {
+        return fillAlpha;
+    }
+
+    public void setFillAlpha(int fillAlpha) {
+        this.fillAlpha = fillAlpha;
+    }
+
+    public int getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(int strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public int getStrokeAlpha() {
+        return strokeAlpha;
+    }
+
+    public void setStrokeAlpha(int strokeAlpha) {
+        this.strokeAlpha = strokeAlpha;
+    }
+
+    public float getStrokeWeight() {
+        return strokeWeight;
+    }
+
+    public void setStrokeWeight(float strokeWeight) {
+        this.strokeWeight = strokeWeight;
+    }
+
+    public boolean isStrokeEnable() {
+        return strokeEnable;
+    }
+
+    public void setStrokeEnable(boolean strokeEnable) {
+        this.strokeEnable = strokeEnable;
+    }
+
+    public boolean isFillEnable() {
+        return fillEnable;
+    }
+
+    public void setFillEnable(boolean fillEnable) {
+        this.fillEnable = fillEnable;
     }
 }

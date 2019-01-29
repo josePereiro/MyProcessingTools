@@ -3,8 +3,6 @@ package GObjectTests;
 import P2DPrimitiveWrappers.EllipseWrapper;
 import processing.core.PApplet;
 
-import java.awt.*;
-
 public class _EllipseTest extends PApplet {
 
     public static void main(String[] args) {
@@ -26,21 +24,19 @@ public class _EllipseTest extends PApplet {
         ellipseWrapper = new EllipseWrapper((int) (random(width)), (int) (random(height)),
                 (int) (random(50)) + 10, (int) (random(50)) + 10, this);
         ellipseWrapper.setStrokeWeight(random(5) + 1);
-        noCursor();
+        ellipseWrapper.draw();
     }
 
     @Override
     public void draw() {
-        background(255);
-
         if (ellipseWrapper.isThisOverMe(mouseX, mouseY)) {
-            ellipseWrapper.setBackgroundColor(Color.RED.getRGB());
-        } else ellipseWrapper.setBackgroundColor(Color.BLUE.getRGB());
+            ellipse(mouseX,mouseY,1,1);
+        }
 
-        ellipseWrapper.draw();
-
-        fill(0);
-        ellipse(mouseX, mouseY, 3, 3);
+//
+//
+//        fill(0);
+//        ellipse(mouseX, mouseY, 3, 3);
 
     }
 

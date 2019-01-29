@@ -4,4 +4,6 @@ public interface PDrawable {
 
     void draw();
 
+    void draw(float x, float y);
+
 }

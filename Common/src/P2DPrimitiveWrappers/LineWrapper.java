@@ -2,15 +2,12 @@ package P2DPrimitiveWrappers;
 
 import processing.core.PApplet;
 
-import java.awt.*;
 import java.awt.geom.Line2D;
 
 public class LineWrapper extends P2DPrimitiveWrapper {
 
     private float x1;
     private float y1;
-    private float strokeWeight = 1.0F;
-    private int strokeColor = Color.BLACK.getRGB();
 
     public LineWrapper(float x, float y, float x1, float y1, PApplet context) {
         super(x, y, context);
@@ -20,9 +17,16 @@ public class LineWrapper extends P2DPrimitiveWrapper {
 
     @Override
     public void draw() {
-        context.stroke(strokeColor);
-        context.strokeWeight(strokeWeight);
-        context.line(x, y, x1, y1);
+        draw(x, y);
+    }
+
+    @Override
+    public void draw(float x, float y) {
+        if (strokeEnable) {
+            context.stroke(strokeColor, strokeAlpha);
+            context.strokeWeight(strokeWeight);
+            context.line(x, y, x1, y1);
+        }
     }
 
     @Override
@@ -46,19 +50,4 @@ public class LineWrapper extends P2DPrimitiveWrapper {
         this.y1 = y1;
     }
 
-    public float getStrokeWeight() {
-        return strokeWeight;
-    }
-
-    public void setStrokeWeight(float strokeWeight) {
-        this.strokeWeight = strokeWeight;
-    }
-
-    public int getStrokeColor() {
-        return strokeColor;
-    }
-
-    public void setStrokeColor(int strokeColor) {
-        this.strokeColor = strokeColor;
-    }
 }

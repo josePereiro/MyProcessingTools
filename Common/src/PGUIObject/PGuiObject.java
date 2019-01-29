@@ -119,9 +119,13 @@ public abstract class PGuiObject extends RectangleWrapper
     }
 
 
+    //MOUSE EVENTS
     //////////////////////////////////////////////////////////////////////////////////////
 
+    private boolean onMouseEventHandlerEnable = true;
+
     private OnMouseReleasedHandler onMouseReleasedHandler;
+    private boolean onMouseReleasedHandlerEnable;
 
     @Override
     public final OnMouseReleasedHandler getOnMouseReleasedHandler() {
@@ -141,6 +145,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnMouseWheelHandler onMouseWheelHandler;
+    private boolean onMouseWheelHandlerEnable = true;
 
     @Override
     public final OnMouseWheelHandler getOnMouseWheelHandler() {
@@ -160,6 +165,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnMousePressedHandler onMousePressedHandler;
+    private boolean onMousePressedHandlerEnable = true;
 
     @Override
     public final OnMousePressedHandler getOnMousePressedHandler() {
@@ -179,6 +185,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnMouseClickedHandler onMouseClickedHandler;
+    private boolean onMouseClickedHandlerEnable = true;
 
     @Override
     public final OnMouseClickedHandler getOnMouseClickedHandler() {
@@ -198,6 +205,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnMouseDraggedHandler onMouseDraggedHandler;
+    private boolean onMouseDraggedHandlerEnable = true;
 
     @Override
     public final OnMouseDraggedHandler getOnMouseDraggedHandler() {
@@ -217,6 +225,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnMouseMovedHandler onMouseMovedHandler;
+    private boolean onMouseMovedHandlerEnable = true;
 
     @Override
     public final OnMouseMovedHandler getOnMouseMovedHandler() {
@@ -233,9 +242,12 @@ public abstract class PGuiObject extends RectangleWrapper
     }
 
 
+    //KEY EVENTS
     //////////////////////////////////////////////////////////////////////////////////////
+    private boolean onKeyEventHandlerEnable = true;
 
     private OnKeyPressedHandler onKeyPressedHandler;
+    private boolean onKeyPressedHandlerEnable = true;
 
     @Override
     public final OnKeyPressedHandler getOnKeyPressedHandler() {
@@ -256,6 +268,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnKeyReleasedHandler onKeyReleasedHandler;
+    private boolean onKeyReleasedHandlerEnable = true;
 
     @Override
     public final OnKeyReleasedHandler getOnKeyReleasedHandler() {
@@ -276,6 +289,7 @@ public abstract class PGuiObject extends RectangleWrapper
     //////////////////////////////////////////////////////////////////////////////////////
 
     private OnKeyTypedHandler onKeyTypedHandler;
+    private boolean onKeyTypedHandlerEnable;
 
     @Override
     public final OnKeyTypedHandler getOnKeyTypedHandler() {
@@ -290,4 +304,91 @@ public abstract class PGuiObject extends RectangleWrapper
     public abstract static class OnKeyTypedHandler extends PGuiManager.PEventHandler<KeyEvent> {
     }
 
+    public boolean isOnMouseEventHandlerEnable() {
+        return onMouseEventHandlerEnable;
+    }
+
+    public void setOnMouseEventHandlerEnable(boolean onMouseEventHandlerEnable) {
+        this.onMouseEventHandlerEnable = onMouseEventHandlerEnable;
+    }
+
+    public boolean isOnMouseReleasedHandlerEnable() {
+        return onMouseReleasedHandlerEnable;
+    }
+
+    public void setOnMouseReleasedHandlerEnable(boolean onMouseReleasedHandlerEnable) {
+        this.onMouseReleasedHandlerEnable = onMouseReleasedHandlerEnable;
+    }
+
+    public boolean isOnMouseWheelHandlerEnable() {
+        return onMouseWheelHandlerEnable;
+    }
+
+    public void setOnMouseWheelHandlerEnable(boolean onMouseWheelHandlerEnable) {
+        this.onMouseWheelHandlerEnable = onMouseWheelHandlerEnable;
+    }
+
+    public boolean isOnMousePressedHandlerEnable() {
+        return onMousePressedHandlerEnable;
+    }
+
+    public void setOnMousePressedHandlerEnable(boolean onMousePressedHandlerEnable) {
+        this.onMousePressedHandlerEnable = onMousePressedHandlerEnable;
+    }
+
+    public boolean isOnMouseClickedHandlerEnable() {
+        return onMouseClickedHandlerEnable;
+    }
+
+    public void setOnMouseClickedHandlerEnable(boolean onMouseClickedHandlerEnable) {
+        this.onMouseClickedHandlerEnable = onMouseClickedHandlerEnable;
+    }
+
+    public boolean isOnMouseDraggedHandlerEnable() {
+        return onMouseDraggedHandlerEnable;
+    }
+
+    public void setOnMouseDraggedHandlerEnable(boolean onMouseDraggedHandlerEnable) {
+        this.onMouseDraggedHandlerEnable = onMouseDraggedHandlerEnable;
+    }
+
+    public boolean isOnMouseMovedHandlerEnable() {
+        return onMouseMovedHandlerEnable;
+    }
+
+    public void setOnMouseMovedHandlerEnable(boolean onMouseMovedHandlerEnable) {
+        this.onMouseMovedHandlerEnable = onMouseMovedHandlerEnable;
+    }
+
+    public boolean isOnKeyEventHandlerEnable() {
+        return onKeyEventHandlerEnable;
+    }
+
+    public void setOnKeyEventHandlerEnable(boolean onKeyEventHandlerEnable) {
+        this.onKeyEventHandlerEnable = onKeyEventHandlerEnable;
+    }
+
+    public boolean isOnKeyPressedHandlerEnable() {
+        return onKeyPressedHandlerEnable;
+    }
+
+    public void setOnKeyPressedHandlerEnable(boolean onKeyPressedHandlerEnable) {
+        this.onKeyPressedHandlerEnable = onKeyPressedHandlerEnable;
+    }
+
+    public boolean isOnKeyReleasedHandlerEnable() {
+        return onKeyReleasedHandlerEnable;
+    }
+
+    public void setOnKeyReleasedHandlerEnable(boolean onKeyReleasedHandlerEnable) {
+        this.onKeyReleasedHandlerEnable = onKeyReleasedHandlerEnable;
+    }
+
+    public boolean isOnKeyTypedHandlerEnable() {
+        return onKeyTypedHandlerEnable;
+    }
+
+    public void setOnKeyTypedHandlerEnable(boolean onKeyTypedHandlerEnable) {
+        this.onKeyTypedHandlerEnable = onKeyTypedHandlerEnable;
+    }
 }

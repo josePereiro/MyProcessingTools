@@ -9,7 +9,6 @@ public class ImageWrapper extends RectangleWrapper {
 
     public ImageWrapper(float x, float y, float width, float height, PApplet context) {
         super(x, y, width, height, context);
-        drawBackground(false);
     }
 
     @Override
@@ -17,9 +16,11 @@ public class ImageWrapper extends RectangleWrapper {
 
         //image
         if (image != null) {
-            drawBackground(false);
+            fillEnable = false;
             context.image(image, x, y);
-        }else drawBackground(true);
+        } else {
+            fillEnable = true;
+        }
         super.draw();
 
     }

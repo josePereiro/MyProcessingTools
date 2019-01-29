@@ -130,6 +130,39 @@ public class Tools {
         }
     }
 
+    public static class KeyCodes {
+
+
+            public static final int RIGHT_ARROW = 37;
+            public static final int LEFT_ARROW = 39;
+            public static final int DOWN_ARROW = 40;
+            public static final int CAPS_LOCK = 20;
+            public static final int UP_ARROW = 38;
+            public static final int COMMAND = 157;
+            public static final int CONTROL = 17;
+            public static final int OPTION = 18;
+            public static final int FUNTION = 0;
+            public static final int RETURN = 10;
+            public static final int SHIFT = 16;
+            public static final int SPACE = 32;
+            public static final int DELETE = 8;
+            public static final int F12 = 123;
+            public static final int F11 = 122;
+            public static final int F10 = 121;
+            public static final int F1 = 112;
+            public static final int F2 = 113;
+            public static final int F3 = 114;
+            public static final int F4 = 115;
+            public static final int F5 = 116;
+            public static final int F6 = 117;
+            public static final int F7 = 118;
+            public static final int F8 = 119;
+            public static final int F9 = 120;
+            public static final int ESC = 27;
+            public static final int TAP = 9;
+
+    }
+
     public static class KeyScanner {
 
         private String lastLine = "";
@@ -234,10 +267,18 @@ public class Tools {
             return lastValidChar;
         }
 
-        public void clear() {
+        public void clearAll() {
+            clearBuffer();
+            clearHistory();
+        }
+
+        public void clearHistory() {
             lastValidChar = "";
-            bufferLine.delete(0, bufferLine.length());
             lastLine = "";
+        }
+
+        public void clearBuffer() {
+            bufferLine.delete(0, bufferLine.length());
         }
     }
 
@@ -256,8 +297,8 @@ public class Tools {
             super(context);
             this.width = width;
             this.height = height;
-            factorizedWidth = Math.round (width / factor);
-            factorizedHeight = Math.round (height / factor);
+            factorizedWidth = Math.round(width / factor);
+            factorizedHeight = Math.round(height / factor);
         }
 
 
@@ -304,8 +345,8 @@ public class Tools {
                 return;
             }
             this.factor = factor;
-            factorizedWidth = Math.round (width / factor);
-            factorizedHeight = Math.round (height / factor);
+            factorizedWidth = Math.round(width / factor);
+            factorizedHeight = Math.round(height / factor);
         }
 
         public void setWidth(int width) {
@@ -315,7 +356,7 @@ public class Tools {
 
         public void setHeight(int height) {
             this.height = height;
-            factorizedHeight = Math.round (height / factor);
+            factorizedHeight = Math.round(height / factor);
         }
 
         public int getMagnifiedAreaWidth() {

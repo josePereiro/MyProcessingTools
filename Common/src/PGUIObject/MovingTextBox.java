@@ -32,8 +32,8 @@ public class MovingTextBox extends PGuiObject {
         this.text = text;
         initializeData();
         automaticStepping = true;
-        textBox.drawBackground(false);
-        textBox.drawStroke(false);
+        textBox.setFillEnable(false);
+        textBox.setStrokeEnable(false);
         setFocusable(false);
     }
 

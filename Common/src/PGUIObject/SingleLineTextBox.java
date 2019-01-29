@@ -37,6 +37,18 @@ public class SingleLineTextBox extends PGuiObject {
     }
 
     @Override
+    public void setX(float x) {
+        super.setX(x);
+        textX = x + margin;
+    }
+
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        textY = y + height - margin;
+    }
+
+    @Override
     public void draw() {
         super.draw();
 

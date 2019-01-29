@@ -10,5 +10,4 @@ public interface PRectangle {
 
     float getHeight();
 
-
 }

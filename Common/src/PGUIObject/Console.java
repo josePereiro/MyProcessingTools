@@ -16,7 +16,9 @@ public class Console extends PGuiObject {
             if (console.scanner.newLineJustHappen()) {
                 console.println(console.scanner.getLastLine());
                 console.setInputText("");
-                console.onInputEntered(console.scanner.getLastLine());
+                if (console.onInputEnteredHandler != null){
+                    return console.onInputEnteredHandler.handlePEvent(console,console.scanner.getLastLine());
+                }
             } else {
                 console.setInputText(console.scanner.getBufferedLine());
             }
@@ -54,8 +56,8 @@ public class Console extends PGuiObject {
         }
         initializeLayout();
         scanner = new Tools.KeyScanner();
-        drawBackground(false);
-        drawStroke(false);
+        setFillEnable(false);
+        setStrokeEnable(false);
         outputBox.setFocusable(false);
         inputBox.setFocusable(false);
 
@@ -97,6 +99,10 @@ public class Console extends PGuiObject {
         print(s + '\n' + prompt);
     }
 
+    public void println() {
+        print( '\n' + prompt);
+    }
+
     /**
      * Get the actual text
      *
@@ -108,11 +114,25 @@ public class Console extends PGuiObject {
 
     public void setInputText(String s) {
         inputBox.setText(prompt + s);
+        scanner.clearBuffer();
+        for (int ci = 0; ci < s.length(); ci++) {
+            scanner.scan(s.charAt(ci));
+        }
         inputBox.fixTextLength();
     }
 
-    public void onInputEntered(String input) {
+    private OnInputEnteredHandler onInputEnteredHandler;
 
+    public OnInputEnteredHandler getOnInputEnteredHandler() {
+        return onInputEnteredHandler;
     }
 
+    public void setOnInputEnteredHandler(OnInputEnteredHandler onInputEnteredHandler) {
+        this.onInputEnteredHandler = onInputEnteredHandler;
+    }
+
+    public abstract static class OnInputEnteredHandler {
+
+        public abstract boolean handlePEvent(PGuiObject pGuiObject, String input);
+    }
 }
