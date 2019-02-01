@@ -13,7 +13,7 @@ public class WrapperPainterObjectsManager extends PGuiObject {
     private static final int HANDLING_SINGLE_COMPONENT = 390;
 
     private int handlingMode;
-    private WrapperPainterObject focusedComponent;
+    private ArrayList<WrapperPainterObject> focusedComponents;
     private boolean focusedComponentChanged = false;
     private ArrayList<String> componentsNames;
     private String[] historyBuffer;
@@ -29,6 +29,7 @@ public class WrapperPainterObjectsManager extends PGuiObject {
         handlingMode = HANDLING_SINGLE_COMPONENT;
         wrapperPainterObjects = new ArrayList<>();
         componentsNames = new ArrayList<>();
+        focusedComponents = new ArrayList<>();
         historyBuffer = new String[historyBufferMaxSize];
         for (int i = 0; i < historyBuffer.length; i++) {
             historyBuffer[i] = HISTORY_EMPTY;
@@ -58,23 +59,24 @@ public class WrapperPainterObjectsManager extends PGuiObject {
 
     public String formatNewName(String name) {
         int i = 0;
+        String virginName = name;
         while (componentsNames.contains(name)) {
             i++;
-            name = "line" + i;
+            name = virginName + i;
         }
         return name;
     }
 
     public void focusNext() {
-        if (focusedComponent != null) {
+        if (focusedComponents != null && focusedComponents.size() != 0) {
             boolean afterFocused = false;
-            for (int oi = 0; oi < wrapperPainterObjects.size(); oi++) {
-                if (wrapperPainterObjects.get(oi).equals(focusedComponent)) {
+            for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
+                if (wrapperPainterObject.equals(focusedComponents.get(0))) {
                     afterFocused = true;
                     continue;
                 }
-                if (afterFocused && wrapperPainterObjects.get(oi).isFocusable()) {
-                    setFocusTo(wrapperPainterObjects.get(oi));
+                if (afterFocused && wrapperPainterObject.isFocusable()) {
+                    setFocusTo(wrapperPainterObject);
                     return;
                 }
             }
@@ -88,19 +90,23 @@ public class WrapperPainterObjectsManager extends PGuiObject {
 
     }
 
-    public boolean setFocusTo(WrapperPainterObject wrapperPainterObject) {
-        if (focusedComponent != null) {
-            focusedComponentChanged = !focusedComponent.equals(wrapperPainterObject);
-            if (focusedComponentChanged) {
-                focusedComponent = wrapperPainterObject;
-            }
+    public void setFocusTo(WrapperPainterObject wrapperPainterObject) {
+        if (wrapperPainterObject == null) {
+            focusedComponentChanged = focusedComponents.size() > 0;
+            focusedComponents = new ArrayList<>();
         } else {
-            focusedComponentChanged = wrapperPainterObject != null;
-            focusedComponent = wrapperPainterObject;
+            if (focusedComponents.size() == 1 && focusedComponents.get(0).equals(wrapperPainterObject))
+                focusedComponentChanged = false;
+            else {
+                focusedComponents = new ArrayList<>();
+                focusedComponents.add(wrapperPainterObject);
+                focusedComponentChanged = true;
+            }
         }
 
+
         for (WrapperPainterObject dComponent : wrapperPainterObjects) {
-            dComponent.setFocus(focusedComponent != null && focusedComponent.equals(dComponent));
+            dComponent.setFocus(focusedComponents.contains(dComponent));
         }
 
         if (focusedComponentChanged) {
@@ -108,7 +114,21 @@ public class WrapperPainterObjectsManager extends PGuiObject {
                 onFocusChangedHandler.handlePEvent(wrapperPainterObject);
             }
         }
-        return focusedComponentChanged;
+    }
+
+    public void addFocusTo(WrapperPainterObject wrapperPainterObject) {
+        if (wrapperPainterObject == null) {
+            return;
+        }
+        if (focusedComponents.contains(wrapperPainterObject)) {
+            return;
+        }
+        focusedComponents.add(wrapperPainterObject);
+        wrapperPainterObject.setFocus(true);
+        focusedComponentChanged = true;
+        if (onFocusChangedHandler != null) {
+            onFocusChangedHandler.handlePEvent(wrapperPainterObject);
+        }
     }
 
     public void addDrawComponent(WrapperPainterObject wrapperPainterObject) {
@@ -129,8 +149,8 @@ public class WrapperPainterObjectsManager extends PGuiObject {
         }
     }
 
-    public WrapperPainterObject getFocusedComponent() {
-        return focusedComponent;
+    public ArrayList<WrapperPainterObject> getFocusedComponents() {
+        return focusedComponents;
     }
 
     public boolean isFocusedComponentChanged() {
@@ -160,9 +180,6 @@ public class WrapperPainterObjectsManager extends PGuiObject {
                 historyIndex = 0;
             }
             historyBuffer[historyIndex] = dataStore;
-            for (int hi = historyIndex + 1; hi < historyBuffer.length; hi++) {
-                historyBuffer[hi] = HISTORY_EMPTY;
-            }
         }
     }
 
@@ -198,9 +215,20 @@ public class WrapperPainterObjectsManager extends PGuiObject {
         }
     }
 
+    public void updateNames() {
+        componentsNames = new ArrayList<>();
+        for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
+            componentsNames.add(wrapperPainterObject.getName());
+        }
+    }
+
+    public void setWrapperPainterObjects(ArrayList<WrapperPainterObject> wrapperPainterObjects) {
+        this.wrapperPainterObjects = wrapperPainterObjects;
+    }
+
     public abstract static class OnFocusChangedHandler {
 
-        public abstract void handlePEvent(WrapperPainterObject wrapperPainterObject);
+        public abstract void handlePEvent(WrapperPainterObject... wrapperPainterObject);
     }
 
 }

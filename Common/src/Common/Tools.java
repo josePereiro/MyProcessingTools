@@ -159,7 +159,7 @@ public class Tools {
             public static final int F8 = 119;
             public static final int F9 = 120;
             public static final int ESC = 27;
-            public static final int TAP = 9;
+            public static final int TAB = 9;
 
     }
 

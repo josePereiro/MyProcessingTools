@@ -1,6 +1,8 @@
 package WrapperPainter;
 
+import BuiltIn.FileTools;
 import BuiltIn.LayoutTools;
+import BuiltIn.StringTools;
 import Common.Tools;
 import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.LineWrapper;
@@ -8,11 +10,15 @@ import P2DPrimitiveWrappers.PointWrapper;
 import P2DPrimitiveWrappers.RectangleWrapper;
 import PGUIObject.*;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WrapperPainter extends PApplet {
 
@@ -22,9 +28,8 @@ public class WrapperPainter extends PApplet {
     }
 
     //Main Window
-    private static final float f = 1.23F;
-    private static final int DW = (int) (640 * f);
-    private static final int DH = (int) (480 * f);
+    private static final int DW = 1100;
+    private static final int DH = 650;
     private int margin = (int) (Math.min(DW, DH) * 0.01);
 
     //PGuiObjects
@@ -47,6 +52,10 @@ public class WrapperPainter extends PApplet {
 
     //Zoom
     private int mx, my;
+
+    //Files
+    File saveFile;
+    File opendFile;
 
     @Override
     public void settings() {
@@ -168,7 +177,7 @@ public class WrapperPainter extends PApplet {
     @Override
     public void keyReleased(KeyEvent event) {
         wrapperPainterObjectsManager.getOnKeyReleasedHandler().
-                handlePEvent(null,null);
+                handlePEvent(null, null);
     }
 
     @Override
@@ -252,7 +261,7 @@ public class WrapperPainter extends PApplet {
                 } else if (key == 'j' || key == 'J') {
                     drawBoard.setDy(drawBoard.getDy() + 1);
                     return true;
-                } else if (key == 'f' || key == 'F') {
+                } else if (key == 'k' || key == 'K') {
                     float d = Math.max(drawBoard.getDx(), drawBoard.getDy());
                     drawBoard.setDx(d);
                     drawBoard.setDy(d);
@@ -264,6 +273,73 @@ public class WrapperPainter extends PApplet {
                 } else if (key == '1') {
                     ComponentConstructor.Line.startConstructionHandler.handlePEvent(null, newLineBtm);
                     return true;
+                } else if (key == 's' || key == 'S') {
+
+                    if (saveFile == null) {
+                        console.println("Write the name for the save file!");
+
+                        if (opendFile != null) {
+                            console.setInputText(opendFile.getName());
+                        } else {
+                            console.setInputText("save_" + System.currentTimeMillis() + ".txt");
+                        }
+                        console.setFocusable(true);
+                        pGuiManager.setFocusTo(console);
+
+                        console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                            @Override
+                            public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                                if (!input.equals("")) {
+
+                                    if (!input.endsWith(".txt")) {
+                                        input += ".txt";
+                                    }
+                                    saveFile = FileTools.openDirDialog("Select a directory!!");
+                                    if (saveFile == null) {
+                                        return false;
+                                    }
+                                    saveFile = new File(saveFile, input);
+                                    try {
+                                        FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
+                                                wrapperPainterObjectsManager.getWrapperPainterObjects()));
+                                        console.println("File created and saved at: " + saveFile.getCanonicalPath());
+                                    } catch (IOException ignored) {
+
+                                    }
+
+                                }
+
+                                pGuiManager.setFocusTo(drawBoard);
+                                console.setFocusable(false);
+                                console.setOnInputEnteredHandler(null);
+                                return true;
+                            }
+                        });
+                    } else {
+                        try {
+                            FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
+                                    wrapperPainterObjectsManager.getWrapperPainterObjects()));
+                            console.println("File saved: " + saveFile.getCanonicalPath());
+                        } catch (IOException ignored) {
+
+                        }
+                    }
+                    return true;
+                } else if (key == 'o' || key == 'O') {
+                    opendFile = FileTools.openFileDialog("Select a file!!!");
+                    if (opendFile != null) {
+
+                        //TODO aqui
+                        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(loadStrings(opendFile)));
+                        String s = StringTools.stringTheList(arrayList,
+                                "\n");
+                        wrapperPainterObjectsManager.setWrapperPainterObjects(
+                                DataStoreFile.readDataStore(s, drawBoard.getContext()));
+                        console.println("File loaded: " + opendFile.getAbsolutePath());
+
+                    }
+                    return true;
                 } else {
                     return false;
                 }
@@ -273,7 +349,7 @@ public class WrapperPainter extends PApplet {
     }
 
     private void initializeConsole() {
-        console = new Console(10, margin, drawBoard.getHeight() + 2 * margin,
+        console = new Console(5, margin, drawBoard.getHeight() + 2 * margin,
                 drawBoard.getWidth(), height - (drawBoard.getHeight() + 3 * margin), this);
         console.setFocusable(false);
         console.println("This is the console. It will show you the program flow!!!");
@@ -281,7 +357,28 @@ public class WrapperPainter extends PApplet {
 
     private void initializeDrawBoard() {
         drawBoard = new GuidedBoard(margin, margin,
-                (int) (width * 0.65), (int) (height * 0.7), margin, margin, this);
+                (int) (width * 0.80), (int) (height * 0.8), margin, margin, this);
+
+        drawBoard.setOnKeyTypedHandler(new PGuiObject.OnKeyTypedHandler() {
+            @Override
+            public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
+                if (key == 'o' || key == 'O') {
+                    File imageFile = FileTools.openFileDialog("Select a backgroud photo!!!");
+                    if (imageFile != null) {
+                        PImage image = loadImage(imageFile.getAbsolutePath());
+                        if (image != null) {
+                            drawBoard.setBackgroundImage(image);
+                            console.println("Background image setted!!!");
+                        }
+                        return true;
+                    }
+                } if (key == 'u' || key == 'U') {
+                    drawBoard.drawBackgroundImage(!drawBoard.isDrawBackgroundImage());
+                }
+                return false;
+
+            }
+        });
 
         pointer = new Point.Float(drawBoard.getCloserGuideX(drawBoard.getX() + drawBoard.getWidth() / 2),
                 drawBoard.getCloserGuideY(drawBoard.getY() + drawBoard.getHeight()));
@@ -293,16 +390,21 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
                 if (wrapperPainterObjectsManager.isThisOverMe(mouseX, mouseY)) {
+                    if (componentInConstruction != null) {
+                        return false;
+                    }
+
                     //Focus
-                    for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjectsManager.getWrapperPainterObjects()) {
+                    for (WrapperPainterObject wrapperPainterObject :
+                            wrapperPainterObjectsManager.getWrapperPainterObjects()) {
                         EllipseWrapper constructionPoint =
                                 wrapperPainterObject.getConstructionPointAtPosition(mouseX, mouseY);
                         if (wrapperPainterObject.isThisOverMe(mouseX, mouseY)) {
-                            wrapperPainterObjectsManager.setFocusTo(wrapperPainterObject);
+                            wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
                             return true;
                         }
                         if (constructionPoint != null) {
-                            wrapperPainterObjectsManager.setFocusTo(wrapperPainterObject);
+                            wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
                             wrapperPainterObject.setFocusedConstructionPoints(constructionPoint);
                             return true;
                         }
@@ -315,42 +417,51 @@ public class WrapperPainter extends PApplet {
 
         wrapperPainterObjectsManager.setOnMouseDraggedHandler(new PGuiObject.OnMouseDraggedHandler() {
 
-            long time = -1;
-            long interval = 500;
+            long lastUpdate = -1;
+            Point p1, p2;
 
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
-                WrapperPainterObject focusedComponent = wrapperPainterObjectsManager.getFocusedComponent();
-                if (focusedComponent != null) {
 
-                    EllipseWrapper constructionPoint =
-                            focusedComponent.getFocusedConstructionPoints();
+                if (wrapperPainterObjectsManager.getFocusedComponents().size() == 1) {
+                    WrapperPainterObject focusedComponent =
+                            wrapperPainterObjectsManager.getFocusedComponents().get(0);
+                    if (focusedComponent != null) {
 
-                    if (constructionPoint.isThisOverMe(mouseX, mouseY)) {
-                        time = System.currentTimeMillis();
-                    }
-                    if (System.currentTimeMillis() - time < interval) {
-                        constructionPoint.setX(mouseX);
-                        constructionPoint.setY(mouseY);
-                        focusedComponent.rebuild();
-                        focusedComponent.guideComponent(drawBoard);
-                    } else {
-                        constructionPoint = focusedComponent.getConstructionPointAtPosition(mouseX, mouseY);
-                        if (constructionPoint != null) {
-                            focusedComponent.
-                                    setFocusedConstructionPoints(constructionPoint);
+                        EllipseWrapper constructionPoint =
+                                focusedComponent.getFocusedConstructionPoints();
+
+                        if (constructionPoint.isThisOverMe(mouseX, mouseY)) {
+                            lastUpdate = System.currentTimeMillis();
                         }
+                        if (System.currentTimeMillis() - lastUpdate < 300) {
+                            constructionPoint.setX(mouseX);
+                            constructionPoint.setY(mouseY);
+                            focusedComponent.rebuild();
+                            focusedComponent.guideComponent(drawBoard);
+                        } else {
+                            constructionPoint = focusedComponent.getConstructionPointAtPosition(mouseX, mouseY);
+                            if (constructionPoint != null) {
+                                focusedComponent.
+                                        setFocusedConstructionPoints(constructionPoint);
+                            }
+                        }
+
                     }
-
+                    return true;
                 }
-                return true;
-
+                return false;
             }
         });
 
         wrapperPainterObjectsManager.setOnFocusChangedHandler(new WrapperPainterObjectsManager.OnFocusChangedHandler() {
             @Override
-            public void handlePEvent(WrapperPainterObject wrapperPainterObject) {
+            public void handlePEvent(WrapperPainterObject... wrapperPainterObjects) {
+                if (wrapperPainterObjects == null) {
+                    return;
+                }
+
+                WrapperPainterObject wrapperPainterObject = wrapperPainterObjects[0];
                 if (wrapperPainterObject == null) {
                     return;
                 }
@@ -376,52 +487,152 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
 
-                if (keyCode == Tools.KeyCodes.F2) {
-                    wrapperPainterObjectsManager.toThePass();
-                    console.println("Undo");
-                }else if (keyCode == Tools.KeyCodes.F3) {
-                    wrapperPainterObjectsManager.toTheFuture();
-                    console.println("Redo");
+                if (pGuiManager.getFocusedPGuiObject() != null) {
+                    if (pGuiManager.getFocusedPGuiObject().equals(console)) {
+                        return false;
+                    }
                 }
 
-                WrapperPainterObject focusedComponent = wrapperPainterObjectsManager.getFocusedComponent();
-                if (focusedComponent != null) {
-                    if (keyCode == Tools.KeyCodes.F1) {
-                        console.println("Rename " + focusedComponent.getName());
-                        console.setInputText(focusedComponent.getName());
-                        console.setFocusable(true);
-                        pGuiManager.setFocusTo(console);
+                if (key == 'z' || key == 'Z') {
+                    wrapperPainterObjectsManager.toThePass();
+                    console.println("Undo");
+                } else if (key == 'x' || key == 'X') {
+                    wrapperPainterObjectsManager.toTheFuture();
+                    console.println("Redo");
+                } else if (key == 'f' || key == 'F') {
+                    console.println("Search components by name:");
+                    console.setInputText("");
+                    console.setFocusable(true);
+                    pGuiManager.setFocusTo(console);
 
-                        console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                            @Override
-                            public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+                    console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                        @Override
+                        public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
-                                focusedComponent.setName(
-                                        wrapperPainterObjectsManager.formatNewName(input));
-                                pGuiManager.setFocusTo(drawBoard);
-                                console.setFocusable(false);
-                                console.setOnInputEnteredHandler(null);
-                                return true;
+                            if (!input.equals("")) {
+
+                                wrapperPainterObjectsManager.setFocusTo(null);
+                                for (WrapperPainterObject wrapperPainterObject :
+                                        wrapperPainterObjectsManager.getWrapperPainterObjects()) {
+                                    if (wrapperPainterObject.getName().contains(input)) {
+                                        wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
+                                    }
+                                }
                             }
-                        });
+
+                            pGuiManager.setFocusTo(drawBoard);
+                            console.setFocusable(false);
+                            console.setOnInputEnteredHandler(null);
+                            return true;
+                        }
+                    });
+                }
+
+                ArrayList<WrapperPainterObject> focusedComponents = wrapperPainterObjectsManager.getFocusedComponents();
+                if (focusedComponents.size() > 0) {
+                    if (key == 'r') {
+
+                        if (focusedComponents.size() == 1) {
+                            console.println("Rename " + focusedComponents.get(0).getName());
+                            console.setInputText(focusedComponents.get(0).getName());
+                            console.setFocusable(true);
+                            pGuiManager.setFocusTo(console);
+                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                                @Override
+                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                                    if (!focusedComponents.get(0).getName().equals(input)) {
+                                        focusedComponents.get(0).setName(
+                                                wrapperPainterObjectsManager.formatNewName(input));
+                                        wrapperPainterObjectsManager.updateNames();
+                                    }
+                                    pGuiManager.setFocusTo(drawBoard);
+                                    console.setFocusable(false);
+                                    console.setOnInputEnteredHandler(null);
+                                    return true;
+                                }
+                            });
+                        } else {
+                            console.println("Renaming " + focusedComponents.size() + " components ");
+                            //TODO finish this
+
+                            console.setInputText("");
+                            console.setFocusable(true);
+                            pGuiManager.setFocusTo(console);
+                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                                @Override
+                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+                                    if (!input.equals("")) {
+                                        for (WrapperPainterObject focusedComponent :
+                                                focusedComponents) {
+                                            focusedComponent.setName(
+                                                    wrapperPainterObjectsManager.formatNewName(input));
+                                            wrapperPainterObjectsManager.updateNames();
+                                        }
+                                    }
+
+                                    pGuiManager.setFocusTo(drawBoard);
+                                    console.setFocusable(false);
+                                    console.setOnInputEnteredHandler(null);
+                                    return true;
+                                }
+                            });
+                        }
+
+
                     } else if (key == 'w' || key == 'W') {
-                        console.println("Change " + focusedComponent.getName() + " strokeWeight!");
-                        console.setInputText(focusedComponent.getWrapper().getStrokeWeight() + "");
-                        console.setFocusable(true);
-                        pGuiManager.setFocusTo(console);
+                        if (focusedComponents.size() == 1) {
+                            console.println("Change " + focusedComponents.get(0).getName() + " strokeWeight!");
+                            console.setInputText(focusedComponents.get(0).getWrapper().getStrokeWeight() + "");
+                            console.setFocusable(true);
+                            pGuiManager.setFocusTo(console);
 
-                        console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                            @Override
-                            public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                                @Override
+                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
-                                focusedComponent.setName(
-                                        wrapperPainterObjectsManager.formatNewName(input));
-                                pGuiManager.setFocusTo(drawBoard);
-                                console.setFocusable(false);
-                                console.setOnInputEnteredHandler(null);
-                                return true;
-                            }
-                        });
+                                    float sw = focusedComponents.get(0).getWrapper().getStrokeWeight();
+                                    try {
+                                        sw = Float.parseFloat(input);
+                                    } catch (Exception ignored) {
+                                    }
+                                    focusedComponents.get(0).getWrapper().setStrokeWeight(sw);
+                                    pGuiManager.setFocusTo(drawBoard);
+                                    console.setFocusable(false);
+                                    console.setOnInputEnteredHandler(null);
+                                    return true;
+                                }
+                            });
+                        } else {
+                            console.println("Change " + focusedComponents.size() + " components strokeWeight!");
+                            console.setInputText("");
+                            console.setFocusable(true);
+                            pGuiManager.setFocusTo(console);
+
+                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                                @Override
+                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                                    if (input.equals("")) {
+                                        float sw;
+                                        try {
+                                            sw = Float.parseFloat(input);
+                                        } catch (Exception e) {
+                                            return false;
+                                        }
+
+                                        for (WrapperPainterObject focusedComponent : focusedComponents) {
+                                            focusedComponent.getWrapper().setStrokeWeight(sw);
+                                        }
+                                    }
+
+                                    console.setOnInputEnteredHandler(null);
+                                    console.setFocusable(false);
+                                    pGuiManager.setFocusTo(drawBoard);
+                                    return true;
+                                }
+                            });
+                        }
                     }
                 }
                 return false;
@@ -436,27 +647,27 @@ public class WrapperPainter extends PApplet {
                         pGuiManager.getFocusedPGuiObject().equals(console)) {
                     return false;
                 }
-                if (keyCode == 9) {
+                if (keyCode == Tools.KeyCodes.TAB) {
                     wrapperPainterObjectsManager.focusNext();
                     return true;
                 }
 
-                WrapperPainterObject focusedComponent =
-                        wrapperPainterObjectsManager.getFocusedComponent();
-                if (focusedComponent == null) {
+                ArrayList<WrapperPainterObject> focusedComponents =
+                        wrapperPainterObjectsManager.getFocusedComponents();
+                if (focusedComponents == null || focusedComponents.size() == 0) {
                     return true;
                 }
 
                 float dx = drawBoard.getDx();
                 float dy = drawBoard.getDy();
                 if (keyCode == 37) {
-                    moveComponent(focusedComponent, -dx, 0);
+                    moveComponent(focusedComponents, -dx, 0);
                 } else if (keyCode == 38) {
-                    moveComponent(focusedComponent, 0, -dy);
+                    moveComponent(focusedComponents, 0, -dy);
                 } else if (keyCode == 39) {
-                    moveComponent(focusedComponent, dx, 0);
+                    moveComponent(focusedComponents, dx, 0);
                 } else if (keyCode == 40) {
-                    moveComponent(focusedComponent, 0, dy);
+                    moveComponent(focusedComponents, 0, dy);
                 }
 
                 return true;
@@ -472,8 +683,14 @@ public class WrapperPainter extends PApplet {
                 return true;
             }
 
-            private void moveComponent(WrapperPainterObject wrapperPainterObject, float dx, float dy) {
-                if (isInsideDrawBoard(wrapperPainterObject, dx, dy)) {
+            private void moveComponent(ArrayList<WrapperPainterObject> wrapperPainterObjects, float dx, float dy) {
+                for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
+                    if (!isInsideDrawBoard(wrapperPainterObject, dx, dy)) {
+                        return;
+                    }
+                }
+
+                for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
                     wrapperPainterObject.move(dx, dy);
                 }
             }
@@ -503,22 +720,25 @@ public class WrapperPainter extends PApplet {
         colorSelector.setOnSelectedColorChanged(new ColorSelector.OnSelectedColorChanged() {
             @Override
             public boolean handleEvent(ColorSelector colorSelector, int newColor) {
-                WrapperPainterObject wrapperPainterObject = wrapperPainterObjectsManager.getFocusedComponent();
-                if (wrapperPainterObject == null) {
+                ArrayList<WrapperPainterObject> wrapperPainterObjects =
+                        wrapperPainterObjectsManager.getFocusedComponents();
+                if (wrapperPainterObjects == null || wrapperPainterObjects.size() == 0) {
                     return false;
                 }
-                if (wrapperPainterObject.isALine()) {
-                    LineWrapper lineWrapper = (LineWrapper) wrapperPainterObject.getWrapper();
-                    lineWrapper.setStrokeColor(newColor);
-                } else if (wrapperPainterObject.isAPoint()) {
-                    PointWrapper pointWrapper = (PointWrapper) wrapperPainterObject.getWrapper();
-                    pointWrapper.setStrokeColor(newColor);
-                } else if (wrapperPainterObject.isAnEllipse()) {
-                    EllipseWrapper ellipseWrapper = (EllipseWrapper) wrapperPainterObject.getWrapper();
-                    ellipseWrapper.setFillColor(newColor);
-                } else if (!wrapperPainterObject.isAnImage()) {
-                    RectangleWrapper rectangleWrapper = (RectangleWrapper) wrapperPainterObject.getWrapper();
-                    rectangleWrapper.setFillColor(newColor);
+                for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
+                    if (wrapperPainterObject.isALine()) {
+                        LineWrapper lineWrapper = (LineWrapper) wrapperPainterObject.getWrapper();
+                        lineWrapper.setStrokeColor(newColor);
+                    } else if (wrapperPainterObject.isAPoint()) {
+                        PointWrapper pointWrapper = (PointWrapper) wrapperPainterObject.getWrapper();
+                        pointWrapper.setStrokeColor(newColor);
+                    } else if (wrapperPainterObject.isAnEllipse()) {
+                        EllipseWrapper ellipseWrapper = (EllipseWrapper) wrapperPainterObject.getWrapper();
+                        ellipseWrapper.setFillColor(newColor);
+                    } else if (!wrapperPainterObject.isAnImage()) {
+                        RectangleWrapper rectangleWrapper = (RectangleWrapper) wrapperPainterObject.getWrapper();
+                        rectangleWrapper.setFillColor(newColor);
+                    }
                 }
                 return true;
             }
@@ -536,16 +756,14 @@ public class WrapperPainter extends PApplet {
                 toolsBox.getWidth(), totalPropertiesHeight, this) {
             @Override
             public void draw() {
-                if (wrapperPainterObjectsManager.getFocusedComponent() != null) {
-                    setText(wrapperPainterObjectsManager.getFocusedComponent().
+                if (wrapperPainterObjectsManager.getFocusedComponents().size() > 0) {
+                    setText(wrapperPainterObjectsManager.getFocusedComponents().get(0).
                             getDescription());
-                    addNewLine("");
                 }
                 super.draw();
             }
         };
 
-        objectProperties.setText("ajcv acvksjch kasjcv ksajhdcv kasjcv aksjcv aksjcv kasjdcv kasjdvc aksjcv kajscv kasjdvck jsvksajvb dsjkvhb ldhvb lav dbjvklsdbv lsdiv baas");
 
         guiProperties = new SingleLineTextBox("", objectProperties.getX(),
                 objectProperties.getY() + objectProperties.getHeight(),
@@ -811,6 +1029,7 @@ public class WrapperPainter extends PApplet {
                             //New componentInConstruction
                             componentInConstruction = new ComponentInConstruction(WrapperPainterObject.Types.LINE);
                             constructionIcon = lineIcon;
+                            wrapperPainterObjectsManager.setFocusTo(null);
 
                             //NextStep
                             pGuiManager.setFocusTo(drawBoard);

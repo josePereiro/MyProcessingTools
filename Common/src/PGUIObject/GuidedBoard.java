@@ -28,6 +28,7 @@ public class GuidedBoard extends PGuiObject {
         this.dy = dy;
         updateGuidesXs();
         updateGuidesYs();
+        drawBackgroundImage = true;
     }
 
     @Override
@@ -37,7 +38,9 @@ public class GuidedBoard extends PGuiObject {
         if (drawBackgroundImage && backgroundImage != null) {
             context.image(backgroundImage, x, y);
             context.fill(255, backgroundImageAlpha);
+            context.stroke(strokeWeight, strokeAlpha);
             context.rect(x, y, width, height);
+            drawFocus();
         } else {
             super.draw();
         }

@@ -167,4 +167,8 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     public void setFocusedConstructionPoints(EllipseWrapper focusedConstructionPoints) {
         this.focusedConstructionPoints = focusedConstructionPoints;
     }
+
+    public EllipseWrapper[] getConstructionPoints() {
+        return constructionPoints;
+    }
 }
