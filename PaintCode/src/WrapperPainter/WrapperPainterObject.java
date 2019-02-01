@@ -89,6 +89,18 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     }
 
     @Override
+    public void setX(float x) {
+        constructionPoints[0].setX(x);
+        rebuild();
+    }
+
+    @Override
+    public void setY(float y) {
+        constructionPoints[0].setY(y);
+        rebuild();
+    }
+
+    @Override
     public boolean isThisOverMe(float x, float y) {
         return wrapper.isThisOverMe(x, y);
     }

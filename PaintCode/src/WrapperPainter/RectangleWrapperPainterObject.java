@@ -1,20 +1,20 @@
 package WrapperPainter;
 
 import P2DPrimitiveWrappers.EllipseWrapper;
-import P2DPrimitiveWrappers.LineWrapper;
+import P2DPrimitiveWrappers.RectangleWrapper;
 import PGUIObject.GuidedBoard;
 
-public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> {
+public class RectangleWrapperPainterObject extends WrapperPainterObject<RectangleWrapper> {
 
 
-    public LineWrapperPainterObject(LineWrapper wrapper, String name) {
+    public RectangleWrapperPainterObject(RectangleWrapper wrapper, String name) {
         super(wrapper, name, Types.LINE);
         constructionPoints = new EllipseWrapper[2];
         constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
                 wrapper.getY(), constructionPointSizes,
                 constructionPointSizes, getWrapper().getContext());
-        constructionPoints[1] = new EllipseWrapper(wrapper.getX1(),
-                wrapper.getY1(), constructionPointSizes,
+        constructionPoints[1] = new EllipseWrapper(wrapper.getX() + wrapper.getWidth(),
+                wrapper.getY() + wrapper.getHeight(), constructionPointSizes,
                 constructionPointSizes, getWrapper().getContext());
         focusedConstructionPoints = constructionPoints[0];
     }
@@ -22,10 +22,25 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
 
     @Override
     public void rebuild() {
-        wrapper.setX(constructionPoints[0].getX());
-        wrapper.setX1(constructionPoints[1].getX());
-        wrapper.setY(constructionPoints[0].getY());
-        wrapper.setY1(constructionPoints[1].getY());
+        if (constructionPoints[0].getX() < constructionPoints[1].getX()) {
+            if (constructionPoints[0].getY() < constructionPoints[1].getY()) {
+                wrapper.setX(constructionPoints[0].getX());
+                wrapper.setY(constructionPoints[0].getY());
+            } else {
+                wrapper.setX(constructionPoints[0].getX());
+                wrapper.setY(constructionPoints[1].getY());
+            }
+        }else {
+            if (constructionPoints[0].getY() < constructionPoints[1].getY()) {
+                wrapper.setX(constructionPoints[1].getX());
+                wrapper.setY(constructionPoints[0].getY());
+            } else {
+                wrapper.setX(constructionPoints[1].getX());
+                wrapper.setY(constructionPoints[1].getY());
+            }
+        }
+        wrapper.setWidth(Math.abs(constructionPoints[1].getX() - constructionPoints[0].getX()));
+        wrapper.setHeight(Math.abs(constructionPoints[1].getY() - constructionPoints[0].getY()));
     }
 
     @Override
@@ -58,20 +73,20 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
         stringBuilder.append(getName() + "\n");
         stringBuilder.append("x = " + getX() + "\n");
         stringBuilder.append("y = " + getY() + "\n");
-        stringBuilder.append("x1 = " + getX1() + "\n");
-        stringBuilder.append("y1 = " + getY1() + "\n");
+        stringBuilder.append("width = " + getWidth() + "\n");
+        stringBuilder.append("height = " + getHeight() + "\n");
         stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
         stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
 
         return stringBuilder.toString();
     }
 
-    public float getX1() {
-        return constructionPoints[1].getX();
+    public float getWidth() {
+        return wrapper.getWidth();
     }
 
-    public float getY1() {
-        return constructionPoints[1].getY();
+    public float getHeight() {
+        return wrapper.getHeight();
     }
 
 }

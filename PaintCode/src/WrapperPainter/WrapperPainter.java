@@ -129,6 +129,55 @@ public class WrapperPainter extends PApplet {
                         line(firstPoint.x, firstPoint.y, pointer.x, pointer.y);
                     }
                 }
+            } else if (componentInConstruction.isARectangle()) {
+                if (componentInConstruction.getConstructionPoints().size() > 0) {
+                    //Firs Point
+                    Point.Float firstPoint = componentInConstruction.getConstructionPoints().get(0);
+                    stroke(0);
+                    strokeWeight(1);
+                    fill(255, 100);
+                    ellipse(firstPoint.x, firstPoint.y, 15, 15);
+
+                    if (componentInConstruction.getConstructionPoints().size() > 1) {
+                        //Second Point
+                        Point.Float secondPoint = componentInConstruction.getConstructionPoints().get(1);
+                        stroke(0);
+                        strokeWeight(1);
+                        fill(255, 100);
+                        float w = Math.abs(firstPoint.x - secondPoint.x);
+                        float h = Math.abs(firstPoint.y - secondPoint.y);
+                        if (firstPoint.x < secondPoint.x) {
+                            if (firstPoint.y < secondPoint.y) {
+                                rect(firstPoint.x, firstPoint.y, w, h);
+                            } else {
+                                rect(firstPoint.x, secondPoint.y, w, h);
+                            }
+                        } else {
+                            if (firstPoint.y < secondPoint.y) {
+                                rect(secondPoint.x, firstPoint.y, w, h);
+                            } else {
+                                rect(secondPoint.x, secondPoint.y, w, h);
+                            }
+                        }
+
+                    } else if (drawBoard.isThisOverMe(mouseX, mouseY)) {
+                        float w = Math.abs(firstPoint.x - mouseX);
+                        float h = Math.abs(firstPoint.y - mouseY);
+                        if (firstPoint.x < mouseX) {
+                            if (firstPoint.y < mouseY) {
+                                rect(firstPoint.x, firstPoint.y, w, h);
+                            } else {
+                                rect(firstPoint.x, mouseY, w, h);
+                            }
+                        } else {
+                            if (firstPoint.y < mouseY) {
+                                rect(mouseX, firstPoint.y, w, h);
+                            } else {
+                                rect(mouseX, mouseY, w, h);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -418,7 +467,6 @@ public class WrapperPainter extends PApplet {
         wrapperPainterObjectsManager.setOnMouseDraggedHandler(new PGuiObject.OnMouseDraggedHandler() {
 
             long lastUpdate = -1;
-            Point p1, p2;
 
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
@@ -805,6 +853,7 @@ public class WrapperPainter extends PApplet {
                 rectIcon.draw();
             }
         };
+        newRectBtm.setOnMouseClickedHandler(ComponentConstructor.Rectangle.startConstructionHandler);
 
         //newEllipseBtm
         newEllipseBtm = new PGuiObject(bottomsPositions[1].x, bottomsPositions[1].y,
@@ -1106,6 +1155,106 @@ public class WrapperPainter extends PApplet {
 
         }
 
+        private static class Rectangle {
+
+            private static PGuiObject.OnMouseClickedHandler startConstructionHandler =
+                    new PGuiObject.OnMouseClickedHandler() {
+                        @Override
+                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+                            if (componentInConstruction != null) {
+                                if (componentInConstruction.isALine()) {
+                                    cancelConstruction();
+                                    return true;
+                                }
+                                cancelConstruction();
+                                console.println();
+                            }
+
+                            //Info
+                            console.println("Building a Rectangle?");
+                            console.println("Click the drawBoard to set the first point!!!");
+
+                            //New componentInConstruction
+                            componentInConstruction = new ComponentInConstruction(WrapperPainterObject.Types.RECTANGLE);
+                            constructionIcon = rectIcon;
+                            wrapperPainterObjectsManager.setFocusTo(null);
+
+                            //NextStep
+                            pGuiManager.setFocusTo(drawBoard);
+                            drawBoard.setOnMouseClickedHandler(firstPointHandler);
+
+                            return true;
+                        }
+                    };
+
+            private static PGuiObject.OnMouseClickedHandler firstPointHandler =
+                    new PGuiObject.OnMouseClickedHandler() {
+                        @Override
+                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+                            //FirstPoint
+                            Point.Float firstPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
+                                    drawBoard.getContext().mouseY);
+                            componentInConstruction.addConstructionPoint(firstPoint);
+
+                            //Info
+                            console.println("First Point set at " + firstPoint.toString());
+                            console.println("Click the drawBoard again to set the second point!!!");
+
+                            //NextStep
+                            drawBoard.setOnMouseClickedHandler(secondPointHandler);
+                            return true;
+                        }
+                    };
+
+            private static PGuiObject.OnMouseClickedHandler secondPointHandler =
+                    new PGuiObject.OnMouseClickedHandler() {
+                        @Override
+                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+                            //SecondPoint
+                            Point.Float secondPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
+                                    drawBoard.getContext().mouseY);
+
+                            componentInConstruction.addConstructionPoint(secondPoint);
+
+                            //Info
+                            console.println("Second Point set at " + secondPoint.toString());
+                            console.println("Now, type a new name in the console or accept the suggested by pressing enter!!!");
+
+                            //Event Handler
+                            drawBoard.setOnMouseClickedHandler(null);
+                            console.setInputText(wrapperPainterObjectsManager.suggestNewName(WrapperPainterObject.Types.RECTANGLE));
+                            console.setFocusable(true);
+                            pGuiManager.setFocusTo(console);
+                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                                @Override
+                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                                    //name
+                                    String checkedName = wrapperPainterObjectsManager.formatNewName(input);
+                                    wrapperPainterObjectsManager.addComponentName(checkedName);
+                                    componentInConstruction.setName(checkedName);
+
+                                    //Finishing
+                                    finishConstruction();
+
+                                    //Event Handler
+                                    console.setOnInputEnteredHandler(null);
+                                    console.setFocusable(false);
+
+                                    return true;
+                                }
+                            });
+
+                            return true;
+                        }
+                    };
+
+
+        }
+
         private static class ComponentInConstruction {
 
             private int type;
@@ -1145,6 +1294,10 @@ public class WrapperPainter extends PApplet {
                 return getType() == WrapperPainterObject.Types.LINE;
             }
 
+            public boolean isARectangle() {
+                return getType() == WrapperPainterObject.Types.RECTANGLE;
+            }
+
         }
 
 
@@ -1182,6 +1335,29 @@ public class WrapperPainter extends PApplet {
                 Point.Float p1 = componentInConstruction.getConstructionPoints().get(1);
                 LineWrapper lineWrapper = new LineWrapper(p0.x, p0.y, p1.x, p1.y, pGuiManager.getContext());
                 return new LineWrapperPainterObject(lineWrapper,
+                        componentInConstruction.name);
+            } else if (componentInConstruction.isARectangle()) {
+                Point.Float p0 = componentInConstruction.getConstructionPoints().get(0);
+                Point.Float p1 = componentInConstruction.getConstructionPoints().get(1);
+                RectangleWrapper rectWrapper;
+                if (p0.getX() < p1.getX()) {
+                    if (p0.getY() < p1.getY()) {
+                        rectWrapper = new RectangleWrapper(p0.x, p0.y,
+                                Math.abs(p1.x - p0.y), Math.abs(p1.y - p0.y), pGuiManager.getContext());
+                    } else {
+                        rectWrapper = new RectangleWrapper(p0.x, p1.y,
+                                Math.abs(p1.x - p0.y), Math.abs(p1.y - p0.y), pGuiManager.getContext());
+                    }
+                } else {
+                    if (p0.getY() < p1.getY()) {
+                        rectWrapper = new RectangleWrapper(p1.x, p0.y,
+                                Math.abs(p1.x - p0.y), Math.abs(p1.y - p0.y), pGuiManager.getContext());
+                    } else {
+                        rectWrapper = new RectangleWrapper(p1.x, p1.y,
+                                Math.abs(p1.x - p0.y), Math.abs(p1.y - p0.y), pGuiManager.getContext());
+                    }
+                }
+                return new RectangleWrapperPainterObject(rectWrapper,
                         componentInConstruction.name);
             }
 

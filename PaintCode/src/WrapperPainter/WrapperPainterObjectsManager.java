@@ -52,6 +52,8 @@ public class WrapperPainterObjectsManager extends PGuiObject {
 
         if (type == WrapperPainterObject.Types.LINE) {
             return formatNewName("line");
+        }else if (type == WrapperPainterObject.Types.RECTANGLE) {
+            return formatNewName("rect");
         }
 
         return "";
