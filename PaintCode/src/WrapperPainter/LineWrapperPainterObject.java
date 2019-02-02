@@ -29,7 +29,7 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
     }
 
     @Override
-    public void guideComponent(GuidedBoard guidedBoard) {
+    public void guide(GuidedBoard guidedBoard) {
 
         //Construction Points
         for (EllipseWrapper constructionPoint : constructionPoints) {
@@ -42,13 +42,14 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
     }
 
     @Override
-    public void move(float dx, float dy) {
-        constructionPoints[0].setX(constructionPoints[0].getX() + dx);
-        constructionPoints[0].setY(constructionPoints[0].getY() + dy);
-        constructionPoints[1].setX(constructionPoints[1].getX() + dx);
-        constructionPoints[1].setY(constructionPoints[1].getY() + dy);
-        rebuild();
-
+    public void moveTo(float x, float y) {
+        float ccx = Math.min(constructionPoints[0].getX(), constructionPoints[1].getX()) +
+                Math.abs(constructionPoints[0].getX() - constructionPoints[1].getX()) / 2;
+        float ccy = Math.min(constructionPoints[0].getY(), constructionPoints[1].getY()) +
+                Math.abs(constructionPoints[0].getY() - constructionPoints[1].getY()) / 2;
+        float dx = x - ccx;
+        float dy = y - ccy;
+        move(dx, dy);
     }
 
     @Override
@@ -56,23 +57,36 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getX() + "\n");
-        stringBuilder.append("y = " + getY() + "\n");
-        stringBuilder.append("x1 = " + getX1() + "\n");
-        stringBuilder.append("y1 = " + getY1() + "\n");
+        stringBuilder.append("x = " + getWrapper().getX() + "\n");
+        stringBuilder.append("y = " + getWrapper().getY() + "\n");
+        stringBuilder.append("x1 = " + getWrapper().getX1() + "\n");
+        stringBuilder.append("y1 = " + getWrapper().getY1() + "\n");
         stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
         stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
 
         return stringBuilder.toString();
     }
 
-    public float getX1() {
-        return constructionPoints[1].getX();
+    @Override
+    public float getX() {
+        return Math.min(constructionPoints[0].getX(), constructionPoints[1].getX()) +
+                Math.abs(constructionPoints[0].getX() - constructionPoints[1].getX()) / 2;
     }
 
-    public float getY1() {
-        return constructionPoints[1].getY();
+    @Override
+    public float getY() {
+        return Math.min(constructionPoints[0].getY(), constructionPoints[1].getY()) +
+                Math.abs(constructionPoints[0].getY() - constructionPoints[1].getY()) / 2;
     }
 
+    @Override
+    public void setX(float x) {
+
+    }
+
+    @Override
+    public void setY(float y) {
+
+    }
 }
 

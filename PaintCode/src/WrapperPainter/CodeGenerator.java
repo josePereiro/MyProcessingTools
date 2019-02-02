@@ -20,10 +20,10 @@ public class CodeGenerator {
     private static String initializeLineWrapper(WrapperPainterObject wrapperPainterObject) {
         LineWrapperPainterObject line = (LineWrapperPainterObject) wrapperPainterObject;
         return tab + tab + line.getName() + " = " + " new " + line.getWrapper().getClass().getCanonicalName() + "(" +
-                line.getX() + "F," + line.getY() + "F," + line.getX1() + "F," + line.getY1() + "F," +
+                line.getX() + "F," + line.getY() + "F," + line.getWrapper().getX1() + "F," + line.getWrapper().getY1() + "F," +
                 "PApplet.this" + ")" + ";" + "\n" +
                 tab + tab + line.getName() + "." + "setFillColor(" + line.getWrapper().getFillColor() + ")" + ";" + "\n" +
-                tab + tab + line.getName() + "." + "setStrokeColor(" + line.getWrapper().getStrokeColor() + ")" + ";" + "\n" +
+                tab + tab + line.getName() + "." + "set StrokeColor(" + line.getWrapper().getStrokeColor() + ")" + ";" + "\n" +
                 tab + tab + line.getName() + "." + "setStrokeWeight(" + line.getWrapper().getStrokeWeight() + "F)" + ";";
     }
 

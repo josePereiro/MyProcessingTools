@@ -19,12 +19,12 @@ public class TextWrapperPainterObject extends WrapperPainterObject<TextWrapper> 
 
     @Override
     public void rebuild() {
-        wrapper.setX(constructionPoints[0].getX());
-        wrapper.setY(constructionPoints[0].getY());
+        wrapper.setX(getX());
+        wrapper.setY(getY());
     }
 
     @Override
-    public void guideComponent(GuidedBoard guidedBoard) {
+    public void guide(GuidedBoard guidedBoard) {
 
         //Construction Points
         for (EllipseWrapper constructionPoint : constructionPoints) {
@@ -37,11 +37,10 @@ public class TextWrapperPainterObject extends WrapperPainterObject<TextWrapper> 
     }
 
     @Override
-    public void move(float dx, float dy) {
-        constructionPoints[0].setX(constructionPoints[0].getX() + dx);
-        constructionPoints[0].setY(constructionPoints[0].getY() + dy);
+    public void moveTo(float x, float y) {
+        constructionPoints[0].setY(y);
+        constructionPoints[0].setX(x);
         rebuild();
-
     }
 
     @Override
@@ -49,8 +48,8 @@ public class TextWrapperPainterObject extends WrapperPainterObject<TextWrapper> 
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getX() + "\n");
-        stringBuilder.append("y = " + getY() + "\n");
+        stringBuilder.append("x = " + getWrapper().getX() + "\n");
+        stringBuilder.append("y = " + getWrapper().getY() + "\n");
         stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
         stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
         stringBuilder.append("text = " + getWrapper().getText() + "\n");
@@ -58,5 +57,26 @@ public class TextWrapperPainterObject extends WrapperPainterObject<TextWrapper> 
         return stringBuilder.toString();
     }
 
+    @Override
+    public float getX() {
+        return constructionPoints[0].getX();
+    }
+
+    @Override
+    public float getY() {
+        return constructionPoints[0].getY();
+    }
+
+    @Override
+    public void setX(float x) {
+        constructionPoints[0].setX(x);
+        rebuild();
+    }
+
+    @Override
+    public void setY(float y) {
+        constructionPoints[0].setY(y);
+        rebuild();
+    }
 }
 

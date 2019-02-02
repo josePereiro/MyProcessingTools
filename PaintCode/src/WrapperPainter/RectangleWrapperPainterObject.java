@@ -30,7 +30,7 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
                 wrapper.setX(constructionPoints[0].getX());
                 wrapper.setY(constructionPoints[1].getY());
             }
-        }else {
+        } else {
             if (constructionPoints[0].getY() < constructionPoints[1].getY()) {
                 wrapper.setX(constructionPoints[1].getX());
                 wrapper.setY(constructionPoints[0].getY());
@@ -44,7 +44,7 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
     }
 
     @Override
-    public void guideComponent(GuidedBoard guidedBoard) {
+    public void guide(GuidedBoard guidedBoard) {
 
         //Construction Points
         for (EllipseWrapper constructionPoint : constructionPoints) {
@@ -57,13 +57,12 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
     }
 
     @Override
-    public void move(float dx, float dy) {
-        constructionPoints[0].setX(constructionPoints[0].getX() + dx);
-        constructionPoints[0].setY(constructionPoints[0].getY() + dy);
-        constructionPoints[1].setX(constructionPoints[1].getX() + dx);
-        constructionPoints[1].setY(constructionPoints[1].getY() + dy);
-        rebuild();
-
+    public void moveTo(float x, float y) {
+        float ccx = getX();
+        float ccy = getY();
+        float dx = x - ccx;
+        float dy = y - ccy;
+        move(dx, dy);
     }
 
     @Override
@@ -71,23 +70,36 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getX() + "\n");
-        stringBuilder.append("y = " + getY() + "\n");
-        stringBuilder.append("width = " + getWidth() + "\n");
-        stringBuilder.append("height = " + getHeight() + "\n");
+        stringBuilder.append("x = " + getWrapper().getX() + "\n");
+        stringBuilder.append("y = " + getWrapper().getY() + "\n");
+        stringBuilder.append("width = " + getWrapper().getWidth() + "\n");
+        stringBuilder.append("height = " + getWrapper().getHeight() + "\n");
         stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
         stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
 
         return stringBuilder.toString();
     }
 
-    public float getWidth() {
-        return wrapper.getWidth();
+    @Override
+    public float getX() {
+        return Math.min(constructionPoints[0].getX(), constructionPoints[1].getX()) +
+                Math.abs(constructionPoints[0].getX() - constructionPoints[1].getX()) / 2;
     }
 
-    public float getHeight() {
-        return wrapper.getHeight();
+    @Override
+    public float getY() {
+        return Math.min(constructionPoints[0].getY(), constructionPoints[1].getY()) +
+                Math.abs(constructionPoints[0].getY() - constructionPoints[1].getY()) / 2;
     }
 
+    @Override
+    public void setX(float x) {
+
+    }
+
+    @Override
+    public void setY(float y) {
+
+    }
 }
 

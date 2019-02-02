@@ -26,6 +26,9 @@ public class ImageWrapper extends RectangleWrapper {
     }
 
     public void setImage(PImage image) {
+        if (image == null) {
+            return;
+        }
         this.image = image;
         image.resize((int) width, (int) height);
     }

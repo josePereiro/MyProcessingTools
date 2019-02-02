@@ -32,6 +32,7 @@ public class _keys extends PApplet {
     public void keyPressed() {
 
         System.out.println(keyCode);
+        System.out.println(Tools.KeyCodes.toString(keyCode));
 
     }
 }

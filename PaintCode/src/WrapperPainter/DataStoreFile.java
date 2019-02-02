@@ -1,15 +1,12 @@
 package WrapperPainter;
 
-import P2DPrimitiveWrappers.EllipseWrapper;
-import P2DPrimitiveWrappers.LineWrapper;
-import P2DPrimitiveWrappers.RectangleWrapper;
-import P2DPrimitiveWrappers.TextWrapper;
+import P2DPrimitiveWrappers.*;
 import WrapperPainter.WrapperPainterObject.Types;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-public class DataStoreFile {
+class DataStoreFile {
 
     private static final String OBJECT_SEPARATOR = "\n";
     private static final String DATA_SEPARATOR = ",";
@@ -20,7 +17,7 @@ public class DataStoreFile {
     private static final int FILL_COLOR_INDEX = 4;
     private static final int CONSTRUCTOR_DATA_FIRST_INDEX = 5;
 
-    public static String generateDataStore(ArrayList<WrapperPainterObject> wrapperPainterObjects) {
+    static String generateDataStore(ArrayList<WrapperPainterObject> wrapperPainterObjects) {
         StringBuilder stringBuilder = new StringBuilder();
         boolean notTheFirst = false;
         for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
@@ -35,7 +32,7 @@ public class DataStoreFile {
         return stringBuilder.toString();
     }
 
-    public static String generateDataStore(WrapperPainterObject wrapperPainterObject) {
+    private static String generateDataStore(WrapperPainterObject wrapperPainterObject) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(wrapperPainterObject.getType());
         stringBuilder.append(DATA_SEPARATOR);
@@ -49,42 +46,52 @@ public class DataStoreFile {
         stringBuilder.append(DATA_SEPARATOR);
 
         if (wrapperPainterObject.isALine()) {
-            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getX());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getY());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(((LineWrapperPainterObject) wrapperPainterObject).getX1());
+            stringBuilder.append(((LineWrapperPainterObject) wrapperPainterObject).getWrapper().getX1());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(((LineWrapperPainterObject) wrapperPainterObject).getY1());
+            stringBuilder.append(((LineWrapperPainterObject) wrapperPainterObject).getWrapper().getY1());
         } else if (wrapperPainterObject.isARectangle()) {
-            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getX());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getY());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getWidth());
+            stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getWrapper().getWidth());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getHeight());
+            stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getWrapper().getHeight());
         } else if (wrapperPainterObject.isAnEllipse()) {
-            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getX());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getY());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(((EllipseWrapperPainterObject) wrapperPainterObject).getVr());
+            stringBuilder.append(((EllipseWrapperPainterObject) wrapperPainterObject).getWrapper().getVr());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(((EllipseWrapperPainterObject) wrapperPainterObject).getHr());
-        }else if (wrapperPainterObject.isAText()) {
-            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(((EllipseWrapperPainterObject) wrapperPainterObject).getWrapper().getHr());
+        } else if (wrapperPainterObject.isAText()) {
+            stringBuilder.append(wrapperPainterObject.getWrapper().getX());
             stringBuilder.append(DATA_SEPARATOR);
-            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(wrapperPainterObject.getWrapper().getY());
             stringBuilder.append(DATA_SEPARATOR);
             stringBuilder.append(((TextWrapperPainterObject) wrapperPainterObject).getWrapper().getText());
+        } else if (wrapperPainterObject.isAnImage()) {
+            stringBuilder.append(wrapperPainterObject.getWrapper().getX());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(wrapperPainterObject.getWrapper().getY());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((ImageWrapperPainterObject) wrapperPainterObject).getWrapper().getWidth());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((ImageWrapperPainterObject) wrapperPainterObject).getWrapper().getHeight());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((ImageWrapperPainterObject) wrapperPainterObject).getImagePath());
         }
 
 
         return stringBuilder.toString();
     }
 
-    public static ArrayList<WrapperPainterObject> readDataStore(String data, PApplet context) {
+    static ArrayList<WrapperPainterObject> readDataStore(String data, PApplet context) {
         ArrayList<WrapperPainterObject> arrayList = new ArrayList<>();
         String[] objectsLine = data.split(OBJECT_SEPARATOR, -1);
         String[] objectData;
@@ -124,13 +131,25 @@ public class DataStoreFile {
                 wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
                 wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
                 arrayList.add(wrapperPainterObject);
-            }else if (objectData[TYPE_INDEX].equals(String.valueOf(Types.TEXT))) {
+            } else if (objectData[TYPE_INDEX].equals(String.valueOf(Types.TEXT))) {
                 float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
                 float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
                 String text = objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2];
                 wrapperPainterObject = new TextWrapperPainterObject(
                         new TextWrapper(text, x, y, context),
                         objectData[NAME_INDEX]);
+                wrapperPainterObject.getWrapper().setFillColor(Integer.parseInt(objectData[FILL_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
+                arrayList.add(wrapperPainterObject);
+            } else if (objectData[TYPE_INDEX].equals(String.valueOf(Types.IMAGE))) {
+                float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
+                float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
+                float w = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2]);
+                float h = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 3]);
+                String ip = objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 4];
+                wrapperPainterObject = new ImageWrapperPainterObject(new ImageWrapper(x, y, w, h, context),
+                        objectData[NAME_INDEX], ip);
                 wrapperPainterObject.getWrapper().setFillColor(Integer.parseInt(objectData[FILL_COLOR_INDEX]));
                 wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
                 wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));

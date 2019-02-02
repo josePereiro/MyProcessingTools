@@ -133,15 +133,15 @@ public class Tools {
     public static class KeyCodes {
 
 
-            public static final int RIGHT_ARROW = 37;
-            public static final int LEFT_ARROW = 39;
+            public static final int RIGHT_ARROW = 39;
+            public static final int LEFT_ARROW = 37;
             public static final int DOWN_ARROW = 40;
             public static final int CAPS_LOCK = 20;
             public static final int UP_ARROW = 38;
             public static final int COMMAND = 157;
             public static final int CONTROL = 17;
             public static final int OPTION = 18;
-            public static final int FUNTION = 0;
+            public static final int FUNCTION = 0;
             public static final int RETURN = 10;
             public static final int SHIFT = 16;
             public static final int SPACE = 32;
@@ -196,6 +196,209 @@ public class Tools {
             public static final int LETTER_X = 88;
             public static final int LETTER_Y = 89;
             public static final int LETTER_Z = 90;
+
+
+        public static String toString(int keyCode){
+
+            switch (keyCode) {
+
+                case RIGHT_ARROW:
+                    return "RIGHT_ARROW";
+
+                case LEFT_ARROW:
+                    return "LEFT_ARROW";
+
+                case DOWN_ARROW:
+                    return "DOWN_ARROW";
+
+                case CAPS_LOCK:
+                    return "CAPS_LOCK";
+
+                case UP_ARROW:
+                    return "UP_ARROW";
+
+                case COMMAND:
+                    return "COMMAND";
+
+                case CONTROL:
+                    return "CONTROL";
+
+                case OPTION:
+                    return "OPTION";
+
+                case FUNCTION:
+                    return "FUNCTION";
+
+                case RETURN:
+                    return "RETURN";
+
+                case SHIFT:
+                    return "SHIFT";
+
+                case SPACE:
+                    return "SPACE";
+
+                case DELETE:
+                    return "DELETE";
+
+                case F12:
+                    return "F12";
+
+                case F11:
+                    return "F11";
+
+                case F10:
+                    return "F10";
+
+                case F1:
+                    return "F1";
+
+                case F2:
+                    return "F2";
+
+                case F3:
+                    return "F3";
+
+                case F4:
+                    return "F4";
+
+                case F5:
+                    return "F5";
+
+                case F6:
+                    return "F6";
+
+                case F7:
+                    return "F7";
+
+                case F8:
+                    return "F8";
+
+                case F9:
+                    return "F9";
+
+                case ESC:
+                    return "ESC";
+
+                case TAB:
+                    return "TAB";
+
+                case NUMBER_0:
+                    return "NUMBER_0";
+
+                case NUMBER_1:
+                    return "NUMBER_1";
+
+                case NUMBER_2:
+                    return "NUMBER_2";
+
+                case NUMBER_3:
+                    return "NUMBER_3";
+
+                case NUMBER_4:
+                    return "NUMBER_4";
+
+                case NUMBER_5:
+                    return "NUMBER_5";
+
+                case NUMBER_6:
+                    return "NUMBER_6";
+
+                case NUMBER_7:
+                    return "NUMBER_7";
+
+                case NUMBER_8:
+                    return "NUMBER_8";
+
+                case NUMBER_9:
+                    return "NUMBER_9";
+
+                case LETTER_A:
+                    return "LETTER_A";
+
+                case LETTER_B:
+                    return "LETTER_B";
+
+                case LETTER_C:
+                    return "LETTER_C";
+
+                case LETTER_D:
+                    return "LETTER_D";
+
+                case LETTER_E:
+                    return "LETTER_E";
+
+                case LETTER_F:
+                    return "LETTER_F";
+
+                case LETTER_G:
+                    return "LETTER_G";
+
+                case LETTER_H:
+                    return "LETTER_H";
+
+                case LETTER_I:
+                    return "LETTER_I";
+
+                case LETTER_J:
+                    return "LETTER_J";
+
+                case LETTER_K:
+                    return "LETTER_K";
+
+                case LETTER_L:
+                    return "LETTER_L";
+
+                case LETTER_M:
+                    return "LETTER_M";
+
+                case LETTER_N:
+                    return "LETTER_N";
+
+                case LETTER_O:
+                    return "LETTER_O";
+
+                case LETTER_P:
+                    return "LETTER_P";
+
+                case LETTER_Q:
+                    return "LETTER_Q";
+
+                case LETTER_R:
+                    return "LETTER_R";
+
+                case LETTER_S:
+                    return "LETTER_S";
+
+                case LETTER_T:
+                    return "LETTER_T";
+
+                case LETTER_U:
+                    return "LETTER_U";
+
+                case LETTER_V:
+                    return "LETTER_V";
+
+                case LETTER_W:
+                    return "LETTER_W";
+
+                case LETTER_X:
+                    return "LETTER_X";
+
+                case LETTER_Y:
+                    return "LETTER_Y";
+
+                case LETTER_Z:
+                return "LETTER_Z";
+
+
+
+            }
+
+            return "";
+
+
+        }
 
     }
 

@@ -79,29 +79,6 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
 
     public abstract void rebuild();
 
-    @Override
-    public float getY() {
-        return wrapper.getY();
-    }
-
-    @Override
-    public float getX() {
-        return wrapper.getX();
-    }
-
-    @Override
-    public void setX(float x) {
-        constructionPoints[0].setX(x);
-        rebuild();
-    }
-
-    @Override
-    public void setY(float y) {
-        constructionPoints[0].setY(y);
-        rebuild();
-    }
-
-    @Override
     public boolean isThisOverMe(float x, float y) {
         return wrapper.isThisOverMe(x, y);
     }
@@ -135,13 +112,22 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
         this.focusable = focusable;
     }
 
-    public abstract void guideComponent(GuidedBoard guidedBoard);
+    public abstract void guide(GuidedBoard guidedBoard);
 
     public int getType() {
         return type;
     }
 
-    public abstract void move(float dx, float dy);
+    public void move(float dx, float dy) {
+        for (EllipseWrapper constructionPoint : constructionPoints) {
+            constructionPoint.setX(constructionPoint.getX() + dx);
+            constructionPoint.setY(constructionPoint.getY() + dy);
+        }
+        rebuild();
+    }
+
+    public abstract void moveTo(float x, float y);
+
 
     public abstract String getDescription();
 

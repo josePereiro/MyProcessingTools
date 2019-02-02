@@ -361,22 +361,24 @@ public class WrapperPainter extends PApplet {
                     return true;
                 }
 
-                ArrayList<WrapperPainterObject> focusedComponents =
+                ArrayList<WrapperPainterObject> focusedObject =
                         wrapperPainterObjectsManager.getFocusedObjects();
-                if (focusedComponents != null && focusedComponents.size() != 0) {
-
+                if (focusedObject != null && focusedObject.size() != 0) {
                     float dx = drawBoard.getDx();
                     float dy = drawBoard.getDy();
-                    if (keyCode == KeyMap.MOVE_FOCUSED_TO_RIGHT) {
-                        moveComponent(focusedComponents, -dx, 0);
+                    if (keyCode == KeyMap.MOVE_FOCUSED_TO_LEFT) {
+                        wrapperPainterObjectsManager.moveObjects(focusedObject, -dx, 0);
                     } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_TOP) {
-                        moveComponent(focusedComponents, 0, -dy);
-                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_LEFT) {
-                        moveComponent(focusedComponents, dx, 0);
+                        wrapperPainterObjectsManager.moveObjects(focusedObject, 0, -dy);
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_RIGHT) {
+                        wrapperPainterObjectsManager.moveObjects(focusedObject, dx, 0);
                     } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_BOTTOM) {
-                        moveComponent(focusedComponents, 0, dy);
+                        wrapperPainterObjectsManager.moveObjects(focusedObject, 0, dy);
                     } else if (keyCode == KeyMap.DELETE_FOCUSED) {
-                        wrapperPainterObjectsManager.remove(focusedComponents);
+                        wrapperPainterObjectsManager.remove(focusedObject);
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_MOUSE_POS) {
+                        wrapperPainterObjectsManager.moveObjectsToSavingRelation(focusedObject, mouseX, mouseY);
+                        return true;
                     }
 
                     return true;
@@ -384,27 +386,6 @@ public class WrapperPainter extends PApplet {
                 return false;
             }
 
-            private boolean isInsideDrawBoard(WrapperPainterObject wrapperPainterObject, float dx, float dy) {
-                for (EllipseWrapper constructionPoint : wrapperPainterObject.constructionPoints) {
-                    if (!drawBoard.isThisOverMe(constructionPoint.getX() + dx,
-                            constructionPoint.getY() + dy)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            private void moveComponent(ArrayList<WrapperPainterObject> wrapperPainterObjects, float dx, float dy) {
-                for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
-                    if (!isInsideDrawBoard(wrapperPainterObject, dx, dy)) {
-                        return;
-                    }
-                }
-
-                for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
-                    wrapperPainterObject.move(dx, dy);
-                }
-            }
 
         });
 
@@ -542,11 +523,12 @@ public class WrapperPainter extends PApplet {
                     if (constructionPoint.isThisOverMe(mouseX, mouseY)) {
                         lastUpdate = System.currentTimeMillis();
                     }
+
                     if (System.currentTimeMillis() - lastUpdate < 300) {
                         constructionPoint.setX(mouseX);
                         constructionPoint.setY(mouseY);
                         focusedComponent.rebuild();
-                        focusedComponent.guideComponent(drawBoard);
+                        focusedComponent.guide(drawBoard);
                     } else {
                         constructionPoint = focusedComponent.getConstructionPointAtPosition(mouseX, mouseY);
                         if (constructionPoint != null) {
@@ -751,22 +733,31 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
+                ArrayList<String> selectedNames = new ArrayList<>();
+
                 if (input.equals(".")) {
                     wrapperPainterObjectsManager.setFocusTo(null);
                     for (WrapperPainterObject wrapperPainterObject :
                             wrapperPainterObjectsManager.getWrapperPainterObjects()) {
                         wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-
+                        selectedNames.add("\'" + wrapperPainterObject.getName() + "\'");
                     }
                 } else if (!input.equals("")) {
-
                     wrapperPainterObjectsManager.setFocusTo(null);
                     for (WrapperPainterObject wrapperPainterObject :
                             wrapperPainterObjectsManager.getWrapperPainterObjects()) {
                         if (wrapperPainterObject.getName().contains(input)) {
                             wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
+                            selectedNames.add(wrapperPainterObject.getName().replaceAll(input, "\'" +
+                                    input + "\'"));
                         }
                     }
+                }
+                console.println("Selected " +
+                        wrapperPainterObjectsManager.getFocusedObjects().size() +
+                        " objects!!");
+                if (selectedNames.size() > 0) {
+                    console.println(selectedNames.toString());
                 }
 
                 pGuiManager.setFocusTo(drawBoard);
@@ -931,10 +922,29 @@ public class WrapperPainter extends PApplet {
                 objectProperties.getY() + objectProperties.getHeight(),
                 objectProperties.getWidth(), objectProperties.getHeight() * 0.1F,
                 this) {
+
+            long lastMillis = -1;
+
             @Override
             public void draw() {
-                guiProperties.setText("FR: " + frameRate);
-                guiProperties.fixTextLength();
+                if (drawBoard.isThisOverMe(mouseX, mouseY) &&
+                        (pmouseY != mouseY || pmouseX != mouseX)) {
+
+                    lastMillis = System.currentTimeMillis();
+                }
+                if (System.currentTimeMillis() - lastMillis > 2000) {
+                    guiProperties.setText("FR: " + (int) frameRate);
+                    guiProperties.fixTextLength();
+
+                    if (System.currentTimeMillis() - lastMillis > 4000) {
+                        lastMillis = System.currentTimeMillis();
+                    }
+                } else {
+                    int x = (int) ((pointer.x - drawBoard.getX()) / drawBoard.getWidth() * 1000);
+                    int y = (int) ((pointer.y - drawBoard.getY()) / drawBoard.getHeight() * 1000);
+                    guiProperties.setText("(" + x + "," + y + ")");
+                    guiProperties.fixTextLength();
+                }
                 super.draw();
             }
         };
@@ -1495,7 +1505,7 @@ public class WrapperPainter extends PApplet {
                     }
                 }
                 return new ImageWrapperPainterObject(rectWrapper,
-                        objectInConstruction.name);
+                        objectInConstruction.name, "");
             } else if (objectInConstruction.isAText()) {
                 Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
                 TextWrapper textWrapper = new TextWrapper("Text", p0.x, p0.y, pGuiManager.getContext());
@@ -1511,7 +1521,6 @@ public class WrapperPainter extends PApplet {
 
     private static class KeyMap {
 
-        //
         private static final int FOCUS_NEXT = Tools.KeyCodes.TAB;
         private static final int DELETE_FOCUSED = Tools.KeyCodes.DELETE;
         private static final int MOVE_FOCUSED_TO_TOP = Tools.KeyCodes.UP_ARROW;
@@ -1542,11 +1551,13 @@ public class WrapperPainter extends PApplet {
         private static final int REDUCE_GUIDES_HEIGHT = Tools.KeyCodes.LETTER_C;
         private static final int MOVE_FOCUSED_TO_BACK = Tools.KeyCodes.LETTER_N;
         private static final int MOVE_FOCUSED_TO_FRONT = Tools.KeyCodes.LETTER_M;
+        private static final int MOVE_FOCUSED_TO_MOUSE_POS = Tools.KeyCodes.LETTER_Q;
         private static final int SHOW_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_U;
         private static final int INCREASE_GUIDES_WIDTH = Tools.KeyCodes.LETTER_J;
         private static final int INCREASE_GUIDES_HEIGHT = Tools.KeyCodes.LETTER_B;
         private static final int SELECT_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_I;
         private static final int CHANGE_FOCUSED_STROKE_WEIGHT = Tools.KeyCodes.LETTER_W;
+
 
     }
 

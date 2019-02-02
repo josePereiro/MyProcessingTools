@@ -158,7 +158,7 @@ class WrapperPainterObjectsManager extends PObject {
 
     void guideFocusedObjects(GuidedBoard guidedBoard) {
         for (WrapperPainterObject focusedObject : focusedObjects) {
-            focusedObject.guideComponent(guidedBoard);
+            focusedObject.guide(guidedBoard);
         }
     }
 
@@ -188,6 +188,33 @@ class WrapperPainterObjectsManager extends PObject {
             wrapperPainterObjects.set(index, wrapperPainterObjects.get(index + 1));
             wrapperPainterObjects.set(index + 1, temp);
         }
+    }
+
+    void moveObjects(ArrayList<WrapperPainterObject> objects, float dx, float dy) {
+        for (WrapperPainterObject wrapperPainterObject : objects) {
+            wrapperPainterObject.move(dx, dy);
+        }
+    }
+
+    void moveObjectsToSavingRelation(ArrayList<WrapperPainterObject> objects, float x, float y) {
+        if (objects.size() == 0) {
+            return;
+        }
+
+        float groupX = 0;
+        float groupY = 0;
+        for (WrapperPainterObject object : objects) {
+            groupX += object.getX();
+            groupY += object.getY();
+        }
+        groupX /= objects.size();
+        groupY /= objects.size();
+        float dx = x - groupX;
+        float dy = y - groupY;
+        for (WrapperPainterObject object : objects) {
+            object.move(dx, dy);
+        }
+
     }
 
     void moveToFront(ArrayList<WrapperPainterObject> wrapperPainterObjects) {
