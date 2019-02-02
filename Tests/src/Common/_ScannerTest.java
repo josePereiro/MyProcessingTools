@@ -31,10 +31,10 @@
 //    }
 //
 //    @Override
-//    public void draw() {
+//    public void drawObjects() {
 //        background(255);
-//        lastLine.draw();
-//        buffer.draw();
+//        lastLine.drawObjects();
+//        buffer.drawObjects();
 //    }
 //
 //    @Override

@@ -23,7 +23,7 @@
 //    }
 //
 //    @Override
-//    public void draw() {
+//    public void drawObjects() {
 //        background(255);
 //        String longText = "Given the set of allowed metabolic states (Ps), the dependency of the " +
 //                "cellular growth rate with metabolic fluxes (λs(v)), and the average growth... ";

@@ -1,6 +1,7 @@
 package WrapperPainter;
 
 import P2DPrimitiveWrappers.LineWrapper;
+import P2DPrimitiveWrappers.RectangleWrapper;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class DataStoreFile {
 
     public static String generateDataStore(WrapperPainterObject wrapperPainterObject) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(WrapperPainterObject.Types.LINE);
+        stringBuilder.append(wrapperPainterObject.getType());
         stringBuilder.append(DATA_SEPARATOR);
         stringBuilder.append(wrapperPainterObject.getName());
         stringBuilder.append(DATA_SEPARATOR);
@@ -52,6 +53,14 @@ public class DataStoreFile {
             stringBuilder.append(((LineWrapperPainterObject) wrapperPainterObject).getX1());
             stringBuilder.append(DATA_SEPARATOR);
             stringBuilder.append(((LineWrapperPainterObject) wrapperPainterObject).getY1());
+        } else if (wrapperPainterObject.isARectangle()) {
+            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getWidth());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getHeight());
         }
 
 
@@ -76,6 +85,17 @@ public class DataStoreFile {
                 wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
                 wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
                 arrayList.add(wrapperPainterObject);
+            } else if (objectData[TYPE_INDEX].equals(String.valueOf(WrapperPainterObject.Types.RECTANGLE))) {
+                float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
+                float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
+                float w = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2]);
+                float h = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 3]);
+                wrapperPainterObject = new RectangleWrapperPainterObject(new RectangleWrapper(x, y, w, h, context),
+                        objectData[NAME_INDEX]);
+                wrapperPainterObject.getWrapper().setFillColor(Integer.parseInt(objectData[FILL_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
+                arrayList.add(wrapperPainterObject);
             }
 
         }
@@ -84,6 +104,5 @@ public class DataStoreFile {
         return arrayList;
 
     }
-
 
 }

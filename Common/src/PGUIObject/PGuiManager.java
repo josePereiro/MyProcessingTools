@@ -224,8 +224,6 @@ public final class PGuiManager extends RectangleWrapper implements PEventListene
                 //EventHandler
                 if (pGuiObject.getOnMouseClickedHandler() != null) {
                     return pGuiObject.getOnMouseClickedHandler().handlePEvent(event, pGuiObject);
-                } else {
-                    return false;
                 }
             }
         }

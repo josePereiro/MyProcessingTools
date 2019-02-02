@@ -21,7 +21,7 @@
 //    }
 //
 //    @Override
-//    public void draw() {
+//    public void drawObjects() {
 //        background(255);
 //
 //        String fullText = "qiuxhiquwtxfuatcx qwiuy9834rh34 98347fgew67cg a87wtcgq3fk3nfbe9dycgq78wtdf q3fb q39ycgq9 w7ecg q3yfw49g weuv a087eq9723f q38fgh -i9 fa-9hdc a97sydgc75rsdcfq35efg 3f94ugh 08e 8awyc 0wyf 0q8f qw0e ca9wgf q3ufhq oweygc 9qf";

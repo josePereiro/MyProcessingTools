@@ -8,7 +8,7 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
 
 
     public RectangleWrapperPainterObject(RectangleWrapper wrapper, String name) {
-        super(wrapper, name, Types.LINE);
+        super(wrapper, name, Types.RECTANGLE);
         constructionPoints = new EllipseWrapper[2];
         constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
                 wrapper.getY(), constructionPointSizes,

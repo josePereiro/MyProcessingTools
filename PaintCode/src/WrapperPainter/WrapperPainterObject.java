@@ -23,7 +23,7 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     public static class Types {
         public static final int LINE = 944;
         public static final int ELLIPSE = 901;
-        public static final int RECTANGLE = 922;
+        public static final int RECTANGLE = 121;
         public static final int POINT = 884;
         public static final int IMAGE = 303;
         public static final int POLYGON = 764;

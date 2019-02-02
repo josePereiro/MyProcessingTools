@@ -71,18 +71,4 @@ public class CodeGenerator {
         return stringBuilder.toString();
     }
 
-    private static class WrappersContainer{
-
-        public static P2DPrimitiveWrappers.LineWrapper myLine;
-
-        static{
-            myLine =  new P2DPrimitiveWrappers.LineWrapper(0.0F,1.0F,2.0F,3.0F,null);
-            myLine.setFillColor(-1);
-            myLine.setStrokeColor(-16777216);
-            myLine.setStrokeWeight(1.0F);
-
-        }
-    }
-
-
 }

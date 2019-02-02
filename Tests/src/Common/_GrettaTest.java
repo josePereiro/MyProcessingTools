@@ -47,7 +47,7 @@
 //    }
 //
 //    @Override
-//    public void draw() {
+//    public void drawObjects() {
 //        if (draggedDelay <= 0) {
 //            cursor(ARROW);
 //            draggedDelay = 0;

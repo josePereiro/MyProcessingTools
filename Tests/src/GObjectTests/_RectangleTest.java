@@ -30,14 +30,14 @@
 //    }
 //
 //    @Override
-//    public void draw() {
+//    public void drawObjects() {
 //        background(255);
 //
 //        if (rectangle.isThisOverMe(mouseX, mouseY)) {
 //            rectangle.setBackgroundColor(Color.RED.getRGB());
 //        } else rectangle.setBackgroundColor(Color.BLUE.getRGB());
 //
-//        rectangle.draw();
+//        rectangle.drawObjects();
 //
 //        stroke(0);
 //        ellipse(mouseX, mouseY, 3, 3);
