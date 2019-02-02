@@ -156,9 +156,9 @@ class WrapperPainterObjectsManager extends PObject {
         return wrapperPainterObjects;
     }
 
-    void guideComponents(GuidedBoard guidedBoard) {
-        for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
-            wrapperPainterObject.guideComponent(guidedBoard);
+    void guideFocusedObjects(GuidedBoard guidedBoard) {
+        for (WrapperPainterObject focusedObject : focusedObjects) {
+            focusedObject.guideComponent(guidedBoard);
         }
     }
 

@@ -160,6 +160,42 @@ public class Tools {
             public static final int F9 = 120;
             public static final int ESC = 27;
             public static final int TAB = 9;
+            public static final int NUMBER_0 = 48;
+            public static final int NUMBER_1 = 49;
+            public static final int NUMBER_2 = 50;
+            public static final int NUMBER_3 = 51;
+            public static final int NUMBER_4 = 52;
+            public static final int NUMBER_5 = 53;
+            public static final int NUMBER_6 = 54;
+            public static final int NUMBER_7 = 55;
+            public static final int NUMBER_8 = 56;
+            public static final int NUMBER_9 = 57;
+            public static final int LETTER_A = 65;
+            public static final int LETTER_B = 66;
+            public static final int LETTER_C = 67;
+            public static final int LETTER_D = 68;
+            public static final int LETTER_E = 69;
+            public static final int LETTER_F = 70;
+            public static final int LETTER_G = 71;
+            public static final int LETTER_H = 72;
+            public static final int LETTER_I = 73;
+            public static final int LETTER_J = 74;
+            public static final int LETTER_K = 75;
+            public static final int LETTER_L = 76;
+            public static final int LETTER_M = 77;
+            public static final int LETTER_N = 78;
+            public static final int LETTER_O = 79;
+            public static final int LETTER_P = 80;
+            public static final int LETTER_Q = 81;
+            public static final int LETTER_R = 82;
+            public static final int LETTER_S = 83;
+            public static final int LETTER_T = 84;
+            public static final int LETTER_U = 85;
+            public static final int LETTER_V = 86;
+            public static final int LETTER_W = 87;
+            public static final int LETTER_X = 88;
+            public static final int LETTER_Y = 89;
+            public static final int LETTER_Z = 90;
 
     }
 

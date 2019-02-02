@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 public class WrapperPainter extends PApplet {
 
+
     // 53871722 Yenier, Hermano de Miguel 80CUC 3*
     public static void main(String[] args) {
         PApplet.main("WrapperPainter.WrapperPainter");
@@ -284,6 +285,11 @@ public class WrapperPainter extends PApplet {
     }
 
     @Override
+    public void keyReleased() {
+        pGuiManager.listeningForKeyReleased(null);
+    }
+
+    @Override
     public void keyTyped(KeyEvent event) {
         pGuiManager.listeningForKeyTyped(event);
     }
@@ -333,11 +339,25 @@ public class WrapperPainter extends PApplet {
                 if (console.isFocused()) {
                     return false;
                 }
-                if (keyCode == 'q') {
-                    wrapperPainterObjectsManager.guideComponents(drawBoard);
-                    return true;
-                } else if (keyCode == Tools.KeyCodes.TAB) {
+
+                if (keyCode == KeyMap.FOCUS_NEXT) {
                     wrapperPainterObjectsManager.focusNext();
+                    return true;
+                } else if (keyCode == KeyMap.AMPLIFIED_AREA) {
+                    mx = mouseX;
+                    my = mouseY;
+                    return true;
+                } else if (keyCode == KeyMap.REDUCE_GUIDES_WIDTH) {
+                    drawBoard.setDx(drawBoard.getDx() - 1);
+                    return true;
+                } else if (keyCode == KeyMap.INCREASE_GUIDES_WIDTH) {
+                    drawBoard.setDx(drawBoard.getDx() + 1);
+                    return true;
+                } else if (keyCode == KeyMap.REDUCE_GUIDES_HEIGHT) {
+                    drawBoard.setDy(drawBoard.getDy() - 1);
+                    return true;
+                } else if (keyCode == KeyMap.INCREASE_GUIDES_HEIGHT) {
+                    drawBoard.setDy(drawBoard.getDy() + 1);
                     return true;
                 }
 
@@ -347,15 +367,15 @@ public class WrapperPainter extends PApplet {
 
                     float dx = drawBoard.getDx();
                     float dy = drawBoard.getDy();
-                    if (keyCode == Tools.KeyCodes.RIGHT_ARROW) {
+                    if (keyCode == KeyMap.MOVE_FOCUSED_TO_RIGHT) {
                         moveComponent(focusedComponents, -dx, 0);
-                    } else if (keyCode == Tools.KeyCodes.UP_ARROW) {
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_TOP) {
                         moveComponent(focusedComponents, 0, -dy);
-                    } else if (keyCode == Tools.KeyCodes.LEFT_ARROW) {
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_LEFT) {
                         moveComponent(focusedComponents, dx, 0);
-                    } else if (keyCode == Tools.KeyCodes.DOWN_ARROW) {
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_BOTTOM) {
                         moveComponent(focusedComponents, 0, dy);
-                    } else if (keyCode == Tools.KeyCodes.DELETE) {
+                    } else if (keyCode == KeyMap.DELETE_FOCUSED) {
                         wrapperPainterObjectsManager.remove(focusedComponents);
                     }
 
@@ -388,72 +408,79 @@ public class WrapperPainter extends PApplet {
 
         });
 
-        pGuiManager.setOnKeyTypedHandler(new PGuiObject.OnKeyTypedHandler() {
+        pGuiManager.setOnKeyReleasedHandler(new PGuiObject.OnKeyReleasedHandler() {
             @Override
             public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
 
-                if (key == 'v' || key == 'V') {
+                if (console.isFocused()) {
+                    return false;
+                }
+
+                if (keyCode == KeyMap.GUIDE_FOCUSED) {
+                    wrapperPainterObjectsManager.guideFocusedObjects(drawBoard);
+                    return true;
+                } else if (keyCode == KeyMap.SELECT_BACKGROUND_IMAGE) {
+                    File imageFile = FileTools.openFileDialog("Select a background photo!!!");
+                    if (imageFile != null) {
+                        PImage image = loadImage(imageFile.getAbsolutePath());
+                        if (image != null) {
+                            drawBoard.setBackgroundImage(image);
+                            console.println("Background image set!!!");
+                        }
+                    }
+                } else if (keyCode == KeyMap.SHOW_BACKGROUND_IMAGE) {
+                    drawBoard.drawBackgroundImage(!drawBoard.isDrawBackgroundImage());
+                    return true;
+                } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_BACK) {
+                    wrapperPainterObjectsManager.moveToBack(wrapperPainterObjectsManager.getFocusedObjects());
+                    return true;
+                } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_FRONT) {
+                    wrapperPainterObjectsManager.moveToFront(wrapperPainterObjectsManager.getFocusedObjects());
+                    return true;
+                } else if (keyCode == KeyMap.SHOW_V_GUIDES) {
                     drawBoard.setVGuidesVisible(!drawBoard.isVGuidesVisible());
                     return true;
-                } else if (key == 'h' || key == 'H') {
+                } else if (keyCode == KeyMap.SHOW_H_GUIDES) {
                     drawBoard.setHGuidesVisible(!drawBoard.ishGuidesVisible());
                     return true;
-                } else if (key == 'c' || key == 'C') {
-                    drawBoard.setDx(drawBoard.getDx() - 1);
-                    return true;
-                } else if (key == 'b' || key == 'B') {
-                    drawBoard.setDx(drawBoard.getDx() + 1);
-                    return true;
-                } else if (key == 'g' || key == 'G') {
-                    drawBoard.setDy(drawBoard.getDy() - 1);
-                    return true;
-                } else if (key == 'j' || key == 'J') {
-                    drawBoard.setDy(drawBoard.getDy() + 1);
-                    return true;
-                } else if (key == 'k' || key == 'K') {
+                } else if (keyCode == KeyMap.NORMALIZE_GUIDES) {
                     float d = Math.max(drawBoard.getDx(), drawBoard.getDy());
                     drawBoard.setDx(d);
                     drawBoard.setDy(d);
                     return true;
-                } else if (key == 'a' || key == 'A') {
-                    mx = mouseX;
-                    my = mouseY;
-                    return true;
-                } else if (key == '3') {
+                } else if (keyCode == KeyMap.START_LINE_CONSTRUCTION) {
                     ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.LINE).
                             handlePEvent(null, newLineBtm);
                     return true;
-                } else if (key == '1') {
+                } else if (keyCode == KeyMap.START_RECT_CONSTRUCTION) {
                     ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.RECTANGLE).
                             handlePEvent(null, newRectBtm);
                     return true;
-                } else if (key == '2') {
+                } else if (keyCode == KeyMap.START_ELLIPSE_CONSTRUCTION) {
                     ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.ELLIPSE).
                             handlePEvent(null, newEllipseBtm);
                     return true;
-                } else if (key == '4') {
+                } else if (keyCode == KeyMap.START_IMAGE_CONSTRUCTION) {
                     ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.IMAGE).
                             handlePEvent(null, newImageBtm);
                     return true;
-                } else if (key == '5') {
+                } else if (keyCode == KeyMap.START_TEXT_CONSTRUCTION) {
                     ObjectConstructor.getOnePointObjectStartConstructionHandler(Types.TEXT).
                             handlePEvent(null, newTextBtn);
                     return true;
-                } else if (key == 's' || key == 'S') {
-                    save();
+                } else if (keyCode == KeyMap.SAVE_INTO_FILE) {
+                    saveIntoFile();
                     return true;
-                } else if (key == 'o' || key == 'O') {
-                    open();
+                } else if (keyCode == KeyMap.OPEN_FILE) {
+                    openFile();
                     return true;
-                } else if (key == 'z' || key == 'Z') {
+                } else if (keyCode == KeyMap.UNDO) {
                     wrapperPainterObjectsManager.toThePass();
-                    console.println("Undo");
                     return true;
-                } else if (key == 'x' || key == 'X') {
+                } else if (keyCode == KeyMap.REDO) {
                     wrapperPainterObjectsManager.toTheFuture();
-                    console.println("Redo");
                     return true;
-                } else if (key == 'f' || key == 'F') {
+                } else if (keyCode == KeyMap.FIND_BY_NAME) {
                     findByName();
                     return true;
                 }
@@ -461,16 +488,16 @@ public class WrapperPainter extends PApplet {
                 ArrayList<WrapperPainterObject> focusedComponents =
                         wrapperPainterObjectsManager.getFocusedObjects();
                 if (focusedComponents.size() > 0) {
-                    if (key == 'r') {
+                    if (keyCode == KeyMap.RENAME_FOCUSED) {
                         rename(focusedComponents);
                         return true;
-                    } else if (key == 'w' || key == 'W') {
+                    } else if (keyCode == KeyMap.CHANGE_FOCUSED_STROKE_WEIGHT) {
                         changeStrokeWeight(focusedComponents);
                         return true;
-                    } else if (key == 't' || key == 'T') {
+                    } else if (keyCode == KeyMap.CHANGE_TEXT_VALUE) {
                         changeTextValue(focusedComponents);
                         return true;
-                    } else if (key == 'e' || key == 'E') {
+                    } else if (keyCode == KeyMap.CHANGE_TEXT_SIZE) {
                         changeTexSizeValue(focusedComponents);
                         return true;
                     }
@@ -750,7 +777,7 @@ public class WrapperPainter extends PApplet {
         });
     }
 
-    private void open() {
+    private void openFile() {
         openedFile = FileTools.openFileDialog("Select a file!!!");
         if (openedFile != null) {
 
@@ -764,9 +791,9 @@ public class WrapperPainter extends PApplet {
         }
     }
 
-    private void save() {
+    private void saveIntoFile() {
         if (saveFile == null) {
-            console.println("Write the name for the save file!");
+            console.println("Write the name for the saveIntoFile file!");
 
             if (openedFile != null) {
                 console.setInputText(openedFile.getName());
@@ -827,36 +854,6 @@ public class WrapperPainter extends PApplet {
     private void initializeDrawBoard() {
         drawBoard = new GuidedBoard(margin, margin,
                 (int) (width * 0.80), (int) (height * 0.8), margin, margin, this);
-
-        drawBoard.setOnKeyTypedHandler(new PGuiObject.OnKeyTypedHandler() {
-            @Override
-            public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
-                if (pGuiManager.getFocusedPGuiObject() != null) {
-                    if (pGuiManager.getFocusedPGuiObject().equals(console)) {
-                        return false;
-                    }
-                }
-
-                if (key == 'i' || key == 'I') {
-                    File imageFile = FileTools.openFileDialog("Select a backgroud photo!!!");
-                    if (imageFile != null) {
-                        PImage image = loadImage(imageFile.getAbsolutePath());
-                        if (image != null) {
-                            drawBoard.setBackgroundImage(image);
-                            console.println("Background image setted!!!");
-                        }
-                    }
-                } else if (key == 'u' || key == 'U') {
-                    drawBoard.drawBackgroundImage(!drawBoard.isDrawBackgroundImage());
-                } else if (key == ',') {
-                    wrapperPainterObjectsManager.moveToBack(wrapperPainterObjectsManager.getFocusedObjects());
-                } else if (key == '.') {
-                    wrapperPainterObjectsManager.moveToFront(wrapperPainterObjectsManager.getFocusedObjects());
-                }
-                return false;
-
-            }
-        });
 
         pointer = new Point.Float(drawBoard.getCloserGuideX(drawBoard.getX() + drawBoard.getWidth() / 2),
                 drawBoard.getCloserGuideY(drawBoard.getY() + drawBoard.getHeight()));
@@ -1509,6 +1506,47 @@ public class WrapperPainter extends PApplet {
             return null;
         }
 
+
+    }
+
+    private static class KeyMap {
+
+        //
+        private static final int FOCUS_NEXT = Tools.KeyCodes.TAB;
+        private static final int DELETE_FOCUSED = Tools.KeyCodes.DELETE;
+        private static final int MOVE_FOCUSED_TO_TOP = Tools.KeyCodes.UP_ARROW;
+        private static final int MOVE_FOCUSED_TO_LEFT = Tools.KeyCodes.LEFT_ARROW;
+        private static final int MOVE_FOCUSED_TO_RIGHT = Tools.KeyCodes.RIGHT_ARROW;
+        private static final int MOVE_FOCUSED_TO_BOTTOM = Tools.KeyCodes.DOWN_ARROW;
+
+        private static final int START_RECT_CONSTRUCTION = Tools.KeyCodes.NUMBER_1;
+        private static final int START_ELLIPSE_CONSTRUCTION = Tools.KeyCodes.NUMBER_2;
+        private static final int START_LINE_CONSTRUCTION = Tools.KeyCodes.NUMBER_3;
+        private static final int START_IMAGE_CONSTRUCTION = Tools.KeyCodes.NUMBER_4;
+        private static final int START_TEXT_CONSTRUCTION = Tools.KeyCodes.NUMBER_5;
+
+        private static final int REDO = Tools.KeyCodes.LETTER_X;
+        private static final int UNDO = Tools.KeyCodes.LETTER_Z;
+        private static final int OPEN_FILE = Tools.KeyCodes.LETTER_O;
+        private static final int FIND_BY_NAME = Tools.KeyCodes.LETTER_F;
+        private static final int SHOW_H_GUIDES = Tools.KeyCodes.LETTER_H;
+        private static final int SHOW_V_GUIDES = Tools.KeyCodes.LETTER_V;
+        private static final int GUIDE_FOCUSED = Tools.KeyCodes.LETTER_P;
+        private static final int AMPLIFIED_AREA = Tools.KeyCodes.LETTER_A;
+        private static final int SAVE_INTO_FILE = Tools.KeyCodes.LETTER_S;
+        private static final int RENAME_FOCUSED = Tools.KeyCodes.LETTER_R;
+        private static final int NORMALIZE_GUIDES = Tools.KeyCodes.LETTER_K;
+        private static final int CHANGE_TEXT_SIZE = Tools.KeyCodes.LETTER_Y;
+        private static final int CHANGE_TEXT_VALUE = Tools.KeyCodes.LETTER_T;
+        private static final int REDUCE_GUIDES_WIDTH = Tools.KeyCodes.LETTER_G;
+        private static final int REDUCE_GUIDES_HEIGHT = Tools.KeyCodes.LETTER_C;
+        private static final int MOVE_FOCUSED_TO_BACK = Tools.KeyCodes.LETTER_N;
+        private static final int MOVE_FOCUSED_TO_FRONT = Tools.KeyCodes.LETTER_M;
+        private static final int SHOW_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_U;
+        private static final int INCREASE_GUIDES_WIDTH = Tools.KeyCodes.LETTER_J;
+        private static final int INCREASE_GUIDES_HEIGHT = Tools.KeyCodes.LETTER_B;
+        private static final int SELECT_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_I;
+        private static final int CHANGE_FOCUSED_STROKE_WEIGHT = Tools.KeyCodes.LETTER_W;
 
     }
 
