@@ -14,7 +14,7 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     protected boolean focus, focusable;
     protected EllipseWrapper[] constructionPoints;
     protected EllipseWrapper focusedConstructionPoints;
-    public static float constructionPointSizes = 25;
+    public static float constructionPointSize = 25;
     protected String name;
     protected int type;
 
@@ -22,6 +22,7 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     //Types
     public static class Types {
         public static final int LINE = 944;
+        public static final int TEXT = 456;
         public static final int ELLIPSE = 901;
         public static final int RECTANGLE = 121;
         public static final int POINT = 884;
@@ -156,6 +157,10 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
         return getType() == Types.ELLIPSE;
     }
 
+    public boolean isAText() {
+        return getType() == Types.TEXT;
+    }
+
     public boolean isARectangle() {
         return getType() == Types.RECTANGLE;
     }
@@ -168,8 +173,8 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
         return getType() == Types.IMAGE;
     }
 
-    public static void setConstructionPointSizes(float constructionPointSizes) {
-        WrapperPainterObject.constructionPointSizes = constructionPointSizes;
+    public static void setConstructionPointSize(float constructionPointSize) {
+        WrapperPainterObject.constructionPointSize = constructionPointSize;
     }
 
     public EllipseWrapper getFocusedConstructionPoints() {

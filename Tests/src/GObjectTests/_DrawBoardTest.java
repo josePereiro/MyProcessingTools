@@ -38,9 +38,9 @@ public class _DrawBoardTest extends PApplet {
         if (key == 'i')
             guidedBoard.drawBackgroundImage(!guidedBoard.isDrawBackgroundImage());
         else if (key == 'v')
-            guidedBoard.drawVGuides(!guidedBoard.isDrawVGuides());
+            guidedBoard.setVGuidesVisible(!guidedBoard.isVGuidesVisible());
         else if (key == 'h')
-            guidedBoard.drawHGuides(!guidedBoard.isDrawHGuides());
+            guidedBoard.setHGuidesVisible(!guidedBoard.ishGuidesVisible());
         else if (key == 'x')
             guidedBoard.setDx(guidedBoard.getDx() + 1);
         else if (key == 'z')

@@ -26,7 +26,7 @@
 //
 //        scanner = new Scanner();
 //        buffer = new SingleLineTextBox("", 0, 0, width, height/10, this);
-//        lastLine = new SingleLineTextBox("", 0, buffer.getHeight(), width, height/10, this);
+//        lastLine = new SingleLineTextBox("", 0, buffer.getHr(), width, height/10, this);
 //
 //    }
 //

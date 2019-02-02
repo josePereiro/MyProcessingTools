@@ -1,31 +1,35 @@
 package WrapperPainter;
 
 import P2DPrimitiveWrappers.EllipseWrapper;
-import P2DPrimitiveWrappers.LineWrapper;
 import PGUIObject.GuidedBoard;
 
-public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> {
+import java.awt.*;
 
+public class EllipseWrapperPainterObject extends WrapperPainterObject<EllipseWrapper> {
 
-    public LineWrapperPainterObject(LineWrapper wrapper, String name) {
-        super(wrapper, name, Types.LINE);
+    private Point.Float centerPosition;
+
+    public EllipseWrapperPainterObject(EllipseWrapper wrapper, String name) {
+        super(wrapper, name, Types.ELLIPSE);
+        centerPosition = new Point.Float(wrapper.getX(), wrapper.getY());
         constructionPoints = new EllipseWrapper[2];
-        constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
-                wrapper.getY(), constructionPointSize,
-                constructionPointSize, getWrapper().getContext());
-        constructionPoints[1] = new EllipseWrapper(wrapper.getX1(),
-                wrapper.getY1(), constructionPointSize,
-                constructionPointSize, getWrapper().getContext());
+        constructionPoints[0] = new EllipseWrapper(centerPosition.x,
+                centerPosition.y - wrapper.getVr() / 2, constructionPointSize, constructionPointSize,
+                wrapper.getContext());
+        constructionPoints[1] = new EllipseWrapper(centerPosition.x + wrapper.getHr() / 2,
+                centerPosition.y, constructionPointSize, constructionPointSize,
+                wrapper.getContext());
         focusedConstructionPoints = constructionPoints[0];
     }
 
-
     @Override
     public void rebuild() {
-        wrapper.setX(constructionPoints[0].getX());
-        wrapper.setX1(constructionPoints[1].getX());
-        wrapper.setY(constructionPoints[0].getY());
-        wrapper.setY1(constructionPoints[1].getY());
+        centerPosition = new Point.Float(constructionPoints[0].getX(),
+                constructionPoints[1].getY());
+        wrapper.setX(centerPosition.x);
+        wrapper.setY(centerPosition.y);
+        wrapper.setVr(Math.abs(centerPosition.y - constructionPoints[0].getY()) * 2);
+        wrapper.setHr(Math.abs(centerPosition.x - constructionPoints[1].getX()) * 2);
     }
 
     @Override
@@ -36,9 +40,7 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
             constructionPoint.setX(guidedBoard.getCloserGuideX(constructionPoint.getX()));
             constructionPoint.setY(guidedBoard.getCloserGuideY(constructionPoint.getY()));
         }
-
         rebuild();
-
     }
 
     @Override
@@ -58,20 +60,20 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
         stringBuilder.append(getName() + "\n");
         stringBuilder.append("x = " + getX() + "\n");
         stringBuilder.append("y = " + getY() + "\n");
-        stringBuilder.append("x1 = " + getX1() + "\n");
-        stringBuilder.append("y1 = " + getY1() + "\n");
+        stringBuilder.append("vr = " + getVr() + "\n");
+        stringBuilder.append("vh = " + getHr() + "\n");
         stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
         stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
 
         return stringBuilder.toString();
     }
 
-    public float getX1() {
-        return constructionPoints[1].getX();
+    public float getVr() {
+        return wrapper.getVr();
     }
 
-    public float getY1() {
-        return constructionPoints[1].getY();
+    public float getHr() {
+        return wrapper.getHr();
     }
 
 }

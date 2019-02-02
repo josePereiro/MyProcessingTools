@@ -1,7 +1,10 @@
 package WrapperPainter;
 
+import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.LineWrapper;
 import P2DPrimitiveWrappers.RectangleWrapper;
+import P2DPrimitiveWrappers.TextWrapper;
+import WrapperPainter.WrapperPainterObject.Types;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -61,6 +64,20 @@ public class DataStoreFile {
             stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getWidth());
             stringBuilder.append(DATA_SEPARATOR);
             stringBuilder.append(((RectangleWrapperPainterObject) wrapperPainterObject).getHeight());
+        } else if (wrapperPainterObject.isAnEllipse()) {
+            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((EllipseWrapperPainterObject) wrapperPainterObject).getVr());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((EllipseWrapperPainterObject) wrapperPainterObject).getHr());
+        }else if (wrapperPainterObject.isAText()) {
+            stringBuilder.append(wrapperPainterObject.getX());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(wrapperPainterObject.getY());
+            stringBuilder.append(DATA_SEPARATOR);
+            stringBuilder.append(((TextWrapperPainterObject) wrapperPainterObject).getWrapper().getText());
         }
 
 
@@ -74,7 +91,7 @@ public class DataStoreFile {
         WrapperPainterObject wrapperPainterObject;
         for (String line : objectsLine) {
             objectData = line.split(DATA_SEPARATOR, -1);
-            if (objectData[TYPE_INDEX].equals(String.valueOf(WrapperPainterObject.Types.LINE))) {
+            if (objectData[TYPE_INDEX].equals(String.valueOf(Types.LINE))) {
                 float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
                 float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
                 float x1 = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2]);
@@ -85,7 +102,7 @@ public class DataStoreFile {
                 wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
                 wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
                 arrayList.add(wrapperPainterObject);
-            } else if (objectData[TYPE_INDEX].equals(String.valueOf(WrapperPainterObject.Types.RECTANGLE))) {
+            } else if (objectData[TYPE_INDEX].equals(String.valueOf(Types.RECTANGLE))) {
                 float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
                 float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
                 float w = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2]);
@@ -96,8 +113,29 @@ public class DataStoreFile {
                 wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
                 wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
                 arrayList.add(wrapperPainterObject);
+            } else if (objectData[TYPE_INDEX].equals(String.valueOf(Types.ELLIPSE))) {
+                float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
+                float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
+                float vr = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2]);
+                float hr = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 3]);
+                wrapperPainterObject = new EllipseWrapperPainterObject(new EllipseWrapper(x, y, vr, hr, context),
+                        objectData[NAME_INDEX]);
+                wrapperPainterObject.getWrapper().setFillColor(Integer.parseInt(objectData[FILL_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
+                arrayList.add(wrapperPainterObject);
+            }else if (objectData[TYPE_INDEX].equals(String.valueOf(Types.TEXT))) {
+                float x = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX]);
+                float y = Float.parseFloat(objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 1]);
+                String text = objectData[CONSTRUCTOR_DATA_FIRST_INDEX + 2];
+                wrapperPainterObject = new TextWrapperPainterObject(
+                        new TextWrapper(text, x, y, context),
+                        objectData[NAME_INDEX]);
+                wrapperPainterObject.getWrapper().setFillColor(Integer.parseInt(objectData[FILL_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeColor(Integer.parseInt(objectData[STROKE_COLOR_INDEX]));
+                wrapperPainterObject.getWrapper().setStrokeWeight(Float.parseFloat(objectData[STROKE_WEIGHT_INDEX]));
+                arrayList.add(wrapperPainterObject);
             }
-
         }
 
 

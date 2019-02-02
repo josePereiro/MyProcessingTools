@@ -15,8 +15,8 @@ public class GuidedBoard extends PGuiObject {
     //GUI
     private float guidesWeight = 0.1F;
     private int guidesAlpha = 120;
-    private boolean drawVGuides = false;
-    private boolean drawHGuides = false;
+    private boolean vGuidesVisible = false;
+    private boolean hGuidesVisible = false;
     private boolean drawBackgroundImage = false;
     private int backgroundImageAlpha = 120;
     private PImage backgroundImage;
@@ -46,7 +46,7 @@ public class GuidedBoard extends PGuiObject {
         }
 
         //Guides
-        if (drawVGuides) {
+        if (vGuidesVisible) {
             context.stroke(strokeColor, guidesAlpha);
             context.strokeWeight(guidesWeight);
             float lastY = y + height;
@@ -54,7 +54,7 @@ public class GuidedBoard extends PGuiObject {
                 context.line(guidesX, y, guidesX, lastY);
             }
         }
-        if (drawHGuides) {
+        if (hGuidesVisible) {
             context.stroke(strokeColor, guidesAlpha);
             context.strokeWeight(guidesWeight);
             float lastX = x + width;
@@ -109,12 +109,12 @@ public class GuidedBoard extends PGuiObject {
         updateGuidesYs();
     }
 
-    public void drawVGuides(boolean b) {
-        drawVGuides = b;
+    public void setVGuidesVisible(boolean b) {
+        vGuidesVisible = b;
     }
 
-    public void drawHGuides(boolean b) {
-        drawHGuides = b;
+    public void setHGuidesVisible(boolean b) {
+        hGuidesVisible = b;
     }
 
     public void drawBackgroundImage(boolean b) {
@@ -125,12 +125,12 @@ public class GuidedBoard extends PGuiObject {
         this.backgroundImageAlpha = backgroundImageAlpha;
     }
 
-    public boolean isDrawVGuides() {
-        return drawVGuides;
+    public boolean isVGuidesVisible() {
+        return vGuidesVisible;
     }
 
-    public boolean isDrawHGuides() {
-        return drawHGuides;
+    public boolean ishGuidesVisible() {
+        return hGuidesVisible;
     }
 
     public boolean isDrawBackgroundImage() {

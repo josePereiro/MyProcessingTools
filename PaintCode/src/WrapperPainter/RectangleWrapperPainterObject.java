@@ -11,11 +11,11 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
         super(wrapper, name, Types.RECTANGLE);
         constructionPoints = new EllipseWrapper[2];
         constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
-                wrapper.getY(), constructionPointSizes,
-                constructionPointSizes, getWrapper().getContext());
+                wrapper.getY(), constructionPointSize,
+                constructionPointSize, getWrapper().getContext());
         constructionPoints[1] = new EllipseWrapper(wrapper.getX() + wrapper.getWidth(),
-                wrapper.getY() + wrapper.getHeight(), constructionPointSizes,
-                constructionPointSizes, getWrapper().getContext());
+                wrapper.getY() + wrapper.getHeight(), constructionPointSize,
+                constructionPointSize, getWrapper().getContext());
         focusedConstructionPoints = constructionPoints[0];
     }
 

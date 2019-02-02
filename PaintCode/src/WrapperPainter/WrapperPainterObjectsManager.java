@@ -33,7 +33,8 @@ class WrapperPainterObjectsManager extends PObject {
     }
 
     void drawObjects() {
-        for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
+        for (int i = wrapperPainterObjects.size() - 1; i >= 0; i--) {
+            WrapperPainterObject wrapperPainterObject = wrapperPainterObjects.get(i);
             wrapperPainterObject.draw();
         }
     }
@@ -44,6 +45,12 @@ class WrapperPainterObjectsManager extends PObject {
             return formatNewName("line");
         } else if (type == WrapperPainterObject.Types.RECTANGLE) {
             return formatNewName("rect");
+        } else if (type == WrapperPainterObject.Types.ELLIPSE) {
+            return formatNewName("ellipse");
+        } else if (type == WrapperPainterObject.Types.IMAGE) {
+            return formatNewName("image");
+        } else if (type == WrapperPainterObject.Types.TEXT) {
+            return formatNewName("text");
         }
 
         return "";
@@ -123,10 +130,18 @@ class WrapperPainterObjectsManager extends PObject {
         }
     }
 
-    void removeObject(WrapperPainterObject wrapperPainterObject) {
-        focusedObjects.remove(wrapperPainterObject);
+    private void remove(WrapperPainterObject wrapperPainterObject) {
         objectsNames.remove(wrapperPainterObject.getName());
+        focusedObjects.remove(wrapperPainterObject);
         wrapperPainterObjects.remove(wrapperPainterObject);
+    }
+
+    void remove(ArrayList<WrapperPainterObject> toDelete) {
+        while (toDelete.size() > 0) {
+            WrapperPainterObject temp = toDelete.get(0);
+            remove(temp);
+            toDelete.remove(temp);
+        }
     }
 
     void addDrawComponent(WrapperPainterObject wrapperPainterObject) {

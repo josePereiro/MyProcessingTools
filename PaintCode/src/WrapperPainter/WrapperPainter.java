@@ -4,11 +4,9 @@ import BuiltIn.FileTools;
 import BuiltIn.LayoutTools;
 import BuiltIn.StringTools;
 import Common.Tools;
-import P2DPrimitiveWrappers.EllipseWrapper;
-import P2DPrimitiveWrappers.LineWrapper;
-import P2DPrimitiveWrappers.PointWrapper;
-import P2DPrimitiveWrappers.RectangleWrapper;
+import P2DPrimitiveWrappers.*;
 import PGUIObject.*;
+import WrapperPainter.WrapperPainterObject.Types;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.KeyEvent;
@@ -47,7 +45,7 @@ public class WrapperPainter extends PApplet {
     //DrawComponents
     private static Point.Float pointer;
     private static WrapperPainterObjectsManager wrapperPainterObjectsManager;
-    private static ComponentConstructor.ComponentInConstruction componentInConstruction;
+    private static ObjectConstructor.ComponentInConstruction objectInConstruction;
     private static RectangleWrapper constructionIcon;
     private static RectangleWrapper lineIcon;
     private static RectangleWrapper ellipseIcon;
@@ -112,77 +110,136 @@ public class WrapperPainter extends PApplet {
     }
 
     private void drawComponentInConstruction() {
-        if (componentInConstruction != null) {
-            if (componentInConstruction.isALine()) {
-                if (componentInConstruction.getConstructionPoints().size() > 0) {
-                    //Firs Point
-                    Point.Float firstPoint = componentInConstruction.getConstructionPoints().get(0);
-                    stroke(0);
-                    strokeWeight(1);
-                    fill(255, 100);
-                    ellipse(firstPoint.x, firstPoint.y, 15, 15);
+        if (objectInConstruction != null) {
 
-                    if (componentInConstruction.getConstructionPoints().size() > 1) {
-                        //Second Point
-                        Point.Float secondPoint = componentInConstruction.getConstructionPoints().get(1);
-                        stroke(0);
-                        strokeWeight(1);
-                        fill(255, 100);
-                        ellipse(secondPoint.x, secondPoint.y, 15, 15);
-                        line(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y);
-                    } else if (drawBoard.isThisOverMe(mouseX, mouseY)) {
-                        line(firstPoint.x, firstPoint.y, pointer.x, pointer.y);
+            int pointSize = 15;
+
+            if (objectInConstruction.isALine()) {
+                drawLineInConstruction(pointSize);
+            } else if (objectInConstruction.isARectangle() || objectInConstruction.isAImage()) {
+                drawRectangleInConstruction(pointSize);
+            } else if (objectInConstruction.isAEllipse()) {
+                drawEllipseInConstruction(pointSize);
+            } else if (objectInConstruction.isAText()) {
+                drawATextInConstruction(pointSize);
+            }
+        }
+    }
+
+    private void drawATextInConstruction(int pointSize) {
+        if (objectInConstruction.getConstructionPoints().size() > 0) {
+            //Point
+            Point.Float point = objectInConstruction.getConstructionPoints().get(0);
+            stroke(0);
+            strokeWeight(1);
+            fill(255, 100);
+            ellipse(point.x, point.y, pointSize, pointSize);
+            textSize(15);
+            fill(0);
+            text("Text", point.x, point.y);
+        }
+    }
+
+    private void drawEllipseInConstruction(int pointSize) {
+        if (objectInConstruction.getConstructionPoints().size() > 0) {
+            //Firs Point
+            Point.Float firstPoint = objectInConstruction.getConstructionPoints().get(0);
+            stroke(0);
+            strokeWeight(1);
+            fill(255, 100);
+            ellipse(firstPoint.x, firstPoint.y, pointSize, pointSize);
+
+            if (objectInConstruction.getConstructionPoints().size() > 1) {
+                //Second Point
+                Point.Float secondPoint = objectInConstruction.getConstructionPoints().get(1);
+                stroke(0);
+                strokeWeight(1);
+                fill(255, 100);
+                float r = (float) Point.Float.
+                        distance(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y) * 2;
+                ellipse(firstPoint.x, firstPoint.y, r, r);
+                ellipse(secondPoint.x, secondPoint.y, pointSize, pointSize);
+
+            } else if (drawBoard.isThisOverMe(mouseX, mouseY)) {
+                float r = (float) Point.Float.
+                        distance(firstPoint.x, firstPoint.y, mouseX, mouseY) * 2;
+                ellipse(firstPoint.x, firstPoint.y, r, r);
+            }
+        }
+    }
+
+    private void drawRectangleInConstruction(int pointSize) {
+        if (objectInConstruction.getConstructionPoints().size() > 0) {
+            //Firs Point
+            Point.Float firstPoint = objectInConstruction.getConstructionPoints().get(0);
+            stroke(0);
+            strokeWeight(1);
+            fill(255, 100);
+            ellipse(firstPoint.x, firstPoint.y, pointSize, pointSize);
+
+            if (objectInConstruction.getConstructionPoints().size() > 1) {
+                //Second Point
+                Point.Float secondPoint = objectInConstruction.getConstructionPoints().get(1);
+                stroke(0);
+                strokeWeight(1);
+                fill(255, 100);
+                float w = Math.abs(firstPoint.x - secondPoint.x);
+                float h = Math.abs(firstPoint.y - secondPoint.y);
+                if (firstPoint.x < secondPoint.x) {
+                    if (firstPoint.y < secondPoint.y) {
+                        rect(firstPoint.x, firstPoint.y, w, h);
+                    } else {
+                        rect(firstPoint.x, secondPoint.y, w, h);
+                    }
+                } else {
+                    if (firstPoint.y < secondPoint.y) {
+                        rect(secondPoint.x, firstPoint.y, w, h);
+                    } else {
+                        rect(secondPoint.x, secondPoint.y, w, h);
                     }
                 }
-            } else if (componentInConstruction.isARectangle()) {
-                if (componentInConstruction.getConstructionPoints().size() > 0) {
-                    //Firs Point
-                    Point.Float firstPoint = componentInConstruction.getConstructionPoints().get(0);
-                    stroke(0);
-                    strokeWeight(1);
-                    fill(255, 100);
-                    ellipse(firstPoint.x, firstPoint.y, 15, 15);
+                ellipse(secondPoint.x, secondPoint.y, pointSize, pointSize);
 
-                    if (componentInConstruction.getConstructionPoints().size() > 1) {
-                        //Second Point
-                        Point.Float secondPoint = componentInConstruction.getConstructionPoints().get(1);
-                        stroke(0);
-                        strokeWeight(1);
-                        fill(255, 100);
-                        float w = Math.abs(firstPoint.x - secondPoint.x);
-                        float h = Math.abs(firstPoint.y - secondPoint.y);
-                        if (firstPoint.x < secondPoint.x) {
-                            if (firstPoint.y < secondPoint.y) {
-                                rect(firstPoint.x, firstPoint.y, w, h);
-                            } else {
-                                rect(firstPoint.x, secondPoint.y, w, h);
-                            }
-                        } else {
-                            if (firstPoint.y < secondPoint.y) {
-                                rect(secondPoint.x, firstPoint.y, w, h);
-                            } else {
-                                rect(secondPoint.x, secondPoint.y, w, h);
-                            }
-                        }
-
-                    } else if (drawBoard.isThisOverMe(mouseX, mouseY)) {
-                        float w = Math.abs(firstPoint.x - mouseX);
-                        float h = Math.abs(firstPoint.y - mouseY);
-                        if (firstPoint.x < mouseX) {
-                            if (firstPoint.y < mouseY) {
-                                rect(firstPoint.x, firstPoint.y, w, h);
-                            } else {
-                                rect(firstPoint.x, mouseY, w, h);
-                            }
-                        } else {
-                            if (firstPoint.y < mouseY) {
-                                rect(mouseX, firstPoint.y, w, h);
-                            } else {
-                                rect(mouseX, mouseY, w, h);
-                            }
-                        }
+            } else if (drawBoard.isThisOverMe(mouseX, mouseY)) {
+                float w = Math.abs(firstPoint.x - mouseX);
+                float h = Math.abs(firstPoint.y - mouseY);
+                if (firstPoint.x < mouseX) {
+                    if (firstPoint.y < mouseY) {
+                        rect(firstPoint.x, firstPoint.y, w, h);
+                    } else {
+                        rect(firstPoint.x, mouseY, w, h);
+                    }
+                } else {
+                    if (firstPoint.y < mouseY) {
+                        rect(mouseX, firstPoint.y, w, h);
+                    } else {
+                        rect(mouseX, mouseY, w, h);
                     }
                 }
+                ellipse(mouseX, mouseY, pointSize, pointSize);
+            }
+        }
+    }
+
+    private void drawLineInConstruction(int pointSize) {
+        if (objectInConstruction.getConstructionPoints().size() > 0) {
+            //Firs Point
+            Point.Float firstPoint = objectInConstruction.getConstructionPoints().get(0);
+            stroke(0);
+            strokeWeight(1);
+            fill(255, 100);
+            ellipse(firstPoint.x, firstPoint.y, pointSize, pointSize);
+
+            if (objectInConstruction.getConstructionPoints().size() > 1) {
+                //Second Point
+                Point.Float secondPoint = objectInConstruction.getConstructionPoints().get(1);
+                stroke(0);
+                strokeWeight(1);
+                fill(255, 100);
+                ellipse(secondPoint.x, secondPoint.y, pointSize, pointSize);
+                line(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y);
+            } else if (drawBoard.isThisOverMe(mouseX, mouseY)) {
+                line(firstPoint.x, firstPoint.y, pointer.x, pointer.y);
             }
         }
     }
@@ -290,14 +347,16 @@ public class WrapperPainter extends PApplet {
 
                     float dx = drawBoard.getDx();
                     float dy = drawBoard.getDy();
-                    if (keyCode == 37) {
+                    if (keyCode == Tools.KeyCodes.RIGHT_ARROW) {
                         moveComponent(focusedComponents, -dx, 0);
-                    } else if (keyCode == 38) {
+                    } else if (keyCode == Tools.KeyCodes.UP_ARROW) {
                         moveComponent(focusedComponents, 0, -dy);
-                    } else if (keyCode == 39) {
+                    } else if (keyCode == Tools.KeyCodes.LEFT_ARROW) {
                         moveComponent(focusedComponents, dx, 0);
-                    } else if (keyCode == 40) {
+                    } else if (keyCode == Tools.KeyCodes.DOWN_ARROW) {
                         moveComponent(focusedComponents, 0, dy);
+                    } else if (keyCode == Tools.KeyCodes.DELETE) {
+                        wrapperPainterObjectsManager.remove(focusedComponents);
                     }
 
                     return true;
@@ -334,10 +393,10 @@ public class WrapperPainter extends PApplet {
             public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
 
                 if (key == 'v' || key == 'V') {
-                    drawBoard.drawVGuides(!drawBoard.isDrawVGuides());
+                    drawBoard.setVGuidesVisible(!drawBoard.isVGuidesVisible());
                     return true;
                 } else if (key == 'h' || key == 'H') {
-                    drawBoard.drawHGuides(!drawBoard.isDrawHGuides());
+                    drawBoard.setHGuidesVisible(!drawBoard.ishGuidesVisible());
                     return true;
                 } else if (key == 'c' || key == 'C') {
                     drawBoard.setDx(drawBoard.getDx() - 1);
@@ -360,222 +419,60 @@ public class WrapperPainter extends PApplet {
                     mx = mouseX;
                     my = mouseY;
                     return true;
+                } else if (key == '3') {
+                    ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.LINE).
+                            handlePEvent(null, newLineBtm);
+                    return true;
                 } else if (key == '1') {
-                    ComponentConstructor.Line.startConstructionHandler.handlePEvent(null, newLineBtm);
+                    ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.RECTANGLE).
+                            handlePEvent(null, newRectBtm);
                     return true;
                 } else if (key == '2') {
-                    ComponentConstructor.Rectangle.startConstructionHandler.handlePEvent(null, newRectBtm);
+                    ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.ELLIPSE).
+                            handlePEvent(null, newEllipseBtm);
+                    return true;
+                } else if (key == '4') {
+                    ObjectConstructor.getTwoPointsObjectStartConstructionHandler(Types.IMAGE).
+                            handlePEvent(null, newImageBtm);
+                    return true;
+                } else if (key == '5') {
+                    ObjectConstructor.getOnePointObjectStartConstructionHandler(Types.TEXT).
+                            handlePEvent(null, newTextBtn);
                     return true;
                 } else if (key == 's' || key == 'S') {
-
-                    if (saveFile == null) {
-                        console.println("Write the name for the save file!");
-
-                        if (openedFile != null) {
-                            console.setInputText(openedFile.getName());
-                        } else {
-                            console.setInputText("save_" + System.currentTimeMillis() + ".txt");
-                        }
-                        console.setFocusable(true);
-                        pGuiManager.setFocusTo(console);
-
-                        console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                            @Override
-                            public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                                if (!input.equals("")) {
-
-                                    if (!input.endsWith(".txt")) {
-                                        input += ".txt";
-                                    }
-                                    saveFile = FileTools.openDirDialog("Select a directory!!");
-                                    if (saveFile == null) {
-                                        return false;
-                                    }
-                                    saveFile = new File(saveFile, input);
-                                    try {
-                                        FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
-                                                wrapperPainterObjectsManager.getWrapperPainterObjects()));
-                                        console.println("File created and saved at: " + saveFile.getCanonicalPath());
-                                    } catch (IOException ignored) {
-
-                                    }
-
-                                }
-
-                                pGuiManager.setFocusTo(drawBoard);
-                                console.setFocusable(false);
-                                console.setOnInputEnteredHandler(null);
-                                return true;
-                            }
-                        });
-                    } else {
-                        try {
-                            FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
-                                    wrapperPainterObjectsManager.getWrapperPainterObjects()));
-                            console.println("File saved: " + saveFile.getCanonicalPath());
-                        } catch (IOException ignored) {
-
-                        }
-                    }
+                    save();
                     return true;
                 } else if (key == 'o' || key == 'O') {
-                    openedFile = FileTools.openFileDialog("Select a file!!!");
-                    if (openedFile != null) {
-
-                        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(loadStrings(openedFile)));
-                        String s = StringTools.stringTheList(arrayList,
-                                "\n");
-                        wrapperPainterObjectsManager.setWrapperPainterObjects(
-                                DataStoreFile.readDataStore(s, drawBoard.getContext()));
-                        console.println("File loaded: " + openedFile.getAbsolutePath());
-
-                    }
+                    open();
                     return true;
-                }
-
-
-                if (key == 'z' || key == 'Z') {
+                } else if (key == 'z' || key == 'Z') {
                     wrapperPainterObjectsManager.toThePass();
                     console.println("Undo");
+                    return true;
                 } else if (key == 'x' || key == 'X') {
                     wrapperPainterObjectsManager.toTheFuture();
                     console.println("Redo");
+                    return true;
                 } else if (key == 'f' || key == 'F') {
-                    console.println("Search components by name:");
-                    console.setInputText("");
-                    console.setFocusable(true);
-                    pGuiManager.setFocusTo(console);
-
-                    console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                        @Override
-                        public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                            if (!input.equals("")) {
-
-                                wrapperPainterObjectsManager.setFocusTo(null);
-                                for (WrapperPainterObject wrapperPainterObject :
-                                        wrapperPainterObjectsManager.getWrapperPainterObjects()) {
-                                    if (wrapperPainterObject.getName().contains(input)) {
-                                        wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                                    }
-                                }
-                            }
-
-                            pGuiManager.setFocusTo(drawBoard);
-                            console.setFocusable(false);
-                            console.setOnInputEnteredHandler(null);
-                            return true;
-                        }
-                    });
+                    findByName();
+                    return true;
                 }
 
                 ArrayList<WrapperPainterObject> focusedComponents =
                         wrapperPainterObjectsManager.getFocusedObjects();
                 if (focusedComponents.size() > 0) {
                     if (key == 'r') {
-
-                        if (focusedComponents.size() == 1) {
-                            console.println("Rename " + focusedComponents.get(0).getName());
-                            console.setInputText(focusedComponents.get(0).getName());
-                            console.setFocusable(true);
-                            pGuiManager.setFocusTo(console);
-                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                                @Override
-                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                                    if (!focusedComponents.get(0).getName().equals(input)) {
-                                        focusedComponents.get(0).setName(
-                                                wrapperPainterObjectsManager.formatNewName(input));
-                                        wrapperPainterObjectsManager.updateNames();
-                                    }
-                                    pGuiManager.setFocusTo(drawBoard);
-                                    console.setFocusable(false);
-                                    console.setOnInputEnteredHandler(null);
-                                    return true;
-                                }
-                            });
-                        } else {
-                            console.println("Renaming " + focusedComponents.size() + " components ");
-                            //TODO finish this
-
-                            console.setInputText("");
-                            console.setFocusable(true);
-                            pGuiManager.setFocusTo(console);
-                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                                @Override
-                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-                                    if (!input.equals("")) {
-                                        for (WrapperPainterObject focusedComponent :
-                                                focusedComponents) {
-                                            focusedComponent.setName(
-                                                    wrapperPainterObjectsManager.formatNewName(input));
-                                            wrapperPainterObjectsManager.updateNames();
-                                        }
-                                    }
-
-                                    pGuiManager.setFocusTo(drawBoard);
-                                    console.setFocusable(false);
-                                    console.setOnInputEnteredHandler(null);
-                                    return true;
-                                }
-                            });
-                        }
-
-
+                        rename(focusedComponents);
+                        return true;
                     } else if (key == 'w' || key == 'W') {
-                        if (focusedComponents.size() == 1) {
-                            console.println("Change " + focusedComponents.get(0).getName() + " strokeWeight!");
-                            console.setInputText(focusedComponents.get(0).getWrapper().getStrokeWeight() + "");
-                            console.setFocusable(true);
-                            pGuiManager.setFocusTo(console);
-
-                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                                @Override
-                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                                    float sw = focusedComponents.get(0).getWrapper().getStrokeWeight();
-                                    try {
-                                        sw = Float.parseFloat(input);
-                                    } catch (Exception ignored) {
-                                    }
-                                    focusedComponents.get(0).getWrapper().setStrokeWeight(sw);
-                                    pGuiManager.setFocusTo(drawBoard);
-                                    console.setFocusable(false);
-                                    console.setOnInputEnteredHandler(null);
-                                    return true;
-                                }
-                            });
-                        } else {
-                            console.println("Change " + focusedComponents.size() + " components strokeWeight!");
-                            console.setInputText("");
-                            console.setFocusable(true);
-                            pGuiManager.setFocusTo(console);
-
-                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                                @Override
-                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                                    if (input.equals("")) {
-                                        float sw;
-                                        try {
-                                            sw = Float.parseFloat(input);
-                                        } catch (Exception e) {
-                                            return false;
-                                        }
-
-                                        for (WrapperPainterObject focusedComponent : focusedComponents) {
-                                            focusedComponent.getWrapper().setStrokeWeight(sw);
-                                        }
-                                    }
-
-                                    console.setOnInputEnteredHandler(null);
-                                    console.setFocusable(false);
-                                    pGuiManager.setFocusTo(drawBoard);
-                                    return true;
-                                }
-                            });
-                        }
+                        changeStrokeWeight(focusedComponents);
+                        return true;
+                    } else if (key == 't' || key == 'T') {
+                        changeTextValue(focusedComponents);
+                        return true;
+                    } else if (key == 'e' || key == 'E') {
+                        changeTexSizeValue(focusedComponents);
+                        return true;
                     }
                 }
                 return false;
@@ -586,26 +483,7 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
                 if (drawBoard.isThisOverMe(mouseX, mouseY)) {
-                    if (componentInConstruction != null) {
-                        return false;
-                    }
-
-                    //Focus
-                    for (WrapperPainterObject wrapperPainterObject :
-                            wrapperPainterObjectsManager.getWrapperPainterObjects()) {
-                        EllipseWrapper constructionPoint =
-                                wrapperPainterObject.getConstructionPointAtPosition(mouseX, mouseY);
-                        if (wrapperPainterObject.isThisOverMe(mouseX, mouseY)) {
-                            wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                            return true;
-                        }
-                        if (constructionPoint != null) {
-                            wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                            wrapperPainterObject.setFocusedConstructionPoints(constructionPoint);
-                            return true;
-                        }
-                    }
-                    wrapperPainterObjectsManager.setFocusTo(null);
+                    return focusComponent();
                 }
                 return false;
             }
@@ -618,37 +496,325 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
 
-                if (wrapperPainterObjectsManager.getFocusedObjects().size() == 1) {
-                    WrapperPainterObject focusedComponent =
-                            wrapperPainterObjectsManager.getFocusedObjects().get(0);
-                    if (focusedComponent != null) {
-
-                        EllipseWrapper constructionPoint =
-                                focusedComponent.getFocusedConstructionPoints();
-
-                        if (constructionPoint.isThisOverMe(mouseX, mouseY)) {
-                            lastUpdate = System.currentTimeMillis();
-                        }
-                        if (System.currentTimeMillis() - lastUpdate < 300) {
-                            constructionPoint.setX(mouseX);
-                            constructionPoint.setY(mouseY);
-                            focusedComponent.rebuild();
-                            focusedComponent.guideComponent(drawBoard);
-                        } else {
-                            constructionPoint = focusedComponent.getConstructionPointAtPosition(mouseX, mouseY);
-                            if (constructionPoint != null) {
-                                focusedComponent.
-                                        setFocusedConstructionPoints(constructionPoint);
-                            }
-                        }
-
-                    }
-                    return true;
+                if (wrapperPainterObjectsManager.getFocusedObjects().size() == 0) {
+                    return focusComponent();
+                } else if (wrapperPainterObjectsManager.getFocusedObjects().size() == 1) {
+                    return moveConstructionPoint();
                 }
                 return false;
             }
+
+            private boolean moveConstructionPoint() {
+                WrapperPainterObject focusedComponent =
+                        wrapperPainterObjectsManager.getFocusedObjects().get(0);
+                if (focusedComponent != null) {
+
+                    EllipseWrapper constructionPoint =
+                            focusedComponent.getFocusedConstructionPoints();
+
+                    if (constructionPoint.isThisOverMe(mouseX, mouseY)) {
+                        lastUpdate = System.currentTimeMillis();
+                    }
+                    if (System.currentTimeMillis() - lastUpdate < 300) {
+                        constructionPoint.setX(mouseX);
+                        constructionPoint.setY(mouseY);
+                        focusedComponent.rebuild();
+                        focusedComponent.guideComponent(drawBoard);
+                    } else {
+                        constructionPoint = focusedComponent.getConstructionPointAtPosition(mouseX, mouseY);
+                        if (constructionPoint != null) {
+                            focusedComponent.
+                                    setFocusedConstructionPoints(constructionPoint);
+                        }
+                    }
+
+                }
+                return true;
+            }
         });
 
+    }
+
+    private boolean focusComponent() {
+
+        if (objectInConstruction != null) {
+            return false;
+        }
+
+        //Focus
+        for (WrapperPainterObject wrapperPainterObject :
+                wrapperPainterObjectsManager.getWrapperPainterObjects()) {
+            EllipseWrapper constructionPoint =
+                    wrapperPainterObject.getConstructionPointAtPosition(mouseX, mouseY);
+            if (wrapperPainterObject.isThisOverMe(mouseX, mouseY)) {
+                wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
+                return true;
+            }
+            if (constructionPoint != null) {
+                wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
+                wrapperPainterObject.setFocusedConstructionPoints(constructionPoint);
+                return true;
+            }
+        }
+        wrapperPainterObjectsManager.setFocusTo(null);
+        return false;
+    }
+
+    private void changeStrokeWeight(ArrayList<WrapperPainterObject> focusedComponents) {
+        if (focusedComponents.size() == 1) {
+            console.println("Change " + focusedComponents.get(0).getName() + " strokeWeight!");
+            console.setInputText(focusedComponents.get(0).getWrapper().getStrokeWeight() + "");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    float sw = focusedComponents.get(0).getWrapper().getStrokeWeight();
+                    try {
+                        sw = Float.parseFloat(input);
+                    } catch (Exception ignored) {
+                    }
+                    focusedComponents.get(0).getWrapper().setStrokeWeight(sw);
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        } else {
+            console.println("Change " + focusedComponents.size() + " components strokeWeight!");
+            console.setInputText("");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (input.equals("")) {
+                        float sw;
+                        try {
+                            sw = Float.parseFloat(input);
+                        } catch (Exception e) {
+                            return false;
+                        }
+
+                        for (WrapperPainterObject focusedComponent : focusedComponents) {
+                            focusedComponent.getWrapper().setStrokeWeight(sw);
+                        }
+                    }
+
+                    console.setOnInputEnteredHandler(null);
+                    console.setFocusable(false);
+                    pGuiManager.setFocusTo(drawBoard);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void changeTextValue(ArrayList<WrapperPainterObject> focusedComponents) {
+        if (focusedComponents.size() == 1 && focusedComponents.get(0).isAText()) {
+            console.println("Change " + focusedComponents.get(0).getName() + " text!");
+            TextWrapperPainterObject textWrapperPainterObject = (TextWrapperPainterObject) focusedComponents.get(0);
+            console.setInputText(textWrapperPainterObject.getWrapper().getText());
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (input.equals("")) {
+                        return false;
+                    }
+                    textWrapperPainterObject.getWrapper().setText(input);
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void changeTexSizeValue(ArrayList<WrapperPainterObject> focusedComponents) {
+        if (focusedComponents.size() == 1 && focusedComponents.get(0).isAText()) {
+            console.println("Change " + focusedComponents.get(0).getName() + " textSize!");
+            TextWrapperPainterObject textWrapperPainterObject = (TextWrapperPainterObject) focusedComponents.get(0);
+            console.setInputText(textWrapperPainterObject.getWrapper().getTextSize() + "");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    float ts = textWrapperPainterObject.getWrapper().getTextSize();
+                    try {
+                        ts = Float.parseFloat(input);
+                    } catch (Exception ignored) {
+                    }
+                    textWrapperPainterObject.getWrapper().setTextSize(ts);
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void rename(ArrayList<WrapperPainterObject> focusedComponents) {
+        if (focusedComponents.size() == 1) {
+            console.println("Rename " + focusedComponents.get(0).getName());
+            console.setInputText(focusedComponents.get(0).getName());
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (!focusedComponents.get(0).getName().equals(input)) {
+                        focusedComponents.get(0).setName(
+                                wrapperPainterObjectsManager.formatNewName(input));
+                        wrapperPainterObjectsManager.updateNames();
+                    }
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        } else {
+            console.println("Renaming " + focusedComponents.size() + " components ");
+            console.setInputText("");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+                    if (!input.equals("")) {
+                        for (WrapperPainterObject focusedComponent :
+                                focusedComponents) {
+                            focusedComponent.setName(
+                                    wrapperPainterObjectsManager.formatNewName(input));
+                            wrapperPainterObjectsManager.updateNames();
+                        }
+                    }
+
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void findByName() {
+        console.println("Search components by name:");
+        console.setInputText("");
+        console.setFocusable(true);
+        pGuiManager.setFocusTo(console);
+
+        console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+            @Override
+            public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                if (input.equals(".")) {
+                    wrapperPainterObjectsManager.setFocusTo(null);
+                    for (WrapperPainterObject wrapperPainterObject :
+                            wrapperPainterObjectsManager.getWrapperPainterObjects()) {
+                        wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
+
+                    }
+                } else if (!input.equals("")) {
+
+                    wrapperPainterObjectsManager.setFocusTo(null);
+                    for (WrapperPainterObject wrapperPainterObject :
+                            wrapperPainterObjectsManager.getWrapperPainterObjects()) {
+                        if (wrapperPainterObject.getName().contains(input)) {
+                            wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
+                        }
+                    }
+                }
+
+                pGuiManager.setFocusTo(drawBoard);
+                console.setFocusable(false);
+                console.setOnInputEnteredHandler(null);
+                return true;
+            }
+        });
+    }
+
+    private void open() {
+        openedFile = FileTools.openFileDialog("Select a file!!!");
+        if (openedFile != null) {
+
+            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(loadStrings(openedFile)));
+            String s = StringTools.stringTheList(arrayList,
+                    "\n");
+            wrapperPainterObjectsManager.setWrapperPainterObjects(
+                    DataStoreFile.readDataStore(s, drawBoard.getContext()));
+            console.println("File loaded: " + openedFile.getAbsolutePath());
+
+        }
+    }
+
+    private void save() {
+        if (saveFile == null) {
+            console.println("Write the name for the save file!");
+
+            if (openedFile != null) {
+                console.setInputText(openedFile.getName());
+            } else {
+                console.setInputText("save_" + System.currentTimeMillis() + ".txt");
+            }
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (!input.equals("")) {
+
+                        if (!input.endsWith(".txt")) {
+                            input += ".txt";
+                        }
+                        saveFile = FileTools.openDirDialog("Select a directory!!");
+                        if (saveFile == null) {
+                            return false;
+                        }
+                        saveFile = new File(saveFile, input);
+                        try {
+                            FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
+                                    wrapperPainterObjectsManager.getWrapperPainterObjects()));
+                            console.println("File created and saved at: " + saveFile.getCanonicalPath());
+                        } catch (IOException ignored) {
+
+                        }
+
+                    }
+
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        } else {
+            try {
+                FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
+                        wrapperPainterObjectsManager.getWrapperPainterObjects()));
+                console.println("File saved: " + saveFile.getCanonicalPath());
+            } catch (IOException ignored) {
+
+            }
+        }
     }
 
     private void initializeConsole() {
@@ -735,7 +901,7 @@ public class WrapperPainter extends PApplet {
                         EllipseWrapper ellipseWrapper = (EllipseWrapper) wrapperPainterObject.getWrapper();
                         ellipseWrapper.setFillColor(newColor);
                     } else if (!wrapperPainterObject.isAnImage()) {
-                        RectangleWrapper rectangleWrapper = (RectangleWrapper) wrapperPainterObject.getWrapper();
+                        TextWrapper rectangleWrapper = (TextWrapper) wrapperPainterObject.getWrapper();
                         rectangleWrapper.setFillColor(newColor);
                     }
                 }
@@ -804,7 +970,8 @@ public class WrapperPainter extends PApplet {
                 rectIcon.draw();
             }
         };
-        newRectBtm.setOnMouseClickedHandler(ComponentConstructor.Rectangle.startConstructionHandler);
+        newRectBtm.setOnMouseClickedHandler(ObjectConstructor.
+                getTwoPointsObjectStartConstructionHandler(Types.RECTANGLE));
 
         //newEllipseBtm
         newEllipseBtm = new PGuiObject(bottomsPositions[1].x, bottomsPositions[1].y,
@@ -829,7 +996,8 @@ public class WrapperPainter extends PApplet {
                 lineIcon.draw();
             }
         };
-        newLineBtm.setOnMouseClickedHandler(ComponentConstructor.Line.startConstructionHandler);
+        newLineBtm.setOnMouseClickedHandler(ObjectConstructor.
+                getTwoPointsObjectStartConstructionHandler(Types.LINE));
 
         //newImageBtm
         newImageBtm = new PGuiObject(bottomsPositions[3].x, bottomsPositions[3].y,
@@ -994,207 +1162,198 @@ public class WrapperPainter extends PApplet {
 
     }
 
-    private static class ComponentConstructor {
+    private static class ObjectConstructor {
 
-        private static class Line {
+        private static PGuiObject.OnMouseClickedHandler getOnePointObjectStartConstructionHandler(int type) {
+            return new PGuiObject.OnMouseClickedHandler() {
+                @Override
+                public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
 
-            private static PGuiObject.OnMouseClickedHandler startConstructionHandler =
-                    new PGuiObject.OnMouseClickedHandler() {
-                        @Override
-                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
-
-                            if (componentInConstruction != null) {
-                                if (componentInConstruction.isALine()) {
-                                    cancelConstruction();
-                                    return true;
-                                }
-                                cancelConstruction();
-                                console.println();
-                            }
-
-                            //Info
-                            console.println("Building a Line?");
-                            console.println("Click the drawBoard to set the first point!!!");
-
-                            //New componentInConstruction
-                            componentInConstruction = new ComponentInConstruction(WrapperPainterObject.Types.LINE);
-                            constructionIcon = lineIcon;
-                            wrapperPainterObjectsManager.setFocusTo(null);
-
-                            //NextStep
-                            pGuiManager.setFocusTo(drawBoard);
-                            drawBoard.setOnMouseClickedHandler(firstPointHandler);
-
+                    if (objectInConstruction != null) {
+                        if (objectInConstruction.isAText()) {
+                            cancelConstruction();
                             return true;
                         }
-                    };
+                        cancelConstruction();
+                        console.println();
+                    }
 
-            private static PGuiObject.OnMouseClickedHandler firstPointHandler =
-                    new PGuiObject.OnMouseClickedHandler() {
+                    if (type == Types.TEXT) {
+                        console.println("Building text?");
+                        constructionIcon = textIcon;
+                    }
+
+                    console.println("Click the drawBoard to set the anchor point!!!");
+
+                    //New objectInConstruction
+                    objectInConstruction = new ComponentInConstruction(type);
+                    wrapperPainterObjectsManager.setFocusTo(null);
+
+                    //NextStep
+                    pGuiManager.setFocusTo(drawBoard);
+                    drawBoard.setOnMouseClickedHandler(getOnePointObjectPointHandler(type));
+
+                    return true;
+                }
+            };
+        }
+
+        private static PGuiObject.OnMouseClickedHandler getOnePointObjectPointHandler(int type) {
+            return new PGuiObject.OnMouseClickedHandler() {
+                @Override
+                public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+                    //SecondPoint
+                    Point.Float point = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
+                            drawBoard.getContext().mouseY);
+
+                    objectInConstruction.addConstructionPoint(point);
+
+                    //Info
+                    console.println("Anchor Point set at " + point.toString());
+                    console.println("Now, type a new name in the console or accept the suggested by pressing enter!!!");
+
+                    //Event Handler
+                    drawBoard.setOnMouseClickedHandler(null);
+                    console.setInputText(wrapperPainterObjectsManager.suggestNewName(type));
+                    console.setFocusable(true);
+                    pGuiManager.setFocusTo(console);
+                    console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
                         @Override
-                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+                        public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
-                            //FirstPoint
-                            Point.Float firstPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
-                                    drawBoard.getContext().mouseY);
-                            componentInConstruction.addConstructionPoint(firstPoint);
+                            //name
+                            String checkedName = wrapperPainterObjectsManager.formatNewName(input);
+                            wrapperPainterObjectsManager.addComponentName(checkedName);
+                            objectInConstruction.setName(checkedName);
 
-                            //Info
-                            console.println("First Point set at " + firstPoint.toString());
-                            console.println("Click the drawBoard again to set the second point!!!");
-
-                            //NextStep
-                            drawBoard.setOnMouseClickedHandler(secondPointHandler);
-                            return true;
-                        }
-                    };
-
-            private static PGuiObject.OnMouseClickedHandler secondPointHandler =
-                    new PGuiObject.OnMouseClickedHandler() {
-                        @Override
-                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
-
-                            //SecondPoint
-                            Point.Float secondPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
-                                    drawBoard.getContext().mouseY);
-
-                            componentInConstruction.addConstructionPoint(secondPoint);
-
-                            //Info
-                            console.println("Second Point set at " + secondPoint.toString());
-                            console.println("Now, type a new name in the console or accept the suggested by pressing enter!!!");
+                            //Finishing
+                            finishConstruction();
 
                             //Event Handler
-                            drawBoard.setOnMouseClickedHandler(null);
-                            console.setInputText(wrapperPainterObjectsManager.suggestNewName(WrapperPainterObject.Types.LINE));
-                            console.setFocusable(true);
-                            pGuiManager.setFocusTo(console);
-                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                                @Override
-                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                                    //name
-                                    String checkedName = wrapperPainterObjectsManager.formatNewName(input);
-                                    wrapperPainterObjectsManager.addComponentName(checkedName);
-                                    componentInConstruction.setName(checkedName);
-
-                                    //Finishing
-                                    finishConstruction();
-
-                                    //Event Handler
-                                    console.setOnInputEnteredHandler(null);
-                                    console.setFocusable(false);
-
-                                    return true;
-                                }
-                            });
+                            console.setOnInputEnteredHandler(null);
+                            console.setFocusable(false);
 
                             return true;
                         }
-                    };
+                    });
 
+                    return true;
+                }
+            };
+        }
+
+
+        private static PGuiObject.OnMouseClickedHandler getTwoPointsObjectStartConstructionHandler(int type) {
+            return new PGuiObject.OnMouseClickedHandler() {
+                @Override
+                public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+                    if (objectInConstruction != null) {
+                        if (objectInConstruction.isALine()) {
+                            cancelConstruction();
+                            return true;
+                        }
+                        cancelConstruction();
+                        console.println();
+                    }
+
+                    if (type == Types.LINE) {
+                        console.println("Building Line?");
+                        constructionIcon = lineIcon;
+                    } else if (type == Types.RECTANGLE) {
+                        console.println("Building Rectangle?");
+                        constructionIcon = rectIcon;
+                    } else if (type == Types.ELLIPSE) {
+                        console.println("Building Ellipse?");
+                        constructionIcon = ellipseIcon;
+                    } else if (type == Types.IMAGE) {
+                        console.println("Building ImageBox?");
+                        constructionIcon = imageIcon;
+                    }
+
+                    console.println("Click the drawBoard to set the first point!!!");
+
+                    //New objectInConstruction
+                    objectInConstruction = new ComponentInConstruction(type);
+                    wrapperPainterObjectsManager.setFocusTo(null);
+
+                    //NextStep
+                    pGuiManager.setFocusTo(drawBoard);
+                    drawBoard.setOnMouseClickedHandler(getTwoPointsObjectFirstPointHandler(type));
+
+                    return true;
+                }
+            };
+        }
+
+        private static PGuiObject.OnMouseClickedHandler getTwoPointsObjectFirstPointHandler(int type) {
+            return new PGuiObject.OnMouseClickedHandler() {
+                @Override
+                public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+
+                    //FirstPoint
+                    Point.Float firstPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
+                            drawBoard.getContext().mouseY);
+                    objectInConstruction.addConstructionPoint(firstPoint);
+
+                    //Info
+                    console.println("First Point set at " + firstPoint.toString());
+                    console.println("Click the drawBoard again to set the second point!!!");
+
+                    //NextStep
+                    drawBoard.setOnMouseClickedHandler(getTwoPointsObjectSecondPointHandler(type));
+                    return true;
+                }
+            };
 
         }
 
-        private static class Rectangle {
+        private static PGuiObject.OnMouseClickedHandler getTwoPointsObjectSecondPointHandler(int type) {
+            return new PGuiObject.OnMouseClickedHandler() {
+                @Override
+                public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
 
-            private static PGuiObject.OnMouseClickedHandler startConstructionHandler =
-                    new PGuiObject.OnMouseClickedHandler() {
+                    //SecondPoint
+                    Point.Float secondPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
+                            drawBoard.getContext().mouseY);
+
+                    objectInConstruction.addConstructionPoint(secondPoint);
+
+                    //Info
+                    console.println("Second Point set at " + secondPoint.toString());
+                    console.println("Now, type a new name in the console or accept the suggested by pressing enter!!!");
+
+                    //Event Handler
+                    drawBoard.setOnMouseClickedHandler(null);
+                    console.setInputText(wrapperPainterObjectsManager.suggestNewName(type));
+                    console.setFocusable(true);
+                    pGuiManager.setFocusTo(console);
+                    console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
                         @Override
-                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
+                        public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
-                            if (componentInConstruction != null) {
-                                if (componentInConstruction.isALine()) {
-                                    cancelConstruction();
-                                    return true;
-                                }
-                                cancelConstruction();
-                                console.println();
-                            }
+                            //name
+                            String checkedName = wrapperPainterObjectsManager.formatNewName(input);
+                            wrapperPainterObjectsManager.addComponentName(checkedName);
+                            objectInConstruction.setName(checkedName);
 
-                            //Info
-                            console.println("Building a Rectangle?");
-                            console.println("Click the drawBoard to set the first point!!!");
-
-                            //New componentInConstruction
-                            componentInConstruction = new ComponentInConstruction(WrapperPainterObject.Types.RECTANGLE);
-                            constructionIcon = rectIcon;
-                            wrapperPainterObjectsManager.setFocusTo(null);
-
-                            //NextStep
-                            pGuiManager.setFocusTo(drawBoard);
-                            drawBoard.setOnMouseClickedHandler(firstPointHandler);
-
-                            return true;
-                        }
-                    };
-
-            private static PGuiObject.OnMouseClickedHandler firstPointHandler =
-                    new PGuiObject.OnMouseClickedHandler() {
-                        @Override
-                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
-
-                            //FirstPoint
-                            Point.Float firstPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
-                                    drawBoard.getContext().mouseY);
-                            componentInConstruction.addConstructionPoint(firstPoint);
-
-                            //Info
-                            console.println("First Point set at " + firstPoint.toString());
-                            console.println("Click the drawBoard again to set the second point!!!");
-
-                            //NextStep
-                            drawBoard.setOnMouseClickedHandler(secondPointHandler);
-                            return true;
-                        }
-                    };
-
-            private static PGuiObject.OnMouseClickedHandler secondPointHandler =
-                    new PGuiObject.OnMouseClickedHandler() {
-                        @Override
-                        public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
-
-                            //SecondPoint
-                            Point.Float secondPoint = drawBoard.getCloserGuidedPoint(drawBoard.getContext().mouseX,
-                                    drawBoard.getContext().mouseY);
-
-                            componentInConstruction.addConstructionPoint(secondPoint);
-
-                            //Info
-                            console.println("Second Point set at " + secondPoint.toString());
-                            console.println("Now, type a new name in the console or accept the suggested by pressing enter!!!");
+                            //Finishing
+                            finishConstruction();
 
                             //Event Handler
-                            drawBoard.setOnMouseClickedHandler(null);
-                            console.setInputText(wrapperPainterObjectsManager.suggestNewName(WrapperPainterObject.Types.RECTANGLE));
-                            console.setFocusable(true);
-                            pGuiManager.setFocusTo(console);
-                            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                                @Override
-                                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
-
-                                    //name
-                                    String checkedName = wrapperPainterObjectsManager.formatNewName(input);
-                                    wrapperPainterObjectsManager.addComponentName(checkedName);
-                                    componentInConstruction.setName(checkedName);
-
-                                    //Finishing
-                                    finishConstruction();
-
-                                    //Event Handler
-                                    console.setOnInputEnteredHandler(null);
-                                    console.setFocusable(false);
-
-                                    return true;
-                                }
-                            });
+                            console.setOnInputEnteredHandler(null);
+                            console.setFocusable(false);
 
                             return true;
                         }
-                    };
+                    });
 
-
+                    return true;
+                }
+            };
         }
+
 
         private static class ComponentInConstruction {
 
@@ -1202,41 +1361,45 @@ public class WrapperPainter extends PApplet {
             private String name;
             private final ArrayList<Point.Float> constructionPoints;
 
-            public ComponentInConstruction(int type) {
+            ComponentInConstruction(int type) {
                 this.type = type;
                 constructionPoints = new ArrayList<>();
             }
 
-            public int getType() {
+            int getType() {
                 return type;
             }
 
-            public void setType(int type) {
-                this.type = type;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
+            void setName(String name) {
                 this.name = name;
             }
 
-            public ArrayList<Point.Float> getConstructionPoints() {
+            ArrayList<Point.Float> getConstructionPoints() {
                 return constructionPoints;
             }
 
-            public void addConstructionPoint(Point.Float point) {
+            void addConstructionPoint(Point.Float point) {
                 constructionPoints.add(point);
             }
 
-            public boolean isALine() {
-                return getType() == WrapperPainterObject.Types.LINE;
+            boolean isALine() {
+                return getType() == Types.LINE;
             }
 
-            public boolean isARectangle() {
-                return getType() == WrapperPainterObject.Types.RECTANGLE;
+            boolean isARectangle() {
+                return getType() == Types.RECTANGLE;
+            }
+
+            boolean isAEllipse() {
+                return getType() == Types.ELLIPSE;
+            }
+
+            boolean isAText() {
+                return getType() == Types.TEXT;
+            }
+
+            boolean isAImage() {
+                return getType() == Types.IMAGE;
             }
 
         }
@@ -1247,7 +1410,7 @@ public class WrapperPainter extends PApplet {
             console.setOnInputEnteredHandler(null);
             console.setFocusable(false);
             drawBoard.setOnMouseClickedHandler(null);
-            componentInConstruction = null;
+            objectInConstruction = null;
             constructionIcon = null;
             console.println("Construction Cancelled!!!");
             console.println();
@@ -1260,26 +1423,27 @@ public class WrapperPainter extends PApplet {
             console.println("Construction finished!!! Enjoy");
             console.println();
             wrapperPainterObjectsManager.addDrawComponent(brantNew);
-            componentInConstruction = null;
+            objectInConstruction = null;
             constructionIcon = null;
 
         }
 
         private static WrapperPainterObject constructDrawComponent() {
 
-            if (componentInConstruction == null) {
+            if (objectInConstruction == null) {
                 return null;
             }
 
-            if (componentInConstruction.isALine()) {
-                Point.Float p0 = componentInConstruction.getConstructionPoints().get(0);
-                Point.Float p1 = componentInConstruction.getConstructionPoints().get(1);
+            if (objectInConstruction.isALine()) {
+                Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
+                Point.Float p1 = objectInConstruction.getConstructionPoints().get(1);
                 LineWrapper lineWrapper = new LineWrapper(p0.x, p0.y, p1.x, p1.y, pGuiManager.getContext());
                 return new LineWrapperPainterObject(lineWrapper,
-                        componentInConstruction.name);
-            } else if (componentInConstruction.isARectangle()) {
-                Point.Float p0 = componentInConstruction.getConstructionPoints().get(0);
-                Point.Float p1 = componentInConstruction.getConstructionPoints().get(1);
+                        objectInConstruction.name);
+
+            } else if (objectInConstruction.isARectangle()) {
+                Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
+                Point.Float p1 = objectInConstruction.getConstructionPoints().get(1);
                 float w = Math.abs(p1.x - p0.x);
                 float h = Math.abs(p1.y - p0.y);
                 RectangleWrapper rectWrapper;
@@ -1301,7 +1465,45 @@ public class WrapperPainter extends PApplet {
                     }
                 }
                 return new RectangleWrapperPainterObject(rectWrapper,
-                        componentInConstruction.name);
+                        objectInConstruction.name);
+            } else if (objectInConstruction.isAEllipse()) {
+                Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
+                Point.Float p1 = objectInConstruction.getConstructionPoints().get(1);
+                float r = (float) Point.distance(p0.x, p0.y, p1.x, p1.y) * 2;
+                EllipseWrapper ellipseWrapper =
+                        new EllipseWrapper(p0.x, p0.y, r, r, pGuiManager.getContext());
+                return new EllipseWrapperPainterObject(ellipseWrapper,
+                        objectInConstruction.name);
+            } else if (objectInConstruction.isAImage()) {
+                Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
+                Point.Float p1 = objectInConstruction.getConstructionPoints().get(1);
+                float w = Math.abs(p1.x - p0.x);
+                float h = Math.abs(p1.y - p0.y);
+                ImageWrapper rectWrapper;
+                if (p0.getX() < p1.getX()) {
+                    if (p0.getY() < p1.getY()) {
+                        rectWrapper = new ImageWrapper(p0.x, p0.y,
+                                w, h, pGuiManager.getContext());
+                    } else {
+                        rectWrapper = new ImageWrapper(p0.x, p1.y,
+                                w, h, pGuiManager.getContext());
+                    }
+                } else {
+                    if (p0.getY() < p1.getY()) {
+                        rectWrapper = new ImageWrapper(p1.x, p0.y,
+                                w, h, pGuiManager.getContext());
+                    } else {
+                        rectWrapper = new ImageWrapper(p1.x, p1.y,
+                                w, h, pGuiManager.getContext());
+                    }
+                }
+                return new ImageWrapperPainterObject(rectWrapper,
+                        objectInConstruction.name);
+            } else if (objectInConstruction.isAText()) {
+                Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
+                TextWrapper textWrapper = new TextWrapper("Text", p0.x, p0.y, pGuiManager.getContext());
+                return new TextWrapperPainterObject(textWrapper,
+                        objectInConstruction.name);
             }
 
             return null;
@@ -1309,6 +1511,5 @@ public class WrapperPainter extends PApplet {
 
 
     }
-
 
 }
