@@ -5,10 +5,9 @@ import P2DPrimitiveWrappers.P2DPrimitiveWrapper;
 import P2DPrimitiveWrappers.PDrawable;
 import P2DPrimitiveWrappers.PLocatable;
 import PGUIObject.GuidedBoard;
-import PGUIObject.PFocusable;
 
-public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
-        implements PFocusable, PDrawable, PLocatable {
+public abstract class WPObject<T extends P2DPrimitiveWrapper>
+        implements PDrawable, PLocatable {
 
     protected final T wrapper;
     protected boolean focus, focusable;
@@ -17,7 +16,6 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     public static float constructionPointSize = 25;
     protected String name;
     protected int type;
-
 
     //Types
     public static class Types {
@@ -30,7 +28,7 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
         public static final int POLYGON = 764;
     }
 
-    public WrapperPainterObject(T wrapper, String name, int type) {
+    public WPObject(T wrapper, String name, int type) {
         this.wrapper = wrapper;
         this.name = name;
         this.type = type;
@@ -49,27 +47,9 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
         return wrapper;
     }
 
-    public void drawFocus() {
-        if (focusable && focus) {
-            for (int i = 0; i < constructionPoints.length; i++) {
-                EllipseWrapper constructionPoint = constructionPoints[i];
-                constructionPoint.setFillEnable(false);
-                if (i == 0 || focusedConstructionPoints == constructionPoint) {
-                    constructionPoint.setStrokeWeight(3);
-                    constructionPoint.draw();
-                } else {
-                    constructionPoint.setStrokeWeight(1);
-                    constructionPoint.draw();
-                }
-            }
-        }
-
-    }
-
     @Override
     public void draw() {
         wrapper.draw();
-        drawFocus();
     }
 
     @Override
@@ -92,22 +72,18 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
         return null;
     }
 
-    @Override
     public boolean isFocused() {
         return focus;
     }
 
-    @Override
     public void setFocus(boolean focus) {
         this.focus = focus;
     }
 
-    @Override
     public boolean isFocusable() {
         return focusable;
     }
 
-    @Override
     public void setFocusable(boolean focusable) {
         this.focusable = focusable;
     }
@@ -129,7 +105,21 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     public abstract void moveTo(float x, float y);
 
 
-    public abstract String getDescription();
+    public String getDescription(){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getName() + "\n");
+        stringBuilder.append("x = " + getWrapper().getX() + "\n");
+        stringBuilder.append("y = " + getWrapper().getY() + "\n");
+        stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
+        stringBuilder.append("fillAlpha = " + getWrapper().getFillAlpha() + "\n");
+        stringBuilder.append("fillEnable = " + getWrapper().isFillEnable() + "\n");
+        stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
+        stringBuilder.append("strokeAlpha = " + getWrapper().getStrokeAlpha() + "\n");
+        stringBuilder.append("strokeEnable = " + getWrapper().isStrokeEnable() + "\n");
+
+        return stringBuilder.toString();
+    };
 
     public boolean isALine() {
         return getType() == Types.LINE;
@@ -160,7 +150,7 @@ public abstract class WrapperPainterObject<T extends P2DPrimitiveWrapper>
     }
 
     public static void setConstructionPointSize(float constructionPointSize) {
-        WrapperPainterObject.constructionPointSize = constructionPointSize;
+        WPObject.constructionPointSize = constructionPointSize;
     }
 
     public EllipseWrapper getFocusedConstructionPoints() {

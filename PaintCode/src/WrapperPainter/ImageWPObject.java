@@ -4,11 +4,11 @@ import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.ImageWrapper;
 import PGUIObject.GuidedBoard;
 
-public class ImageWrapperPainterObject extends WrapperPainterObject<ImageWrapper> {
+public class ImageWPObject extends WPObject<ImageWrapper> {
 
     String imagePath;
 
-    public ImageWrapperPainterObject(ImageWrapper wrapper, String name, String imagePath) {
+    public ImageWPObject(ImageWrapper wrapper, String name, String imagePath) {
         super(wrapper, name, Types.IMAGE);
         constructionPoints = new EllipseWrapper[2];
         constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
@@ -69,16 +69,10 @@ public class ImageWrapperPainterObject extends WrapperPainterObject<ImageWrapper
     @Override
     public String getDescription() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getWrapper().getX() + "\n");
-        stringBuilder.append("y = " + getWrapper().getY() + "\n");
+        StringBuilder stringBuilder = new StringBuilder(super.getDescription());
         stringBuilder.append("width = " + getWrapper().getWidth() + "\n");
         stringBuilder.append("height = " + getWrapper().getHeight() + "\n");
-        stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
-        stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
         stringBuilder.append("imagePath = " + getImagePath() + "\n");
-
         return stringBuilder.toString();
     }
 

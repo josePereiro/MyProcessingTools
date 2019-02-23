@@ -4,7 +4,6 @@ import Common.Tools;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.event.MouseEvent;
-
 /**
  * Implement a Graphics in a Processing Applet.
  */

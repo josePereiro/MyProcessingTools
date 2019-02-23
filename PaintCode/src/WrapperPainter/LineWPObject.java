@@ -4,10 +4,10 @@ import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.LineWrapper;
 import PGUIObject.GuidedBoard;
 
-public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> {
+public class LineWPObject extends WPObject<LineWrapper> {
 
 
-    public LineWrapperPainterObject(LineWrapper wrapper, String name) {
+    public LineWPObject(LineWrapper wrapper, String name) {
         super(wrapper, name, Types.LINE);
         constructionPoints = new EllipseWrapper[2];
         constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
@@ -55,15 +55,9 @@ public class LineWrapperPainterObject extends WrapperPainterObject<LineWrapper> 
     @Override
     public String getDescription() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getWrapper().getX() + "\n");
-        stringBuilder.append("y = " + getWrapper().getY() + "\n");
+        StringBuilder stringBuilder = new StringBuilder(super.getDescription());
         stringBuilder.append("x1 = " + getWrapper().getX1() + "\n");
         stringBuilder.append("y1 = " + getWrapper().getY1() + "\n");
-        stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
-        stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
-
         return stringBuilder.toString();
     }
 

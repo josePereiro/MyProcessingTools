@@ -4,10 +4,10 @@ import P2DPrimitiveWrappers.EllipseWrapper;
 import P2DPrimitiveWrappers.RectangleWrapper;
 import PGUIObject.GuidedBoard;
 
-public class RectangleWrapperPainterObject extends WrapperPainterObject<RectangleWrapper> {
+public class RectangleWPObject extends WPObject<RectangleWrapper> {
 
 
-    public RectangleWrapperPainterObject(RectangleWrapper wrapper, String name) {
+    public RectangleWPObject(RectangleWrapper wrapper, String name) {
         super(wrapper, name, Types.RECTANGLE);
         constructionPoints = new EllipseWrapper[2];
         constructionPoints[0] = new EllipseWrapper(wrapper.getX(),
@@ -68,15 +68,9 @@ public class RectangleWrapperPainterObject extends WrapperPainterObject<Rectangl
     @Override
     public String getDescription() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getWrapper().getX() + "\n");
-        stringBuilder.append("y = " + getWrapper().getY() + "\n");
-        stringBuilder.append("width = " + getWrapper().getWidth() + "\n");
+        StringBuilder stringBuilder = new StringBuilder(super.getDescription());
         stringBuilder.append("height = " + getWrapper().getHeight() + "\n");
-        stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
-        stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
-
+        stringBuilder.append("width = " + getWrapper().getWidth() + "\n");
         return stringBuilder.toString();
     }
 

@@ -22,6 +22,8 @@ public class RectangleWrapper extends P2DPrimitiveWrapper implements PRectangle 
         draw(x, y);
     }
 
+
+
     @Override
     public void draw(float x, float y) {
         if (fillEnable) {

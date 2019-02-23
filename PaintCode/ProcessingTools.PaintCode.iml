@@ -10,5 +10,6 @@
     <orderEntry type="library" name="core" level="application" />
     <orderEntry type="library" name="BuiltIn" level="project" />
     <orderEntry type="module" module-name="ProcessingTools.Common" />
+    <orderEntry type="library" name="core" level="project" />
   </component>
 </module>

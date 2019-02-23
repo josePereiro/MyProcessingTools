@@ -6,22 +6,25 @@ import BuiltIn.StringTools;
 import Common.Tools;
 import P2DPrimitiveWrappers.*;
 import PGUIObject.*;
-import WrapperPainter.WrapperPainterObject.Types;
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import static WrapperPainter.WPObject.Types;
 
 public class WrapperPainter extends PApplet {
 
+    /*
+     * TODO
+     * 1. Returns relative coordinates!!
+     * 2. Add settings to the save file. Ex: drawBoard dx, dy, backgroundImage Path!!!
+     *
+     */
 
-    // 53871722 Yenier, Hermano de Miguel 80CUC 3*
     public static void main(String[] args) {
         PApplet.main("WrapperPainter.WrapperPainter");
     }
@@ -32,20 +35,20 @@ public class WrapperPainter extends PApplet {
     private int margin = (int) (Math.min(DW, DH) * 0.01);
 
     //PGuiObjects
-    private static PGuiManager pGuiManager;
-    private static RectangleWrapper toolsBox;
-    private static ColorSelector colorSelector;
-    private static RectangleWrapper bottomsGridBox;
-    private static PGuiObject newRectBtm, newEllipseBtm, newLineBtm, newImageBtm, newTextBtn;
-    private static MultiLineTextBox objectProperties;
-    private static SingleLineTextBox guiProperties;
-    private static ZoomBox zoom;
-    private static Console console;
-    private static GuidedBoard drawBoard;
+    static PGuiManager pGuiManager;
+    static RectangleWrapper toolsBox;
+    static ColorSelector colorSelector;
+    static RectangleWrapper bottomsGridBox;
+    static PGuiObject newRectBtm, newEllipseBtm, newLineBtm, newImageBtm, newTextBtn;
+    static MultiLineTextBox objectProperties;
+    static SingleLineTextBox guiProperties;
+    static ZoomBox zoom;
+    static Console console;
+    static GuidedBoard drawBoard;
 
     //DrawComponents
     private static Point.Float pointer;
-    private static WrapperPainterObjectsManager wrapperPainterObjectsManager;
+    static WPObjectsManager WPObjectsManager;
     private static ObjectConstructor.ComponentInConstruction objectInConstruction;
     private static RectangleWrapper constructionIcon;
     private static RectangleWrapper lineIcon;
@@ -75,13 +78,26 @@ public class WrapperPainter extends PApplet {
         initializeProperties();
         initializePGuiManager();
         initializeIcons();
+
+        //Paths hard coded
+        saveFile = new File("/Users/Pereiro/Code/Java/" +
+                "IntelliJIDEA/save8BitsComputer.txt");
+        openedFile = new File("/Users/Pereiro/Code/Java/" +
+                "IntelliJIDEA/save8BitsComputer.txt");
+        drawBoard.setBackgroundImagePath("/Users/Pereiro/" +
+                "Code/Java/IntelliJIDEA/MyProcessingTools/background.png");
+
+        //Opening File
+        WPStoreData.loadStoreData(loadStrings(openedFile), this);
+        console.println("File loaded: " + openedFile.getAbsolutePath());
+
     }
 
     @Override
     public void draw() {
         background(155);
         drawGUIComponents();
-        wrapperPainterObjectsManager.drawObjects();
+        WPObjectsManager.drawObjects();
         drawComponentInConstruction();
 
         drawPointer();
@@ -89,7 +105,7 @@ public class WrapperPainter extends PApplet {
         drawFloatingIcon();
 
         if (frameCount % 20 == 0) {
-            wrapperPainterObjectsManager.saveInHistory();
+            WPObjectsManager.saveInHistory();
         }
 
 
@@ -341,44 +357,60 @@ public class WrapperPainter extends PApplet {
                 }
 
                 if (keyCode == KeyMap.FOCUS_NEXT) {
-                    wrapperPainterObjectsManager.focusNext();
+                    WPObjectsManager.focusNext();
+                    return true;
+                } else if (keyCode == KeyMap.FOCUS_POINTED) {
+                    focusPointed();
                     return true;
                 } else if (keyCode == KeyMap.AMPLIFIED_AREA) {
                     mx = mouseX;
                     my = mouseY;
                     return true;
+                } else if (keyCode == KeyMap.FOCUS_INNER_OBJECTS) {
+                    focusInnerObjects();
+                    return true;
+                } else if (keyCode == KeyMap.GENERATE_CODE) {
+                    String containerClass = CodeGenerator.
+                            getCode(WPObjectsManager.getFocusedObjects(), drawBoard);
+                    console.println(StringTools.ensureStringLength(containerClass, 100, ' '));
+                    console.println("Code copied to clipboard!!!");
+                    StringTools.copyToClipboard(containerClass);
+                    return true;
                 } else if (keyCode == KeyMap.REDUCE_GUIDES_WIDTH) {
-                    drawBoard.setDx(drawBoard.getDx() - 1);
-                    return true;
-                } else if (keyCode == KeyMap.INCREASE_GUIDES_WIDTH) {
-                    drawBoard.setDx(drawBoard.getDx() + 1);
-                    return true;
-                } else if (keyCode == KeyMap.REDUCE_GUIDES_HEIGHT) {
                     drawBoard.setDy(drawBoard.getDy() - 1);
                     return true;
-                } else if (keyCode == KeyMap.INCREASE_GUIDES_HEIGHT) {
+                } else if (keyCode == KeyMap.INCREASE_GUIDES_WIDTH) {
                     drawBoard.setDy(drawBoard.getDy() + 1);
+                    return true;
+                } else if (keyCode == KeyMap.REDUCE_GUIDES_HEIGHT) {
+                    drawBoard.setDx(drawBoard.getDx() - 1);
+                    return true;
+                } else if (keyCode == KeyMap.INCREASE_GUIDES_HEIGHT) {
+                    drawBoard.setDx(drawBoard.getDx() + 1);
                     return true;
                 }
 
-                ArrayList<WrapperPainterObject> focusedObject =
-                        wrapperPainterObjectsManager.getFocusedObjects();
-                if (focusedObject != null && focusedObject.size() != 0) {
+                ArrayList<WPObject> focusedObjects =
+                        WPObjectsManager.getFocusedObjects();
+                if (focusedObjects != null && focusedObjects.size() != 0) {
                     float dx = drawBoard.getDx();
                     float dy = drawBoard.getDy();
                     if (keyCode == KeyMap.MOVE_FOCUSED_TO_LEFT) {
-                        wrapperPainterObjectsManager.moveObjects(focusedObject, -dx, 0);
+                        WPObjectsManager.moveObjects(focusedObjects, -dx, 0);
                     } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_TOP) {
-                        wrapperPainterObjectsManager.moveObjects(focusedObject, 0, -dy);
+                        WPObjectsManager.moveObjects(focusedObjects, 0, -dy);
                     } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_RIGHT) {
-                        wrapperPainterObjectsManager.moveObjects(focusedObject, dx, 0);
+                        WPObjectsManager.moveObjects(focusedObjects, dx, 0);
                     } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_BOTTOM) {
-                        wrapperPainterObjectsManager.moveObjects(focusedObject, 0, dy);
+                        WPObjectsManager.moveObjects(focusedObjects, 0, dy);
                     } else if (keyCode == KeyMap.DELETE_FOCUSED) {
-                        wrapperPainterObjectsManager.remove(focusedObject);
+                        WPObjectsManager.remove(focusedObjects);
                     } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_MOUSE_POS) {
-                        wrapperPainterObjectsManager.moveObjectsToSavingRelation(focusedObject, mouseX, mouseY);
-                        return true;
+                        WPObjectsManager.moveObjectsToSavingRelation(focusedObjects, mouseX, mouseY);
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_BACK) {
+                        WPObjectsManager.moveToBack(focusedObjects);
+                    } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_FRONT) {
+                        WPObjectsManager.moveToFront(focusedObjects);
                     }
 
                     return true;
@@ -398,25 +430,19 @@ public class WrapperPainter extends PApplet {
                 }
 
                 if (keyCode == KeyMap.GUIDE_FOCUSED) {
-                    wrapperPainterObjectsManager.guideFocusedObjects(drawBoard);
+                    WPObjectsManager.guideFocusedObjects(drawBoard);
                     return true;
                 } else if (keyCode == KeyMap.SELECT_BACKGROUND_IMAGE) {
                     File imageFile = FileTools.openFileDialog("Select a background photo!!!");
                     if (imageFile != null) {
-                        PImage image = loadImage(imageFile.getAbsolutePath());
-                        if (image != null) {
-                            drawBoard.setBackgroundImage(image);
+                            drawBoard.setBackgroundImagePath(imageFile.getAbsolutePath());
                             console.println("Background image set!!!");
-                        }
                     }
                 } else if (keyCode == KeyMap.SHOW_BACKGROUND_IMAGE) {
                     drawBoard.drawBackgroundImage(!drawBoard.isDrawBackgroundImage());
                     return true;
-                } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_BACK) {
-                    wrapperPainterObjectsManager.moveToBack(wrapperPainterObjectsManager.getFocusedObjects());
-                    return true;
-                } else if (keyCode == KeyMap.MOVE_FOCUSED_TO_FRONT) {
-                    wrapperPainterObjectsManager.moveToFront(wrapperPainterObjectsManager.getFocusedObjects());
+                } else if (keyCode == KeyMap.PRINT_HELP) {
+                    printHelp();
                     return true;
                 } else if (keyCode == KeyMap.SHOW_V_GUIDES) {
                     drawBoard.setVGuidesVisible(!drawBoard.isVGuidesVisible());
@@ -456,18 +482,18 @@ public class WrapperPainter extends PApplet {
                     openFile();
                     return true;
                 } else if (keyCode == KeyMap.UNDO) {
-                    wrapperPainterObjectsManager.toThePass();
+                    WPObjectsManager.toThePass();
                     return true;
                 } else if (keyCode == KeyMap.REDO) {
-                    wrapperPainterObjectsManager.toTheFuture();
+                    WPObjectsManager.toTheFuture();
                     return true;
                 } else if (keyCode == KeyMap.FIND_BY_NAME) {
                     findByName();
                     return true;
                 }
 
-                ArrayList<WrapperPainterObject> focusedComponents =
-                        wrapperPainterObjectsManager.getFocusedObjects();
+                ArrayList<WPObject> focusedComponents =
+                        WPObjectsManager.getFocusedObjects();
                 if (focusedComponents.size() > 0) {
                     if (keyCode == KeyMap.RENAME_FOCUSED) {
                         rename(focusedComponents);
@@ -475,11 +501,29 @@ public class WrapperPainter extends PApplet {
                     } else if (keyCode == KeyMap.CHANGE_FOCUSED_STROKE_WEIGHT) {
                         changeStrokeWeight(focusedComponents);
                         return true;
+                    } else if (keyCode == KeyMap.CHANGE_FOCUSED_STROKE_ALPHA) {
+                        changeStrokeAlpha(focusedComponents);
+                        return true;
+                    } else if (keyCode == KeyMap.CHANGE_FOCUSED_STROKE_ENABLE) {
+                        changeStrokeEnable(focusedComponents);
+                        return true;
+                    } else if (keyCode == KeyMap.CHANGE_FOCUSED_FILL_ENABLE) {
+                        changeFillEnable(focusedComponents);
+                        return true;
+                    } else if (keyCode == KeyMap.CHANGE_FOCUSED_FILL_ALPHA) {
+                        changeFillAlpha(focusedComponents);
+                        return true;
+                    } else if (keyCode == KeyMap.SET_FOCUS_TO_NULL) {
+                        WPObjectsManager.setFocusTo(null);
+                        return true;
                     } else if (keyCode == KeyMap.CHANGE_TEXT_VALUE) {
                         changeTextValue(focusedComponents);
                         return true;
                     } else if (keyCode == KeyMap.CHANGE_TEXT_SIZE) {
                         changeTexSizeValue(focusedComponents);
+                        return true;
+                    } else if (keyCode == KeyMap.DUPLICATE_OBJECT) {
+                        WPObjectsManager.duplicateFocused();
                         return true;
                     }
                 }
@@ -491,7 +535,7 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
                 if (drawBoard.isThisOverMe(mouseX, mouseY)) {
-                    return focusComponent();
+                    return focusObject();
                 }
                 return false;
             }
@@ -504,17 +548,17 @@ public class WrapperPainter extends PApplet {
             @Override
             public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
 
-                if (wrapperPainterObjectsManager.getFocusedObjects().size() == 0) {
-                    return focusComponent();
-                } else if (wrapperPainterObjectsManager.getFocusedObjects().size() == 1) {
+                if (WPObjectsManager.getFocusedObjects().size() == 0) {
+                    return focusObject();
+                } else if (WPObjectsManager.getFocusedObjects().size() == 1) {
                     return moveConstructionPoint();
                 }
                 return false;
             }
 
             private boolean moveConstructionPoint() {
-                WrapperPainterObject focusedComponent =
-                        wrapperPainterObjectsManager.getFocusedObjects().get(0);
+                WPObject focusedComponent =
+                        WPObjectsManager.getFocusedObjects().get(0);
                 if (focusedComponent != null) {
 
                     EllipseWrapper constructionPoint =
@@ -544,56 +588,29 @@ public class WrapperPainter extends PApplet {
 
     }
 
-    private boolean focusComponent() {
-
-        if (objectInConstruction != null) {
-            return false;
-        }
-
-        //Focus
-        for (WrapperPainterObject wrapperPainterObject :
-                wrapperPainterObjectsManager.getWrapperPainterObjects()) {
-            EllipseWrapper constructionPoint =
-                    wrapperPainterObject.getConstructionPointAtPosition(mouseX, mouseY);
-            if (wrapperPainterObject.isThisOverMe(mouseX, mouseY)) {
-                wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                return true;
-            }
-            if (constructionPoint != null) {
-                wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                wrapperPainterObject.setFocusedConstructionPoints(constructionPoint);
-                return true;
+    private void focusPointed() {
+        for (WPObject WPObject : WPObjectsManager.getWPObjects()) {
+            if (WPObject.isThisOverMe(mouseX, mouseY)) {
+                WPObjectsManager.addFocusTo(WPObject);
             }
         }
-        wrapperPainterObjectsManager.setFocusTo(null);
-        return false;
     }
 
-    private void changeStrokeWeight(ArrayList<WrapperPainterObject> focusedComponents) {
-        if (focusedComponents.size() == 1) {
-            console.println("Change " + focusedComponents.get(0).getName() + " strokeWeight!");
-            console.setInputText(focusedComponents.get(0).getWrapper().getStrokeWeight() + "");
-            console.setFocusable(true);
-            pGuiManager.setFocusTo(console);
+    private void focusInnerObjects() {
 
-            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
-                @Override
-                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+        ArrayList<WPObject> innerObjects =
+                WPObjectsManager.getInnerObjects(WPObjectsManager.getFocusedObjects());
+        if (innerObjects.size() > 0) {
+            WPObjectsManager.setFocusTo(null);
+            for (WPObject innerObject : innerObjects) {
+                WPObjectsManager.addFocusTo(innerObject);
+            }
+        }
+    }
 
-                    float sw = focusedComponents.get(0).getWrapper().getStrokeWeight();
-                    try {
-                        sw = Float.parseFloat(input);
-                    } catch (Exception ignored) {
-                    }
-                    focusedComponents.get(0).getWrapper().setStrokeWeight(sw);
-                    pGuiManager.setFocusTo(drawBoard);
-                    console.setFocusable(false);
-                    console.setOnInputEnteredHandler(null);
-                    return true;
-                }
-            });
-        } else {
-            console.println("Change " + focusedComponents.size() + " components strokeWeight!");
+    private void changeFillEnable(ArrayList<WPObject> focusedComponents) {
+        if (focusedComponents.size() > 0) {
+            console.println("Change fill alpha: " + focusedComponents.size() + " objects");
             console.setInputText("");
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
@@ -602,33 +619,30 @@ public class WrapperPainter extends PApplet {
                 @Override
                 public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
-                    if (input.equals("")) {
-                        float sw;
+                    if (!input.equals("")) {
                         try {
-                            sw = Float.parseFloat(input);
-                        } catch (Exception e) {
-                            return false;
-                        }
-
-                        for (WrapperPainterObject focusedComponent : focusedComponents) {
-                            focusedComponent.getWrapper().setStrokeWeight(sw);
+                            int fa = Integer.parseInt(input);
+                            for (WPObject focusedComponent : focusedComponents) {
+                                focusedComponent.getWrapper().setFillAlpha(fa);
+                            }
+                        } catch (Exception ignored) {
                         }
                     }
 
-                    console.setOnInputEnteredHandler(null);
-                    console.setFocusable(false);
                     pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
                     return true;
                 }
             });
         }
     }
 
-    private void changeTextValue(ArrayList<WrapperPainterObject> focusedComponents) {
-        if (focusedComponents.size() == 1 && focusedComponents.get(0).isAText()) {
-            console.println("Change " + focusedComponents.get(0).getName() + " text!");
-            TextWrapperPainterObject textWrapperPainterObject = (TextWrapperPainterObject) focusedComponents.get(0);
-            console.setInputText(textWrapperPainterObject.getWrapper().getText());
+    private void changeFillAlpha(ArrayList<WPObject> focusedComponents) {
+        if (focusedComponents.size() > 0) {
+            console.println("Change fill enable: " + focusedComponents.size() + " objects. Press \'y\' " +
+                    "to enable or anything else to disable!");
+            console.setInputText("");
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -636,10 +650,16 @@ public class WrapperPainter extends PApplet {
                 @Override
                 public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
-                    if (input.equals("")) {
-                        return false;
+                    if (!input.equals("")) {
+                        try {
+                            boolean fe = input.equals("y");
+                            for (WPObject focusedComponent : focusedComponents) {
+                                focusedComponent.getWrapper().setFillEnable(fe);
+                            }
+                        } catch (Exception ignored) {
+                        }
                     }
-                    textWrapperPainterObject.getWrapper().setText(input);
+
                     pGuiManager.setFocusTo(drawBoard);
                     console.setFocusable(false);
                     console.setOnInputEnteredHandler(null);
@@ -649,10 +669,162 @@ public class WrapperPainter extends PApplet {
         }
     }
 
-    private void changeTexSizeValue(ArrayList<WrapperPainterObject> focusedComponents) {
+    private void changeStrokeEnable(ArrayList<WPObject> focusedComponents) {
+        if (focusedComponents.size() > 0) {
+            console.println("Change stroke enable: " + focusedComponents.size() + " objects. Press \'y\' " +
+                    "to enable or anything else to disable!");
+            console.setInputText("");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (!input.equals("")) {
+                        try {
+                            boolean se = input.equals("y");
+                            for (WPObject focusedComponent : focusedComponents) {
+                                focusedComponent.getWrapper().setStrokeEnable(se);
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private boolean focusObject() {
+
+        if (objectInConstruction != null) {
+            return false;
+        }
+
+        //If it is over the object
+        for (WPObject WPObject :
+                WPObjectsManager.getWPObjects()) {
+
+            if (WPObject.isThisOverMe(mouseX, mouseY)) {
+                WPObjectsManager.addFocusTo(WPObject);
+                return true;
+            }
+
+        }
+
+        //If it is over a constructor point
+        for (WPObject WPObject :
+                WPObjectsManager.getWPObjects()) {
+            EllipseWrapper constructionPoint =
+                    WPObject.getConstructionPointAtPosition(mouseX, mouseY);
+
+            if (constructionPoint != null) {
+                WPObjectsManager.addFocusTo(WPObject);
+                WPObject.setFocusedConstructionPoints(constructionPoint);
+                return true;
+            }
+        }
+
+        WPObjectsManager.setFocusTo(null);
+        return false;
+    }
+
+    private void changeStrokeWeight(ArrayList<WPObject> focusedComponents) {
+        if (focusedComponents.size() > 0) {
+            console.println("Change stroke weight: " + focusedComponents.size() + " objects");
+            console.setInputText("");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (!input.equals("")) {
+                        try {
+                            float sw = Float.parseFloat(input);
+                            for (WPObject focusedComponent : focusedComponents) {
+                                focusedComponent.getWrapper().setStrokeWeight(sw);
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void changeStrokeAlpha(ArrayList<WPObject> focusedComponents) {
+        if (focusedComponents.size() > 0) {
+            console.println("Change stroke alpha: " + focusedComponents.size() + " objects");
+            console.setInputText("");
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (!input.equals("")) {
+                        try {
+                            int sa = Integer.parseInt(input);
+                            for (WPObject focusedComponent : focusedComponents) {
+                                focusedComponent.getWrapper().setStrokeAlpha(sa);
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void changeTextValue(ArrayList<WPObject> focusedComponents) {
+        if (focusedComponents.size() == 1 && focusedComponents.get(0).isAText()) {
+            console.println("Change " + focusedComponents.get(0).getName() + " text!");
+
+            TextWPObject textWrapperPainterObject = (TextWPObject) focusedComponents.get(0);
+            console.setInputText(textWrapperPainterObject.getWrapper().getText());
+
+            console.setFocusable(true);
+            pGuiManager.setFocusTo(console);
+
+            console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
+                @Override
+                public boolean handlePEvent(PGuiObject pGuiObject, String input) {
+
+                    if (!input.equals("")) {
+                        textWrapperPainterObject.getWrapper().setText(input);
+                    }
+
+                    pGuiManager.setFocusTo(drawBoard);
+                    console.setFocusable(false);
+                    console.setOnInputEnteredHandler(null);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void changeTexSizeValue(ArrayList<WPObject> focusedComponents) {
         if (focusedComponents.size() == 1 && focusedComponents.get(0).isAText()) {
             console.println("Change " + focusedComponents.get(0).getName() + " textSize!");
-            TextWrapperPainterObject textWrapperPainterObject = (TextWrapperPainterObject) focusedComponents.get(0);
+            TextWPObject textWrapperPainterObject = (TextWPObject) focusedComponents.get(0);
             console.setInputText(textWrapperPainterObject.getWrapper().getTextSize() + "");
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
@@ -676,7 +848,7 @@ public class WrapperPainter extends PApplet {
         }
     }
 
-    private void rename(ArrayList<WrapperPainterObject> focusedComponents) {
+    private void rename(ArrayList<WPObject> focusedComponents) {
         if (focusedComponents.size() == 1) {
             console.println("Rename " + focusedComponents.get(0).getName());
             console.setInputText(focusedComponents.get(0).getName());
@@ -688,8 +860,7 @@ public class WrapperPainter extends PApplet {
 
                     if (!focusedComponents.get(0).getName().equals(input)) {
                         focusedComponents.get(0).setName(
-                                wrapperPainterObjectsManager.formatNewName(input));
-                        wrapperPainterObjectsManager.updateNames();
+                                WPObjectsManager.formatNewName(input));
                     }
                     pGuiManager.setFocusTo(drawBoard);
                     console.setFocusable(false);
@@ -698,7 +869,7 @@ public class WrapperPainter extends PApplet {
                 }
             });
         } else {
-            console.println("Renaming " + focusedComponents.size() + " components ");
+            console.println("Renaming " + focusedComponents.size() + " objects ");
             console.setInputText("");
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
@@ -706,11 +877,10 @@ public class WrapperPainter extends PApplet {
                 @Override
                 public boolean handlePEvent(PGuiObject pGuiObject, String input) {
                     if (!input.equals("")) {
-                        for (WrapperPainterObject focusedComponent :
+                        for (WPObject focusedComponent :
                                 focusedComponents) {
                             focusedComponent.setName(
-                                    wrapperPainterObjectsManager.formatNewName(input));
-                            wrapperPainterObjectsManager.updateNames();
+                                    WPObjectsManager.formatNewName(input));
                         }
                     }
 
@@ -724,8 +894,12 @@ public class WrapperPainter extends PApplet {
     }
 
     private void findByName() {
-        console.println("Search components by name:");
-        console.setInputText("");
+        console.println("Search objects by name:");
+        if (WPObjectsManager.getFocusedObjects().size() > 0) {
+            console.setInputText(WPObjectsManager.getFocusedObjects().get(0).getName());
+        } else {
+            console.setInputText("");
+        }
         console.setFocusable(true);
         pGuiManager.setFocusTo(console);
 
@@ -736,25 +910,25 @@ public class WrapperPainter extends PApplet {
                 ArrayList<String> selectedNames = new ArrayList<>();
 
                 if (input.equals(".")) {
-                    wrapperPainterObjectsManager.setFocusTo(null);
-                    for (WrapperPainterObject wrapperPainterObject :
-                            wrapperPainterObjectsManager.getWrapperPainterObjects()) {
-                        wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                        selectedNames.add("\'" + wrapperPainterObject.getName() + "\'");
+                    WPObjectsManager.setFocusTo(null);
+                    for (WPObject WPObject :
+                            WPObjectsManager.getWPObjects()) {
+                        WPObjectsManager.addFocusTo(WPObject);
+                        selectedNames.add("\'" + WPObject.getName() + "\'");
                     }
                 } else if (!input.equals("")) {
-                    wrapperPainterObjectsManager.setFocusTo(null);
-                    for (WrapperPainterObject wrapperPainterObject :
-                            wrapperPainterObjectsManager.getWrapperPainterObjects()) {
-                        if (wrapperPainterObject.getName().contains(input)) {
-                            wrapperPainterObjectsManager.addFocusTo(wrapperPainterObject);
-                            selectedNames.add(wrapperPainterObject.getName().replaceAll(input, "\'" +
+                    WPObjectsManager.setFocusTo(null);
+                    for (WPObject WPObject :
+                            WPObjectsManager.getWPObjects()) {
+                        if (WPObject.getName().contains(input)) {
+                            WPObjectsManager.addFocusTo(WPObject);
+                            selectedNames.add(WPObject.getName().replaceAll(input, "\'" +
                                     input + "\'"));
                         }
                     }
                 }
                 console.println("Selected " +
-                        wrapperPainterObjectsManager.getFocusedObjects().size() +
+                        WPObjectsManager.getFocusedObjects().size() +
                         " objects!!");
                 if (selectedNames.size() > 0) {
                     console.println(selectedNames.toString());
@@ -772,11 +946,7 @@ public class WrapperPainter extends PApplet {
         openedFile = FileTools.openFileDialog("Select a file!!!");
         if (openedFile != null) {
 
-            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(loadStrings(openedFile)));
-            String s = StringTools.stringTheList(arrayList,
-                    "\n");
-            wrapperPainterObjectsManager.setWrapperPainterObjects(
-                    DataStoreFile.readDataStore(s, drawBoard.getContext()));
+            WPStoreData.loadStoreData(loadStrings(openedFile), this);
             console.println("File loaded: " + openedFile.getAbsolutePath());
 
         }
@@ -808,13 +978,9 @@ public class WrapperPainter extends PApplet {
                             return false;
                         }
                         saveFile = new File(saveFile, input);
-                        try {
-                            FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
-                                    wrapperPainterObjectsManager.getWrapperPainterObjects()));
-                            console.println("File created and saved at: " + saveFile.getCanonicalPath());
-                        } catch (IOException ignored) {
-
-                        }
+                        String[] toStore = WPStoreData.getStoreData();
+                        saveStrings(saveFile.getAbsolutePath(), toStore);
+                        console.println("File saved: " + saveFile.getAbsolutePath());
 
                     }
 
@@ -825,13 +991,10 @@ public class WrapperPainter extends PApplet {
                 }
             });
         } else {
-            try {
-                FileTools.writeTextFile(saveFile, DataStoreFile.generateDataStore(
-                        wrapperPainterObjectsManager.getWrapperPainterObjects()));
-                console.println("File saved: " + saveFile.getCanonicalPath());
-            } catch (IOException ignored) {
+            String[] toStore = WPStoreData.getStoreData();
+            saveStrings(saveFile.getAbsolutePath(), toStore);
+            console.println("File saved: " + saveFile.getAbsolutePath());
 
-            }
         }
     }
 
@@ -849,7 +1012,7 @@ public class WrapperPainter extends PApplet {
         pointer = new Point.Float(drawBoard.getCloserGuideX(drawBoard.getX() + drawBoard.getWidth() / 2),
                 drawBoard.getCloserGuideY(drawBoard.getY() + drawBoard.getHeight()));
 
-        wrapperPainterObjectsManager = new WrapperPainterObjectsManager(this);
+        WPObjectsManager = new WPObjectsManager(this);
 
     }
 
@@ -873,23 +1036,23 @@ public class WrapperPainter extends PApplet {
         colorSelector.setOnSelectedColorChanged(new ColorSelector.OnSelectedColorChanged() {
             @Override
             public boolean handleEvent(ColorSelector colorSelector, int newColor) {
-                ArrayList<WrapperPainterObject> wrapperPainterObjects =
-                        wrapperPainterObjectsManager.getFocusedObjects();
-                if (wrapperPainterObjects == null || wrapperPainterObjects.size() == 0) {
+                ArrayList<WPObject> WPObjects =
+                        WPObjectsManager.getFocusedObjects();
+                if (WPObjects == null || WPObjects.size() == 0) {
                     return false;
                 }
-                for (WrapperPainterObject wrapperPainterObject : wrapperPainterObjects) {
-                    if (wrapperPainterObject.isALine()) {
-                        LineWrapper lineWrapper = (LineWrapper) wrapperPainterObject.getWrapper();
+                for (WPObject WPObject : WPObjects) {
+                    if (WPObject.isALine()) {
+                        LineWrapper lineWrapper = (LineWrapper) WPObject.getWrapper();
                         lineWrapper.setStrokeColor(newColor);
-                    } else if (wrapperPainterObject.isAPoint()) {
-                        PointWrapper pointWrapper = (PointWrapper) wrapperPainterObject.getWrapper();
+                    } else if (WPObject.isAPoint()) {
+                        PointWrapper pointWrapper = (PointWrapper) WPObject.getWrapper();
                         pointWrapper.setStrokeColor(newColor);
-                    } else if (wrapperPainterObject.isAnEllipse()) {
-                        EllipseWrapper ellipseWrapper = (EllipseWrapper) wrapperPainterObject.getWrapper();
+                    } else if (WPObject.isAnEllipse()) {
+                        EllipseWrapper ellipseWrapper = (EllipseWrapper) WPObject.getWrapper();
                         ellipseWrapper.setFillColor(newColor);
-                    } else if (!wrapperPainterObject.isAnImage()) {
-                        TextWrapper rectangleWrapper = (TextWrapper) wrapperPainterObject.getWrapper();
+                    } else if (WPObject.isARectangle()) {
+                        RectangleWrapper rectangleWrapper = (RectangleWrapper) WPObject.getWrapper();
                         rectangleWrapper.setFillColor(newColor);
                     }
                 }
@@ -904,13 +1067,13 @@ public class WrapperPainter extends PApplet {
         float totalPropertiesHeight = toolsBox.getY() +
                 toolsBox.getHeight() - bottomsGridBox.getY() - bottomsGridBox.getHeight();
         totalPropertiesHeight *= 0.9F;
-        objectProperties = new MultiLineTextBox(10, toolsBox.getX(),
+        objectProperties = new MultiLineTextBox(15, toolsBox.getX(),
                 bottomsGridBox.getY() + bottomsGridBox.getHeight(),
                 toolsBox.getWidth(), totalPropertiesHeight, this) {
             @Override
             public void draw() {
-                if (wrapperPainterObjectsManager.getFocusedObjects().size() > 0) {
-                    setText(wrapperPainterObjectsManager.getFocusedObjects().get(0).
+                if (WPObjectsManager.getFocusedObjects().size() > 0) {
+                    setText(WPObjectsManager.getFocusedObjects().get(0).
                             getDescription());
                 }
                 super.draw();
@@ -1194,7 +1357,7 @@ public class WrapperPainter extends PApplet {
 
                     //New objectInConstruction
                     objectInConstruction = new ComponentInConstruction(type);
-                    wrapperPainterObjectsManager.setFocusTo(null);
+                    WPObjectsManager.setFocusTo(null);
 
                     //NextStep
                     pGuiManager.setFocusTo(drawBoard);
@@ -1222,7 +1385,7 @@ public class WrapperPainter extends PApplet {
 
                     //Event Handler
                     drawBoard.setOnMouseClickedHandler(null);
-                    console.setInputText(wrapperPainterObjectsManager.suggestNewName(type));
+                    console.setInputText(WPObjectsManager.suggestNewName(type));
                     console.setFocusable(true);
                     pGuiManager.setFocusTo(console);
                     console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
@@ -1230,8 +1393,7 @@ public class WrapperPainter extends PApplet {
                         public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
                             //name
-                            String checkedName = wrapperPainterObjectsManager.formatNewName(input);
-                            wrapperPainterObjectsManager.addComponentName(checkedName);
+                            String checkedName = WPObjectsManager.formatNewName(input);
                             objectInConstruction.setName(checkedName);
 
                             //Finishing
@@ -1283,7 +1445,7 @@ public class WrapperPainter extends PApplet {
 
                     //New objectInConstruction
                     objectInConstruction = new ComponentInConstruction(type);
-                    wrapperPainterObjectsManager.setFocusTo(null);
+                    WPObjectsManager.setFocusTo(null);
 
                     //NextStep
                     pGuiManager.setFocusTo(drawBoard);
@@ -1333,7 +1495,7 @@ public class WrapperPainter extends PApplet {
 
                     //Event Handler
                     drawBoard.setOnMouseClickedHandler(null);
-                    console.setInputText(wrapperPainterObjectsManager.suggestNewName(type));
+                    console.setInputText(WPObjectsManager.suggestNewName(type));
                     console.setFocusable(true);
                     pGuiManager.setFocusTo(console);
                     console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
@@ -1341,8 +1503,7 @@ public class WrapperPainter extends PApplet {
                         public boolean handlePEvent(PGuiObject pGuiObject, String input) {
 
                             //name
-                            String checkedName = wrapperPainterObjectsManager.formatNewName(input);
-                            wrapperPainterObjectsManager.addComponentName(checkedName);
+                            String checkedName = WPObjectsManager.formatNewName(input);
                             objectInConstruction.setName(checkedName);
 
                             //Finishing
@@ -1425,17 +1586,18 @@ public class WrapperPainter extends PApplet {
 
         private static void finishConstruction() {
             pGuiManager.setFocusTo(drawBoard);
-            WrapperPainterObject brantNew = constructDrawComponent();
+            WPObject brantNew = constructDrawComponent();
             console.println("New component created: " + brantNew);
             console.println("Construction finished!!! Enjoy");
             console.println();
-            wrapperPainterObjectsManager.addDrawComponent(brantNew);
+            WPObjectsManager.addDrawComponent(brantNew);
+            WPObjectsManager.setFocusTo(brantNew);
             objectInConstruction = null;
             constructionIcon = null;
 
         }
 
-        private static WrapperPainterObject constructDrawComponent() {
+        private static WPObject constructDrawComponent() {
 
             if (objectInConstruction == null) {
                 return null;
@@ -1445,7 +1607,7 @@ public class WrapperPainter extends PApplet {
                 Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
                 Point.Float p1 = objectInConstruction.getConstructionPoints().get(1);
                 LineWrapper lineWrapper = new LineWrapper(p0.x, p0.y, p1.x, p1.y, pGuiManager.getContext());
-                return new LineWrapperPainterObject(lineWrapper,
+                return new LineWPObject(lineWrapper,
                         objectInConstruction.name);
 
             } else if (objectInConstruction.isARectangle()) {
@@ -1471,7 +1633,7 @@ public class WrapperPainter extends PApplet {
                                 w, h, pGuiManager.getContext());
                     }
                 }
-                return new RectangleWrapperPainterObject(rectWrapper,
+                return new RectangleWPObject(rectWrapper,
                         objectInConstruction.name);
             } else if (objectInConstruction.isAEllipse()) {
                 Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
@@ -1479,7 +1641,7 @@ public class WrapperPainter extends PApplet {
                 float r = (float) Point.distance(p0.x, p0.y, p1.x, p1.y) * 2;
                 EllipseWrapper ellipseWrapper =
                         new EllipseWrapper(p0.x, p0.y, r, r, pGuiManager.getContext());
-                return new EllipseWrapperPainterObject(ellipseWrapper,
+                return new EllipseWPObject(ellipseWrapper,
                         objectInConstruction.name);
             } else if (objectInConstruction.isAImage()) {
                 Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
@@ -1504,12 +1666,12 @@ public class WrapperPainter extends PApplet {
                                 w, h, pGuiManager.getContext());
                     }
                 }
-                return new ImageWrapperPainterObject(rectWrapper,
+                return new ImageWPObject(rectWrapper,
                         objectInConstruction.name, "");
             } else if (objectInConstruction.isAText()) {
                 Point.Float p0 = objectInConstruction.getConstructionPoints().get(0);
                 TextWrapper textWrapper = new TextWrapper("Text", p0.x, p0.y, pGuiManager.getContext());
-                return new TextWrapperPainterObject(textWrapper,
+                return new TextWPObject(textWrapper,
                         objectInConstruction.name);
             }
 
@@ -1519,20 +1681,235 @@ public class WrapperPainter extends PApplet {
 
     }
 
+    private void printHelp() {
+
+        StringBuilder helpMs = new StringBuilder("--------------- WRAPPER PAINTER HELP ------------");
+        helpMs.append("\n");
+        helpMs.append("Press any of this keys to:");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.FOCUS_NEXT));
+        helpMs.append(": ");
+        helpMs.append("Pass the focus to the next object!!!");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.DELETE_FOCUSED));
+        helpMs.append(": ");
+        helpMs.append("Delete the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_TOP));
+        helpMs.append(": ");
+        helpMs.append("Move the focused objects to the top of the screen");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_LEFT));
+        helpMs.append(": ");
+        helpMs.append("Move the focused objects to the left of the screen");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_RIGHT));
+        helpMs.append(": ");
+        helpMs.append("Move the focused objects to the right of the screen");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_BOTTOM));
+        helpMs.append(": ");
+        helpMs.append("Move the focused objects to the bottom of the screen");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.START_RECT_CONSTRUCTION));
+        helpMs.append(": ");
+        helpMs.append("Start/Cancel the construction of a rectangle");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.START_ELLIPSE_CONSTRUCTION));
+        helpMs.append(": ");
+        helpMs.append("Start/Cancel the construction of an ellipse");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.START_LINE_CONSTRUCTION));
+        helpMs.append(": ");
+        helpMs.append("Start/Cancel the construction of a line");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SAVE_INTO_FILE));
+        helpMs.append(": ");
+        helpMs.append("Start/Cancel the construction of an image");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.START_TEXT_CONSTRUCTION));
+        helpMs.append(": ");
+        helpMs.append("Start/Cancel the construction of a text");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_FOCUSED_STROKE_WEIGHT));
+        helpMs.append(": ");
+        helpMs.append("Change the stroke weight value of the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_FOCUSED_STROKE_ALPHA));
+        helpMs.append(": ");
+        helpMs.append("Change the stroke alpha value of the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_FOCUSED_STROKE_ENABLE));
+        helpMs.append(": ");
+        helpMs.append("Change the stroke enable value of the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_FOCUSED_FILL_ENABLE));
+        helpMs.append(": ");
+        helpMs.append("Change the fill enable value of the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_FOCUSED_FILL_ALPHA));
+        helpMs.append(": ");
+        helpMs.append("Change the fill alpha value of the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.RENAME_FOCUSED));
+        helpMs.append(": ");
+        helpMs.append("Change the name of the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.PRINT_HELP));
+        helpMs.append(": ");
+        helpMs.append("Print help");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.UNDO));
+        helpMs.append(": ");
+        helpMs.append("Undo the last action");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.REDO));
+        helpMs.append(": ");
+        helpMs.append("Undo the undo :)");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.OPEN_FILE));
+        helpMs.append(": ");
+        helpMs.append("Open a dialog to select a file to open");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.FIND_BY_NAME));
+        helpMs.append(": ");
+        helpMs.append("Focus all the objects that match, at least partially with a given expression");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SHOW_V_GUIDES));
+        helpMs.append(": ");
+        helpMs.append("Show/Hide the vertical guides");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SHOW_H_GUIDES));
+        helpMs.append(": ");
+        helpMs.append("Show/Hide the horizontal guides");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.GUIDE_FOCUSED));
+        helpMs.append(": ");
+        helpMs.append("Guide the focused objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.AMPLIFIED_AREA));
+        helpMs.append(": ");
+        helpMs.append("Amplified area pointed by the mouse and show it in the zoom box");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SAVE_INTO_FILE));
+        helpMs.append(": ");
+        helpMs.append("Save");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.NORMALIZE_GUIDES));
+        helpMs.append(": ");
+        helpMs.append("Make both guides of the same size");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_TEXT_VALUE));
+        helpMs.append(": ");
+        helpMs.append("Change the text value of the focused text objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.CHANGE_TEXT_SIZE));
+        helpMs.append(": ");
+        helpMs.append("Change the text size of the focused text objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.REDUCE_GUIDES_WIDTH));
+        helpMs.append(": ");
+        helpMs.append("Reduce the distance between horizontal guides");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.INCREASE_GUIDES_WIDTH));
+        helpMs.append(": ");
+        helpMs.append("Increase the distance between horizontal guides");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.REDUCE_GUIDES_HEIGHT));
+        helpMs.append(": ");
+        helpMs.append("Reduce the distance between vertical guides");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.INCREASE_GUIDES_HEIGHT));
+        helpMs.append(": ");
+        helpMs.append("Increase the distance between vertical guides");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_BACK));
+        helpMs.append(": ");
+        helpMs.append("Move the draw plain of the selected object to the back");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_FRONT));
+        helpMs.append(": ");
+        helpMs.append("Move the draw plain of the selected object to the front");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.MOVE_FOCUSED_TO_MOUSE_POS));
+        helpMs.append(": ");
+        helpMs.append("Move the selected objects to the position of the mouse");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SHOW_BACKGROUND_IMAGE));
+        helpMs.append(": ");
+        helpMs.append("Show/Hide the image set as background");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SELECT_BACKGROUND_IMAGE));
+        helpMs.append(": ");
+        helpMs.append("Open a browser dialog to select the background image");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.SET_FOCUS_TO_NULL));
+        helpMs.append(": ");
+        helpMs.append("Unfocus everybody");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.DUPLICATE_OBJECT));
+        helpMs.append(": ");
+        helpMs.append("Duplicate the selected objects");
+        helpMs.append("\n");
+
+        helpMs.append(Tools.KeyCodes.toString(KeyMap.FOCUS_INNER_OBJECTS));
+        helpMs.append(": ");
+        helpMs.append("Focus the objects that are entirely inside the previews one");
+        helpMs.append("\n");
+
+        console.println(helpMs.toString());
+    }
+
     private static class KeyMap {
 
-        private static final int FOCUS_NEXT = Tools.KeyCodes.TAB;
-        private static final int DELETE_FOCUSED = Tools.KeyCodes.DELETE;
-        private static final int MOVE_FOCUSED_TO_TOP = Tools.KeyCodes.UP_ARROW;
-        private static final int MOVE_FOCUSED_TO_LEFT = Tools.KeyCodes.LEFT_ARROW;
-        private static final int MOVE_FOCUSED_TO_RIGHT = Tools.KeyCodes.RIGHT_ARROW;
-        private static final int MOVE_FOCUSED_TO_BOTTOM = Tools.KeyCodes.DOWN_ARROW;
+        private static final int MOVE_FOCUSED_TO_BACK = Tools.KeyCodes.LETTER_N;
+        private static final int MOVE_FOCUSED_TO_FRONT = Tools.KeyCodes.LETTER_M;
+        private static final int MOVE_FOCUSED_TO_MOUSE_POS = Tools.KeyCodes.LETTER_Q;
+        private static final int SHOW_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_U;
+        private static final int SELECT_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_I;
+        private static final int SET_FOCUS_TO_NULL = Tools.KeyCodes.SPACE;
 
-        private static final int START_RECT_CONSTRUCTION = Tools.KeyCodes.NUMBER_1;
-        private static final int START_ELLIPSE_CONSTRUCTION = Tools.KeyCodes.NUMBER_2;
-        private static final int START_LINE_CONSTRUCTION = Tools.KeyCodes.NUMBER_3;
-        private static final int START_IMAGE_CONSTRUCTION = Tools.KeyCodes.NUMBER_4;
-        private static final int START_TEXT_CONSTRUCTION = Tools.KeyCodes.NUMBER_5;
 
         private static final int REDO = Tools.KeyCodes.LETTER_X;
         private static final int UNDO = Tools.KeyCodes.LETTER_Z;
@@ -1540,23 +1917,41 @@ public class WrapperPainter extends PApplet {
         private static final int FIND_BY_NAME = Tools.KeyCodes.LETTER_F;
         private static final int SHOW_H_GUIDES = Tools.KeyCodes.LETTER_H;
         private static final int SHOW_V_GUIDES = Tools.KeyCodes.LETTER_V;
-        private static final int GUIDE_FOCUSED = Tools.KeyCodes.LETTER_P;
+        private static final int GUIDE_FOCUSED = Tools.KeyCodes.F12;
         private static final int AMPLIFIED_AREA = Tools.KeyCodes.LETTER_A;
         private static final int SAVE_INTO_FILE = Tools.KeyCodes.LETTER_S;
-        private static final int RENAME_FOCUSED = Tools.KeyCodes.LETTER_R;
         private static final int NORMALIZE_GUIDES = Tools.KeyCodes.LETTER_K;
         private static final int CHANGE_TEXT_SIZE = Tools.KeyCodes.LETTER_Y;
         private static final int CHANGE_TEXT_VALUE = Tools.KeyCodes.LETTER_T;
         private static final int REDUCE_GUIDES_WIDTH = Tools.KeyCodes.LETTER_G;
         private static final int REDUCE_GUIDES_HEIGHT = Tools.KeyCodes.LETTER_C;
-        private static final int MOVE_FOCUSED_TO_BACK = Tools.KeyCodes.LETTER_N;
-        private static final int MOVE_FOCUSED_TO_FRONT = Tools.KeyCodes.LETTER_M;
-        private static final int MOVE_FOCUSED_TO_MOUSE_POS = Tools.KeyCodes.LETTER_Q;
-        private static final int SHOW_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_U;
         private static final int INCREASE_GUIDES_WIDTH = Tools.KeyCodes.LETTER_J;
         private static final int INCREASE_GUIDES_HEIGHT = Tools.KeyCodes.LETTER_B;
-        private static final int SELECT_BACKGROUND_IMAGE = Tools.KeyCodes.LETTER_I;
-        private static final int CHANGE_FOCUSED_STROKE_WEIGHT = Tools.KeyCodes.LETTER_W;
+        private static final int DUPLICATE_OBJECT = Tools.KeyCodes.LETTER_D;
+
+        private static final int RENAME_FOCUSED = Tools.KeyCodes.F2;
+        private static final int GENERATE_CODE = Tools.KeyCodes.F3;
+        private static final int FOCUS_POINTED = Tools.KeyCodes.SHIFT;
+        private static final int PRINT_HELP = Tools.KeyCodes.F1;
+        private static final int FOCUS_INNER_OBJECTS = Tools.KeyCodes.RETURN;
+
+        private static final int START_RECT_CONSTRUCTION = Tools.KeyCodes.NUMBER_1;
+        private static final int START_ELLIPSE_CONSTRUCTION = Tools.KeyCodes.NUMBER_2;
+        private static final int START_LINE_CONSTRUCTION = Tools.KeyCodes.NUMBER_3;
+        private static final int START_IMAGE_CONSTRUCTION = Tools.KeyCodes.NUMBER_4;
+        private static final int START_TEXT_CONSTRUCTION = Tools.KeyCodes.NUMBER_5;
+        private static final int CHANGE_FOCUSED_STROKE_WEIGHT = Tools.KeyCodes.NUMBER_6;
+        private static final int CHANGE_FOCUSED_STROKE_ALPHA = Tools.KeyCodes.NUMBER_7;
+        private static final int CHANGE_FOCUSED_STROKE_ENABLE = Tools.KeyCodes.NUMBER_8;
+        private static final int CHANGE_FOCUSED_FILL_ENABLE = Tools.KeyCodes.NUMBER_9;
+        private static final int CHANGE_FOCUSED_FILL_ALPHA = Tools.KeyCodes.NUMBER_0;
+
+        private static final int FOCUS_NEXT = Tools.KeyCodes.TAB;
+        private static final int DELETE_FOCUSED = Tools.KeyCodes.DELETE;
+        private static final int MOVE_FOCUSED_TO_TOP = Tools.KeyCodes.UP_ARROW;
+        private static final int MOVE_FOCUSED_TO_LEFT = Tools.KeyCodes.LEFT_ARROW;
+        private static final int MOVE_FOCUSED_TO_RIGHT = Tools.KeyCodes.RIGHT_ARROW;
+        private static final int MOVE_FOCUSED_TO_BOTTOM = Tools.KeyCodes.DOWN_ARROW;
 
 
     }

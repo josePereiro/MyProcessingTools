@@ -5,9 +5,9 @@ import PGUIObject.GuidedBoard;
 
 import java.awt.*;
 
-public class EllipseWrapperPainterObject extends WrapperPainterObject<EllipseWrapper> {
+public class EllipseWPObject extends WPObject<EllipseWrapper> {
 
-    public EllipseWrapperPainterObject(EllipseWrapper wrapper, String name) {
+    public EllipseWPObject(EllipseWrapper wrapper, String name) {
         super(wrapper, name, Types.ELLIPSE);
         Point.Float centerPosition = new Point.Float(wrapper.getX(), wrapper.getY());
         constructionPoints = new EllipseWrapper[2];
@@ -48,14 +48,9 @@ public class EllipseWrapperPainterObject extends WrapperPainterObject<EllipseWra
     @Override
     public String getDescription() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName() + "\n");
-        stringBuilder.append("x = " + getWrapper().getX() + "\n");
-        stringBuilder.append("y = " + getWrapper().getY() + "\n");
+        StringBuilder stringBuilder = new StringBuilder(super.getDescription());
         stringBuilder.append("vr = " + getWrapper().getVr() + "\n");
         stringBuilder.append("vh = " + getWrapper().getHr() + "\n");
-        stringBuilder.append("fillColor = " + getWrapper().getFillColor() + "\n");
-        stringBuilder.append("strokeColor = " + getWrapper().getStrokeColor() + "\n");
 
         return stringBuilder.toString();
     }

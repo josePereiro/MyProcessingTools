@@ -20,6 +20,7 @@ public class GuidedBoard extends PGuiObject {
     private boolean drawBackgroundImage = false;
     private int backgroundImageAlpha = 120;
     private PImage backgroundImage;
+    private String backgroundImagePath;
 
 
     public GuidedBoard(float x, float y, float width, float height, float dx, float dy, PApplet context) {
@@ -145,13 +146,15 @@ public class GuidedBoard extends PGuiObject {
         return dy;
     }
 
-    public PImage getBackgroundImage() {
-        return backgroundImage;
+    public String getBackgroundImagePath() {
+        return backgroundImagePath;
     }
 
-    public void setBackgroundImage(PImage backgroundImage) {
-        this.backgroundImage = backgroundImage;
-        backgroundImage.resize((int) width, (int) height);
+    public void setBackgroundImagePath(String backgroundImagePath) {
+        this.backgroundImagePath = backgroundImagePath;
+        this.backgroundImage = context.loadImage(backgroundImagePath);
+        if (backgroundImage != null)
+            backgroundImage.resize((int) width, (int) height);
     }
 
     private void updateGuidesYs() {
