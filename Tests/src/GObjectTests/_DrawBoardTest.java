@@ -26,7 +26,7 @@ public class _DrawBoardTest extends PApplet {
                 15, 15, this);
         //(int) (width * 0.1), (int) (height * 0.1), this);
         try {
-            guidedBoard.setBackgroundImagePath(loadImage("/Users/Pereiro/Pictures/Screenshots/Friends - 901 - The one where no one proposes-0001.png"));
+            guidedBoard.setBackgroundImagePath("/Users/Pereiro/Pictures/Screenshots/Friends - 901 - The one where no one proposes-0001.png");
         } catch (Exception ignored) {
         }
 

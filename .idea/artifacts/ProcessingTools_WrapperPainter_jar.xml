@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ProcessingTools.WrapperPainter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProcessingTools_WrapperPainter_jar</output-path>
+    <root id="archive" name="ProcessingTools.WrapperPainter.jar">
+      <element id="module-output" name="ProcessingTools.WrapperPainter" />
+      <element id="module-output" name="ProcessingTools.Common" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../Libraries_and_Dependencies/Java/ProcessingCore/core.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../MyJavaTools/out/artifacts/BuiltIn_jar/BuiltIn.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Common/ProcessingTools.Common.iml" filepath="$PROJECT_DIR$/Common/ProcessingTools.Common.iml" group="ProcessingTools" />
-      <module fileurl="file://$PROJECT_DIR$/PaintCode/ProcessingTools.PaintCode.iml" filepath="$PROJECT_DIR$/PaintCode/ProcessingTools.PaintCode.iml" group="ProcessingTools" />
       <module fileurl="file://$PROJECT_DIR$/Tests/ProcessingTools.Tests.iml" filepath="$PROJECT_DIR$/Tests/ProcessingTools.Tests.iml" group="ProcessingTools" />
+      <module fileurl="file://$PROJECT_DIR$/WrapperPainter/ProcessingTools.WrapperPainter.iml" filepath="$PROJECT_DIR$/WrapperPainter/ProcessingTools.WrapperPainter.iml" group="ProcessingTools" />
     </modules>
   </component>
 </project>
