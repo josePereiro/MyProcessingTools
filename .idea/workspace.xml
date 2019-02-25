@@ -1,0 +1,1586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Current File" />
+  </component>
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ProcessingTools.Tests:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="429d5db0-4720-4efb-9d80-35077614ebff" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/MyProcessingTools$WrapperPainter.ic" NAME="WrapperPainter Coverage Results" MODIFIED="1549046826460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>WrapperPainter.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="176" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="MyProcessingTools" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/GuidedBoard.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+              <folding>
+                <element signature="method#GuidedBoard#0;class#GuidedBoard#0" />
+                <element signature="method#draw#0;class#GuidedBoard#0" />
+                <element signature="method#getCloserGuideX#0;class#GuidedBoard#0" />
+                <element signature="method#getCloserGuideY#0;class#GuidedBoard#0" />
+                <element signature="method#getCloserGuidedPoint#0;class#GuidedBoard#0" />
+                <element signature="method#setDy#0;class#GuidedBoard#0" />
+                <element signature="method#updateGuidesYs#0;class#GuidedBoard#0" />
+                <element signature="method#updateGuidesXs#0;class#GuidedBoard#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObjectsManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4200">
+              <caret line="288" column="25" selection-start-line="288" selection-start-column="25" selection-end-line="288" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PGuiManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPStoreData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="51" column="69" selection-start-line="51" selection-start-column="69" selection-end-line="51" selection-end-column="69" />
+              <folding>
+                <element signature="method#getStoreData#0;class#WPStoreData#0" />
+                <element signature="method#addPreferencesStoreData#0;class#WPStoreData#0" />
+                <element signature="method#addWrappersStoreData#0;class#WPStoreData#0" />
+                <element signature="method#getWrapperStoreData#0;class#WPStoreData#0" />
+                <element signature="method#loadStoreData#0;class#WPStoreData#0" />
+                <element signature="method#loadStoreData#1;class#WPStoreData#0" />
+                <element signature="method#getWPObjectFromStoreDataLine#0;class#WPStoreData#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_DrawBoardTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="28" column="139" selection-start-line="28" selection-start-column="139" selection-end-line="28" selection-end-column="139" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/Common/Tools.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="149" column="39" selection-start-line="149" selection-start-column="39" selection-end-line="149" selection-end-column="39" />
+              <folding>
+                <element signature="docComment;method#fixTextLength#0;class#Tools#0" />
+                <element signature="method#fixTextLength#0;class#Tools#0" />
+                <element signature="e#557#1597#1" />
+                <element signature="e#707#1539#1" />
+                <element signature="e#863#1231#1" />
+                <element signature="e#898#1213#1" />
+                <element signature="e#1084#1191#1" />
+                <element signature="e#1237#1467#1" />
+                <element signature="e#1262#1415#1" />
+                <element signature="e#1545#1587#1" />
+                <element signature="e#1603#1639#1" />
+                <element signature="class#TimeOscillator#0;class#Tools#0" />
+                <element signature="method#TimeOscillator#0;class#TimeOscillator#0;class#Tools#0" />
+                <element signature="method#run#0;class#TimeOscillator#0;class#Tools#0" />
+                <element signature="e#2204#2399#1" />
+                <element signature="e#2405#2567#1" />
+                <element signature="method#step#0;class#TimeOscillator#0;class#Tools#0" />
+                <element signature="e#2794#3043#1" />
+                <element signature="e#3049#3158#1" />
+                <element signature="class#KeyScanner#0;class#Tools#0" />
+                <element signature="method#KeyScanner#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="docComment;method#scan#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="method#scan#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="docComment;method#getLastLine#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="docComment;method#getBufferedLine#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="docComment;method#setValidCharsRegex#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="docComment;method#newLineJustHappen#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="method#clearAll#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="method#clearHistory#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="class#Zoom#0;class#Tools#0" />
+                <element signature="method#Zoom#0;class#Zoom#0;class#Tools#0" />
+                <element signature="docComment;method#magnifyCenteredArea#0;class#Zoom#0;class#Tools#0" />
+                <element signature="method#magnifyCenteredArea#0;class#Zoom#0;class#Tools#0" />
+                <element signature="docComment;method#magnifyArea#0;class#Zoom#0;class#Tools#0" />
+                <element signature="method#magnifyArea#0;class#Zoom#0;class#Tools#0" />
+                <element signature="docComment;method#getFactor#0;class#Zoom#0;class#Tools#0" />
+                <element signature="docComment;method#setFactor#0;class#Zoom#0;class#Tools#0" />
+                <element signature="method#setFactor#0;class#Zoom#0;class#Tools#0" />
+                <element signature="method#setWidth#0;class#Zoom#0;class#Tools#0" />
+                <element signature="method#setHeight#0;class#Zoom#0;class#Tools#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Julia File" />
+        <option value="Interface" />
+        <option value="ProcessingTemplate" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>'f</find>
+      <find>'s'</find>
+      <find>onMouseDra</find>
+      <find>'a'</find>
+      <find>'i'</find>
+      <find>'z'</find>
+      <find>WrapperPainter.WrapperPainter.ObjectConstructor</find>
+      <find>'1'</find>
+      <find>conta</find>
+      <find>RIG</find>
+      <find>draw</find>
+      <find>'4'</find>
+      <find>'t'</find>
+      <find>'e'</find>
+      <find>'o'</find>
+      <find>'*'</find>
+      <find>keyCode.*\)</find>
+      <find>keyCode.</find>
+      <find>setOnKey</find>
+      <find>MAGNIF</find>
+      <find>RIGHT_ARROW</find>
+      <find>RIGHT_ARROW:</find>
+      <find>RIGHT_ARROW&quot;</find>
+      <find>wrapperPainterObject.getX</find>
+      <find>wrapperPainterObject.getY</find>
+      <find>System.o</find>
+      <find>components</find>
+      <find>name</find>
+      <find>focus</find>
+      <find>setDx</find>
+    </findStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/GObjects/src/TestField</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="josePereiro &lt;jose.pereiro.personal@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="WrapperPainter" />
+      </map>
+    </option>
+    <option name="SIGN_OFF_COMMIT" value="true" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Tests/src/Common/_DraggedMouseTest.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/PaintCode/DrawComponentManager.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PRectangle.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/RectangleWrapper.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/EllipseWrapper.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/LineWrapper.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PointWrapper.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/ColorSelector.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/Console.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/MovingTextBox.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/MultiLineTextBox.java" />
+        <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_MovingTextBoxTest.java" />
+        <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_RectangleTest.java" />
+        <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_ColorSelectorTest.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/P2DPrimitiveWrapper.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/PaintCode/CodePainter_v1.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/PaintCode/CSVHandler.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/PaintCode/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/PaintCode/DrawComponent.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/LineEditableWrapper.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/PGuiObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/EditableWrapper.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/DataStore.java" />
+        <option value="$PROJECT_DIR$/Common/src/Common/_LinkedListTest.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/PGuiManager.java" />
+        <option value="$PROJECT_DIR$/Tests/src/Common/_TextWrapperTest.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/TextWrapper.java" />
+        <option value="$PROJECT_DIR$/Common/src/Common/Tools.java" />
+        <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/ImageWrapper.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/RectangleWrapperPainterObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/EllipseWrapperPainterObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/ImageWrapperPainterObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/LineWrapperPainterObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/TextWrapperPainterObject.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/ZoomBox.java" />
+        <option value="$PROJECT_DIR$/Common/src/Common/_TestOpenBrowser.java" />
+        <option value="$PROJECT_DIR$/Common/src/Common/_keys.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/DataStoreFile.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/DataStoreFormatFile.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/StoreFormatData.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/GuidedBoard.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/WrapperPainterObjectsManager.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/WrapperPainterObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/WPObject.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/WrapperPainter.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/WPObjectsManager.java" />
+        <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/WPStoreData.java" />
+        <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_DrawBoardTest.java" />
+        <option value="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/bla.java" />
+        <option value="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="724" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="P2DPrimitiveWrappers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="ProcessingTools" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="ProcessingTools" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ProcessingTools" type="eaaa3913:PackageViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ProcessingTools" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="ProcessingTools.PaintCode" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ProcessingTools" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="ProcessingTools.Tests" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ProcessingTools" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="ProcessingTools.Tests" type="616d4139:PackageViewModuleNode" />
+              <item name="GObjectTests" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550905843992" />
+    <property name="full.screen.before.presentation.mode" value="true" />
+    <property name="last.edited.regexp" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.125" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="WrapperPainter.LineEditableWrapper" />
+      <recent name="PGUIObject.PGuiManager" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers" />
+      <recent name="$PROJECT_DIR$/PUIObjects/src/PGUIObjects" />
+      <recent name="$PROJECT_DIR$/PaintCode/src" />
+      <recent name="$PROJECT_DIR$/PaintCode" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="P2DPrimitiveWrappers" />
+      <recent name="WrapperPainter" />
+      <recent name="GObjects" />
+      <recent name="GObjectTests" />
+      <recent name="TestField" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/PUIObjects/src/PGUIObjects" />
+      <recent name="$PROJECT_DIR$/PaintCode" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.WrapperPainter">
+    <configuration name="WrapperPainter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="WrapperPainter.WrapperPainter" />
+      <module name="ProcessingTools.WrapperPainter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="WrapperPainter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="_DrawBoardTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GObjectTests._DrawBoardTest" />
+      <module name="ProcessingTools.Tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GObjectTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="_TestOpenBrowser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Common._TestOpenBrowser" />
+      <module name="ProcessingTools.Common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="_TextWrapperTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Common._TextWrapperTest" />
+      <module name="ProcessingTools.Tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="_keys" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Common._keys" />
+      <module name="ProcessingTools.Common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.WrapperPainter" />
+        <item itemvalue="Application._DrawBoardTest" />
+        <item itemvalue="Application._keys" />
+        <item itemvalue="Application._TestOpenBrowser" />
+        <item itemvalue="Application._TextWrapperTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="429d5db0-4720-4efb-9d80-35077614ebff" name="Default Changelist" comment="" />
+      <created>1547009306002</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1547009306002</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Just created project structure and a few classes">
+      <created>1547033466048</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1547033466048</updated>
+    </task>
+    <task id="LOCAL-00002" summary="More structural modifications!!!">
+      <created>1547059545486</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1547059545486</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Big things happened!!! Changed all the object inherent!!!">
+      <created>1548220175340</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1548220175340</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Moving no primitive objects to PGUI!!!">
+      <created>1548361419177</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1548361419177</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Include DefaultFocusEffect on PGUIObject">
+      <created>1548442927526</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1548442927526</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Basic PGUIObject finished, by now!!!!">
+      <created>1548449346539</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1548449346539</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed all PGuiObject event handling... OnBlaBlaEventHandler interface&#10;implemented">
+      <created>1548469890360</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1548469890360</updated>
+    </task>
+    <task id="LOCAL-00008" summary="PGuiManager implemented as the InputListener of all OGuiObjects...">
+      <created>1548478307739</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1548478307739</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Starting to implement CodePainter_v1... It gets interesting!!!">
+      <created>1548487636119</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1548487636119</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Separating WrapperPainter development process from the rest of processing&#10;tools!!!">
+      <created>1548797488244</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1548797488244</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Coder, dataStore classes created!!! Undo and redo features added!!">
+      <created>1549002392448</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1549002392448</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Save and open features added!!! Now, it is time to add new Wrappers!!!">
+      <created>1549057604808</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1549057604808</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Rectangle half added!!!">
+      <created>1549060255216</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1549060255216</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Cleaned the code a little bit. All input events handled now for the pGuiManager!!!">
+      <created>1549075182453</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1549075182453</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Old Wrappers added!!! Almost Ready!!!">
+      <created>1549119569766</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1549119569766</updated>
+    </task>
+    <task id="LOCAL-00016" summary="KeyMap organized... Only help left to first beta release 0.1.&#10;More KeyCodes included in Tools.KeyCodes">
+      <created>1549123886644</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1549123886644</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Help still is missing :), but I added group moving feature. Some changes in the&#10;WrapperPainterObjects classes!!!">
+      <created>1549133336533</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1549133336534</updated>
+    </task>
+    <task id="LOCAL-00018" summary="This is the first test of wrapper painter!!! I will produce the layout of a simple 8 bits computer. Because the browser dialogs are getting problem the project paths will be hard coded till I have internet!!!">
+      <created>1549133653646</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1549133653646</updated>
+    </task>
+    <task id="LOCAL-00019" summary="First layout produced... StoreData now save all the important information of the WrapperPainter...&#10;I will change now the format of the code generated!!!">
+      <created>1550904546735</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1550904546735</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Just adding the MaquinitaDe8Bits.txt save file to git!!!">
+      <created>1550905178980</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1550905178980</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1280" height="724" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.26132685" />
+      <window_info id="Structure" order="1" sideWeight="0.50410956" side_tool="true" weight="0.23909532" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Learn" order="6" weight="0.32956383" />
+      <window_info id="Favorites" order="7" sideWeight="0.5068493" side_tool="true" weight="0.23909532" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32385466" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39240506" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3270142" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.328594" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.32771084" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49928468" weight="0.096518986" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31962025" />
+      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.328594" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="JuliaSciView" order="8" />
+      <window_info anchor="right" x="693" y="-745" width="509" height="745" id="Documentation" order="9" side_tool="true" visible="true" weight="0.07754443" />
+      <window_info anchor="right" id="Coverage" order="10" side_tool="true" weight="0.32956383" />
+      <window_info anchor="right" id="Copy/Paste" order="11" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" weight="0.20516963" />
+      <window_info id="Structure" order="1" sideWeight="0.50410956" side_tool="true" weight="0.23909532" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Learn" order="6" weight="0.32956383" />
+      <window_info id="Favorites" order="7" sideWeight="0.5068493" side_tool="true" weight="0.23909532" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32469305" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.14533965" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39563438" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3270142" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3287858" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.32771084" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49928468" weight="0.28767124" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32465544" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="JuliaSciView" order="8" />
+      <window_info anchor="right" x="693" y="-745" width="509" height="745" id="Documentation" order="9" side_tool="true" visible="true" weight="0.19628432" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Just created project structure and a few classes" />
+    <MESSAGE value="More structural modifications!!!" />
+    <MESSAGE value="Big things happened!!! Changed all the object inherent!!!" />
+    <MESSAGE value="Moving no primitive objects to PGUI!!!" />
+    <MESSAGE value="Include DefaultFocusEffect on PGUIObject" />
+    <MESSAGE value="Basic PGUIObject finished, by now!!!!" />
+    <MESSAGE value="Changed all PGuiObject event handling... OnBlaBlaEventHandler interface&#10;implemented" />
+    <MESSAGE value="PGuiManager implemented as the InputListener of all OGuiObjects..." />
+    <MESSAGE value="Starting to implement CodePainter_v1... It gets interesting!!!" />
+    <MESSAGE value="Separating WrapperPainter development process from the rest of processing&#10;tools!!!" />
+    <MESSAGE value="Coder, dataStore classes created!!! Undo and redo features added!!" />
+    <MESSAGE value="Save and open features added!!! Now, it is time to add new Wrappers!!!" />
+    <MESSAGE value="Rectangle half added!!!" />
+    <MESSAGE value="Cleaned the code a little bit. All input events handled now for the pGuiManager!!!" />
+    <MESSAGE value="Old Wrappers added!!! Almost Ready!!!" />
+    <MESSAGE value="KeyMap organized... Only help left to first beta relase" />
+    <MESSAGE value="KeyMap organized... Only help left to first beta release 0.1.&#10;More KeyCodes included in Tools.KeyCodes" />
+    <MESSAGE value="Help still is missing :), but I added group moving feature. Some changes in the&#10;WrapperPainterObjects classes!!!" />
+    <MESSAGE value="This is the first test of wrapper painter!!! I will produce the layout of a simple 8 bits computer. Because the browser dialogs are getting problem the project paths will be hard coded till I have internet!!!" />
+    <MESSAGE value="First layout produced... StoreData now save all the important information of the WrapperPainter...&#10;I will change now the format of the code generated!!!" />
+    <MESSAGE value="Just adding the MaquinitaDe8Bits.txt save file to git!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Just adding the MaquinitaDe8Bits.txt save file to git!!!" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GObjects/src/GObjects/GObject.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java</url>
+          <line>51</line>
+          <properties />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tests/src/GObjectTests/_ColorSelectorTest.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java</url>
+          <line>421</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java</url>
+          <line>1029</line>
+          <properties />
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java</url>
+          <line>588</line>
+          <properties />
+          <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObjectsManager.java</url>
+          <line>309</line>
+          <properties />
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_EllipseTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <element signature="e#1000#1001#0" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/Common/_DraggedMouseTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="36" column="34" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/Console.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
+          <folding>
+            <element signature="e#564#873#1" />
+            <element signature="e#730#859#1" />
+            <element signature="e#879#967#1" />
+            <element signature="e#1833#1906#1" />
+            <element signature="e#1912#1966#1" />
+            <element signature="method#initializeLayout#0;class#Console#0" />
+            <element signature="method#draw#0;class#Console#0" />
+            <element signature="e#2925#2970#1" />
+            <element signature="method#print#0;class#Console#0" />
+            <element signature="docComment;method#getInputText#0;class#Console#0" />
+            <element signature="method#setOnInputEnteredHandler#0;class#Console#0" />
+            <element signature="class#OnInputEnteredHandler#0;class#Console#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/FocusEffect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/MultiLineTextBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
+          <folding>
+            <element signature="method#MultiLineTextBox#0;class#MultiLineTextBox#0" />
+            <element signature="method#setUpTextLines#0;class#MultiLineTextBox#0" />
+            <element signature="method#splitText#0;class#MultiLineTextBox#0" />
+            <element signature="method#putLinesInTextBoxes#0;class#MultiLineTextBox#0" />
+            <element signature="method#scrollDown#0;class#MultiLineTextBox#0" />
+            <element signature="method#scrollUp#0;class#MultiLineTextBox#0" />
+            <element signature="method#setText#0;class#MultiLineTextBox#0" />
+            <element signature="method#draw#0;class#MultiLineTextBox#0" />
+            <element signature="method#drawFocus#0;class#MultiLineTextBox#0" />
+            <element signature="method#setMaxVisibleLinesCount#0;class#MultiLineTextBox#0" />
+            <element signature="method#addText#0;class#MultiLineTextBox#0" />
+            <element signature="method#scrollTillBottom#0;class#MultiLineTextBox#0" />
+            <element signature="method#scrollTillTop#0;class#MultiLineTextBox#0" />
+            <element signature="method#setLastLine#0;class#MultiLineTextBox#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PEventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PEventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+          <folding>
+            <element signature="method#draw#0;class#_ConsoleTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_MovingTextBoxTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="32" column="29" lean-forward="true" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+          <folding>
+            <element signature="e#183#184#0" expanded="true" />
+            <element signature="e#246#247#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_RectangleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_ColorSelectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#961#1182#0" expanded="true" />
+            <element signature="e#1181#1182#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/LineWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="11" column="78" lean-forward="true" selection-start-line="11" selection-start-column="78" selection-end-line="11" selection-end-column="78" />
+          <folding>
+            <element signature="method#isThisOverMe#0;class#LineWrapper#0" />
+            <element signature="e#862#863#0" expanded="true" />
+            <element signature="e#887#888#0" expanded="true" />
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#950#951#0" expanded="true" />
+            <element signature="e#978#979#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1038#1039#0" expanded="true" />
+            <element signature="e#1066#1067#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PRectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/util/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="200" column="24" selection-start-line="200" selection-start-column="24" selection-end-line="200" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/ColorSelector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+          <folding>
+            <element signature="e#563#862#1" />
+            <element signature="e#718#848#1" />
+            <element signature="method#ColorSelector#0;class#ColorSelector#0" />
+            <element signature="method#setColors#0;class#ColorSelector#0" />
+            <element signature="method#setColorsRectangles#0;class#ColorSelector#0" />
+            <element signature="method#draw#0;class#ColorSelector#0" />
+            <element signature="method#vertical#0;class#ColorSelector#0" />
+            <element signature="method#moveRight#0;class#ColorSelector#0" />
+            <element signature="method#moveLeft#0;class#ColorSelector#0" />
+            <element signature="method#setSelectedColorChanged#0;class#ColorSelector#0" />
+            <element signature="method#setOnSelectedColorChanged#0;class#ColorSelector#0" />
+            <element signature="class#OnSelectedColorChanged#0;class#ColorSelector#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PLocatable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding>
+            <element signature="docComment;method#isThisOverMe#0;class#PLocatable#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/EllipseWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PointWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="25" column="51" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#835#836#0" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/MovingTextBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+          <folding>
+            <element signature="docComment;method#MovingTextBox#0;class#MovingTextBox#0" />
+            <element signature="method#draw#0;class#MovingTextBox#0" />
+            <element signature="docComment;method#step#0;class#MovingTextBox#0" />
+            <element signature="method#step#0;class#MovingTextBox#0" />
+            <element signature="method#initializeData#0;class#MovingTextBox#0" />
+            <element signature="method#addHead#0;class#MovingTextBox#0" />
+            <element signature="method#addHead#1;class#MovingTextBox#0" />
+            <element signature="method#setTextBoxText#0;class#MovingTextBox#0" />
+            <element signature="method#setText#0;class#MovingTextBox#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/SingleLineTextBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="49" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="49" />
+          <folding>
+            <element signature="docComment;method#SingleLineTextBox#0;class#SingleLineTextBox#0" />
+            <element signature="method#draw#0;class#SingleLineTextBox#0" />
+            <element signature="docComment;method#fixTextLength#0;class#SingleLineTextBox#0" />
+            <element signature="method#fixTextLength#0;class#SingleLineTextBox#0" />
+            <element signature="docComment;method#fixTextSize#0;class#SingleLineTextBox#0" />
+            <element signature="docComment;method#fixBox#0;class#SingleLineTextBox#0" />
+            <element signature="method#fixBox#0;class#SingleLineTextBox#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PGuiObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1484">
+          <caret line="243" column="16" selection-start-line="243" selection-start-column="16" selection-end-line="243" selection-end-column="16" />
+          <folding>
+            <element signature="e#580#816#0" />
+            <element signature="e#740#810#1" />
+            <element signature="e#823#980#0" />
+            <element signature="e#1062#1192#0" />
+            <element signature="e#1143#1186#1" />
+            <element signature="e#1387#1513#0" />
+            <element signature="e#1460#1507#1" />
+            <element signature="e#1519#1643#0" />
+            <element signature="e#1601#1637#1" />
+            <element signature="e#1649#3507#0" />
+            <element signature="e#1872#3501#0" />
+            <element signature="e#1979#3287#1" />
+            <element signature="class#2025:3272" />
+            <element signature="method#onOscillationHappened#0;class#2025:3272" />
+            <element signature="e#2431#2553#1" />
+            <element signature="e#2592#2714#1" />
+            <element signature="method#onOscillationDidNotHappen#0;class#2025:3272" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/Common/_TextWrapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/ImageWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../MyJavaTools/out/artifacts/BuiltIn_jar/BuiltIn.jar!/BuiltIn/FileTools.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/GeneralTools.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/ImageWPObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="method#rebuild#0;class#ImageWrapperPainterObject#0" />
+            <element signature="method#guide#0;class#ImageWrapperPainterObject#0" />
+            <element signature="method#moveTo#0;class#ImageWrapperPainterObject#0" />
+            <element signature="method#getX#0;class#ImageWrapperPainterObject#0" />
+            <element signature="method#getY#0;class#ImageWrapperPainterObject#0" />
+            <element signature="method#setX#0;class#ImageWrapperPainterObject#0" />
+            <element signature="method#setY#0;class#ImageWrapperPainterObject#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/LineWPObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="method#LineWrapperPainterObject#0;class#LineWrapperPainterObject#0" />
+            <element signature="method#rebuild#0;class#LineWrapperPainterObject#0" />
+            <element signature="method#guide#0;class#LineWrapperPainterObject#0" />
+            <element signature="e#1260#1453#1" />
+            <element signature="method#moveTo#0;class#LineWrapperPainterObject#0" />
+            <element signature="method#setX#0;class#LineWrapperPainterObject#0" />
+            <element signature="method#setY#0;class#LineWrapperPainterObject#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/RectangleWPObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="73" column="40" lean-forward="true" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
+          <folding>
+            <element signature="method#RectangleWrapperPainterObject#0;class#RectangleWrapperPainterObject#0" />
+            <element signature="method#rebuild#0;class#RectangleWrapperPainterObject#0" />
+            <element signature="e#1025#1390#1" />
+            <element signature="e#1104#1239#1" />
+            <element signature="e#1245#1380#1" />
+            <element signature="e#1396#1761#1" />
+            <element signature="e#1475#1610#1" />
+            <element signature="e#1616#1751#1" />
+            <element signature="method#guide#0;class#RectangleWrapperPainterObject#0" />
+            <element signature="e#2126#2319#1" />
+            <element signature="method#getX#0;class#RectangleWrapperPainterObject#0" />
+            <element signature="method#getY#0;class#RectangleWrapperPainterObject#0" />
+            <element signature="method#setX#0;class#RectangleWrapperPainterObject#0" />
+            <element signature="method#setY#0;class#RectangleWrapperPainterObject#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/TextWPObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/P2DPrimitiveWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="90" column="16" selection-start-line="90" selection-start-column="16" selection-end-line="90" selection-end-column="16" />
+          <folding>
+            <element signature="docComment;class#P2DPrimitiveWrapper#0" />
+            <element signature="docComment;method#P2DPrimitiveWrapper#0;class#P2DPrimitiveWrapper#0" />
+            <element signature="method#P2DPrimitiveWrapper#0;class#P2DPrimitiveWrapper#0" />
+            <element signature="docComment;method#draw#0;class#P2DPrimitiveWrapper#0" />
+            <element signature="docComment;method#isThisOverMe#0;class#P2DPrimitiveWrapper#0" />
+            <element signature="e#3144#3145#0" expanded="true" />
+            <element signature="e#3170#3171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/TextWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="method#TextWrapper#0;class#TextWrapper#0" />
+            <element signature="method#draw#1;class#TextWrapper#0" />
+            <element signature="method#isThisOverMe#0;class#TextWrapper#0" />
+            <element signature="method#setText#0;class#TextWrapper#0" />
+            <element signature="method#updateTextWidth#0;class#TextWrapper#0" />
+            <element signature="method#setTextSize#0;class#TextWrapper#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/RectangleWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding>
+            <element signature="docComment;class#RectangleWrapper#0" />
+            <element signature="e#462#463#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="method#draw#1;class#RectangleWrapper#0" />
+            <element signature="e#570#629#1" />
+            <element signature="e#635#676#1" />
+            <element signature="e#704#817#1" />
+            <element signature="e#823#866#1" />
+            <element signature="e#908#966#1" />
+            <element signature="method#isThisOverMe#0;class#RectangleWrapper#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PDrawable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PFocusable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/Common/_TestOpenBrowser.java" />
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/ZoomBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#ZoomBox#0" />
+            <element signature="docComment;method#magnifyCenteredArea#0;class#ZoomBox#0" />
+            <element signature="docComment;method#magnifyArea#0;class#ZoomBox#0" />
+            <element signature="docComment;method#draw#0;class#ZoomBox#0" />
+            <element signature="docComment;method#getFactor#0;class#ZoomBox#0" />
+            <element signature="docComment;method#setFactor#0;class#ZoomBox#0" />
+            <element signature="method#setWidth#0;class#ZoomBox#0" />
+            <element signature="method#setHeight#0;class#ZoomBox#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/Common/_LinkedListTest.java" />
+    <entry file="file://$PROJECT_DIR$/Common/src/Common/_keys.java" />
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/EllipseWPObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="method#EllipseWrapperPainterObject#0;class#EllipseWrapperPainterObject#0" />
+            <element signature="method#rebuild#0;class#EllipseWrapperPainterObject#0" />
+            <element signature="method#moveTo#0;class#EllipseWrapperPainterObject#0" />
+            <element signature="method#setX#0;class#EllipseWrapperPainterObject#0" />
+            <element signature="method#setY#0;class#EllipseWrapperPainterObject#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/Common/PObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/bla.java" />
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/GuidedBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+          <folding>
+            <element signature="method#GuidedBoard#0;class#GuidedBoard#0" />
+            <element signature="method#draw#0;class#GuidedBoard#0" />
+            <element signature="method#getCloserGuideX#0;class#GuidedBoard#0" />
+            <element signature="method#getCloserGuideY#0;class#GuidedBoard#0" />
+            <element signature="method#getCloserGuidedPoint#0;class#GuidedBoard#0" />
+            <element signature="method#setDy#0;class#GuidedBoard#0" />
+            <element signature="method#updateGuidesYs#0;class#GuidedBoard#0" />
+            <element signature="method#updateGuidesXs#0;class#GuidedBoard#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObjectsManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4200">
+          <caret line="288" column="25" selection-start-line="288" selection-start-column="25" selection-end-line="288" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PGuiManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPStoreData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="51" column="69" selection-start-line="51" selection-start-column="69" selection-end-line="51" selection-end-column="69" />
+          <folding>
+            <element signature="method#getStoreData#0;class#WPStoreData#0" />
+            <element signature="method#addPreferencesStoreData#0;class#WPStoreData#0" />
+            <element signature="method#addWrappersStoreData#0;class#WPStoreData#0" />
+            <element signature="method#getWrapperStoreData#0;class#WPStoreData#0" />
+            <element signature="method#loadStoreData#0;class#WPStoreData#0" />
+            <element signature="method#loadStoreData#1;class#WPStoreData#0" />
+            <element signature="method#getWPObjectFromStoreDataLine#0;class#WPStoreData#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_DrawBoardTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="28" column="139" selection-start-line="28" selection-start-column="139" selection-end-line="28" selection-end-column="139" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/Common/Tools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="149" column="39" selection-start-line="149" selection-start-column="39" selection-end-line="149" selection-end-column="39" />
+          <folding>
+            <element signature="docComment;method#fixTextLength#0;class#Tools#0" />
+            <element signature="method#fixTextLength#0;class#Tools#0" />
+            <element signature="e#557#1597#1" />
+            <element signature="e#707#1539#1" />
+            <element signature="e#863#1231#1" />
+            <element signature="e#898#1213#1" />
+            <element signature="e#1084#1191#1" />
+            <element signature="e#1237#1467#1" />
+            <element signature="e#1262#1415#1" />
+            <element signature="e#1545#1587#1" />
+            <element signature="e#1603#1639#1" />
+            <element signature="class#TimeOscillator#0;class#Tools#0" />
+            <element signature="method#TimeOscillator#0;class#TimeOscillator#0;class#Tools#0" />
+            <element signature="method#run#0;class#TimeOscillator#0;class#Tools#0" />
+            <element signature="e#2204#2399#1" />
+            <element signature="e#2405#2567#1" />
+            <element signature="method#step#0;class#TimeOscillator#0;class#Tools#0" />
+            <element signature="e#2794#3043#1" />
+            <element signature="e#3049#3158#1" />
+            <element signature="class#KeyScanner#0;class#Tools#0" />
+            <element signature="method#KeyScanner#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="docComment;method#scan#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="method#scan#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="docComment;method#getLastLine#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="docComment;method#getBufferedLine#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="docComment;method#setValidCharsRegex#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="docComment;method#newLineJustHappen#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="method#clearAll#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="method#clearHistory#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="class#Zoom#0;class#Tools#0" />
+            <element signature="method#Zoom#0;class#Zoom#0;class#Tools#0" />
+            <element signature="docComment;method#magnifyCenteredArea#0;class#Zoom#0;class#Tools#0" />
+            <element signature="method#magnifyCenteredArea#0;class#Zoom#0;class#Tools#0" />
+            <element signature="docComment;method#magnifyArea#0;class#Zoom#0;class#Tools#0" />
+            <element signature="method#magnifyArea#0;class#Zoom#0;class#Tools#0" />
+            <element signature="docComment;method#getFactor#0;class#Zoom#0;class#Tools#0" />
+            <element signature="docComment;method#setFactor#0;class#Zoom#0;class#Tools#0" />
+            <element signature="method#setFactor#0;class#Zoom#0;class#Tools#0" />
+            <element signature="method#setWidth#0;class#Zoom#0;class#Tools#0" />
+            <element signature="method#setHeight#0;class#Zoom#0;class#Tools#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>ProcessingTools.WrapperPainter:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.125" />
+                <option value="0.65861344" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39470655" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>core</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39470655" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8.0_191</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39470655" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>ProcessingTools</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39470655" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>core</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39470655" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39470655" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

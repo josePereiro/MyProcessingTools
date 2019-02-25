@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class CodeGenerator {
 
-    private static String className = "WrappersContainer";
     private static String tab = "   ";
 
     public static void main(String[] args) {
@@ -122,12 +121,13 @@ public class CodeGenerator {
         return "";
     }
 
-    public static String getCode(ArrayList<WPObject> WPObjects,
+    static String getCode(ArrayList<WPObject> WPObjects,
                                  GuidedBoard guidedBoard) {
 
         StringBuilder stringBuilder = new StringBuilder();
         //Fields
         stringBuilder.append("public static " + P2DPrimitiveWrapper.class.getName() + "[] wrappers;");
+        stringBuilder.append("\n");
         for (WPObject WPObject : WPObjects) {
             stringBuilder.append(createWrapperField(WPObject));
             stringBuilder.append("\n");
