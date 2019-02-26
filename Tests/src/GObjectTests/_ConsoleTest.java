@@ -29,12 +29,7 @@ public class _ConsoleTest extends PApplet {
         pGuiManager = PGuiManager.createPGuiManager(this);
         pGuiManager.addPGUIObject(console);
 
-        for (int li = 0; li < 500; li++) {
-            console.println(li + "");
-        }
-
-
-    }
+     }
 
     @Override
     public void draw() {

@@ -11,7 +11,140 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="429d5db0-4720-4efb-9d80-35077614ebff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/src/PGUIObject/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/PGUIObject/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java" beforeDir="false" afterPath="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ProcessingTools_WrapperPainter_jar/ProcessingTools.WrapperPainter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ProcessingTools_WrapperPainter_jar/ProcessingTools.WrapperPainter.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/PObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/PObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$KeyCodes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$KeyCodes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$KeyScanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$KeyScanner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$TimeOscillator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$TimeOscillator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$Zoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools$Zoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/Common/Tools.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/META-INF/ProcessingTools.Common.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/EllipseWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/EllipseWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/ImageWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/ImageWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/LineWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/LineWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/P2DPrimitiveWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/P2DPrimitiveWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PDrawable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PDrawable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PLocatable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PLocatable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PRectangle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PointWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/PointWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/RectangleWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/RectangleWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/TextWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/P2DPrimitiveWrappers/TextWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ColorSelector$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ColorSelector$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ColorSelector$OnSelectedColorChanged.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ColorSelector$OnSelectedColorChanged.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ColorSelector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ColorSelector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console$OnInputEnteredHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console$OnInputEnteredHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/Console.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/FocusEffect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/FocusEffect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/GuidedBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/GuidedBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/MovingTextBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/MovingTextBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/MultiLineTextBox$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/MultiLineTextBox$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/MultiLineTextBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/MultiLineTextBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PEventHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PEventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PFocusable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PFocusable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnFocusChangedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnFocusChangedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnKeyPressedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnKeyPressedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnKeyReleasedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnKeyReleasedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnKeyTypedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnKeyTypedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseClickedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseClickedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseDraggedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseDraggedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseMovedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseMovedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMousePressedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMousePressedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseReleasedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseReleasedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseWheelHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$OnMouseWheelHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$PEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager$PEventHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$DefaultFocusEffect$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$DefaultFocusEffect$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$DefaultFocusEffect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$DefaultFocusEffect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnKeyPressedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnKeyPressedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnKeyReleasedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnKeyReleasedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnKeyTypedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnKeyTypedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseClickedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseClickedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseDraggedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseDraggedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseMovedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseMovedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMousePressedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMousePressedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseReleasedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseReleasedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseWheelHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject$OnMouseWheelHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/PGuiObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/SingleLineTextBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/SingleLineTextBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ZoomBox$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ZoomBox$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ZoomBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Common/PGUIObject/ZoomBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/Common/_DraggedMouseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/Common/_DraggedMouseTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/Common/_MouseWheelTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/Common/_MouseWheelTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/Common/_TextWrapperTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/Common/_TextWrapperTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ColorSelectorTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ColorSelectorTest$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ColorSelectorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ColorSelectorTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ConsoleTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ConsoleTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_DrawBoardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_DrawBoardTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_EllipseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_EllipseTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ImageBoxTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ImageBoxTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_LineDrawTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_LineDrawTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_MovingTextBoxTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_MovingTextBoxTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_MultiLineTextBoxTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_MultiLineTextBoxTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_PointWrapperTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_PointWrapperTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_TextBoxTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_TextBoxTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ZoomBoxTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ZoomBoxTest$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ZoomBoxTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.Tests/GObjectTests/_ZoomBoxTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/META-INF/ProcessingTools.WrapperPainter.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/CodeGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/CodeGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/EllipseWPObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/EllipseWPObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/ImageWPObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/ImageWPObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/LineWPObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/LineWPObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/RectangleWPObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/RectangleWPObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/TextWPObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/TextWPObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObject$Types.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObject$Types.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObjectsManager$OnFocusChangedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObjectsManager$OnFocusChangedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObjectsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPObjectsManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPStoreData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WPStoreData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$28.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$29.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$KeyMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$KeyMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$5$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$5$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$ComponentInConstruction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor$ComponentInConstruction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter$ObjectConstructor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProcessingTools.WrapperPainter/WrapperPainter/WrapperPainter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save8BitsComputer.txt" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,39 +169,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
+            <state relative-caret-position="15">
+              <caret line="1524" selection-start-line="1524" selection-end-line="1524" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/GuidedBoard.java">
+        <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+            <state relative-caret-position="360">
+              <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
               <folding>
-                <element signature="method#GuidedBoard#0;class#GuidedBoard#0" />
-                <element signature="method#draw#0;class#GuidedBoard#0" />
-                <element signature="method#getCloserGuideX#0;class#GuidedBoard#0" />
-                <element signature="method#getCloserGuideY#0;class#GuidedBoard#0" />
-                <element signature="method#getCloserGuidedPoint#0;class#GuidedBoard#0" />
-                <element signature="method#setDy#0;class#GuidedBoard#0" />
-                <element signature="method#updateGuidesYs#0;class#GuidedBoard#0" />
-                <element signature="method#updateGuidesXs#0;class#GuidedBoard#0" />
+                <element signature="method#draw#0;class#_ConsoleTest#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObjectsManager.java">
+        <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/Console.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4200">
-              <caret line="288" column="25" selection-start-line="288" selection-start-column="25" selection-end-line="288" selection-end-column="25" />
+            <state relative-caret-position="1455">
+              <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
+              <folding>
+                <element signature="e#3236#3237#0" expanded="true" />
+                <element signature="e#3286#3287#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,8 +206,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PGuiManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="5445">
+              <caret line="407" selection-start-line="407" selection-end-line="407" />
             </state>
           </provider>
         </entry>
@@ -121,8 +251,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/src/Common/Tools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="149" column="39" selection-start-line="149" selection-start-column="39" selection-end-line="149" selection-end-column="39" />
+            <state relative-caret-position="4410">
+              <caret line="425" column="23" selection-start-line="425" selection-start-column="23" selection-end-line="425" selection-end-column="23" />
               <folding>
                 <element signature="docComment;method#fixTextLength#0;class#Tools#0" />
                 <element signature="method#fixTextLength#0;class#Tools#0" />
@@ -143,14 +273,16 @@
                 <element signature="method#step#0;class#TimeOscillator#0;class#Tools#0" />
                 <element signature="e#2794#3043#1" />
                 <element signature="e#3049#3158#1" />
-                <element signature="class#KeyScanner#0;class#Tools#0" />
                 <element signature="method#KeyScanner#0;class#KeyScanner#0;class#Tools#0" />
                 <element signature="docComment;method#scan#0;class#KeyScanner#0;class#Tools#0" />
-                <element signature="method#scan#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="e#13329#13330#0" expanded="true" />
+                <element signature="e#13405#13406#0" expanded="true" />
                 <element signature="docComment;method#getLastLine#0;class#KeyScanner#0;class#Tools#0" />
                 <element signature="docComment;method#getBufferedLine#0;class#KeyScanner#0;class#Tools#0" />
                 <element signature="docComment;method#setValidCharsRegex#0;class#KeyScanner#0;class#Tools#0" />
                 <element signature="docComment;method#newLineJustHappen#0;class#KeyScanner#0;class#Tools#0" />
+                <element signature="e#14877#14878#0" expanded="true" />
+                <element signature="e#14915#14916#0" expanded="true" />
                 <element signature="method#clearAll#0;class#KeyScanner#0;class#Tools#0" />
                 <element signature="method#clearHistory#0;class#KeyScanner#0;class#Tools#0" />
                 <element signature="class#Zoom#0;class#Tools#0" />
@@ -169,11 +301,46 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+            <state relative-caret-position="135">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="method#initializeWrapper#0;class#CodeGenerator#0" />
+                <element signature="e#421#500#1" />
+                <element signature="e#534#616#1" />
+                <element signature="e#646#725#1" />
+                <element signature="e#760#839#1" />
+                <element signature="e#871#950#1" />
+                <element signature="method#initializeLineWrapper#0;class#CodeGenerator#0" />
+                <element signature="method#initializeTextWrapper#0;class#CodeGenerator#0" />
+                <element signature="method#initializeRectWrapper#0;class#CodeGenerator#0" />
+                <element signature="method#initializeImageWrapper#0;class#CodeGenerator#0" />
+                <element signature="method#initializeEllipseWrapper#0;class#CodeGenerator#0" />
+                <element signature="method#initializeWrapperLayout#0;class#CodeGenerator#0" />
+                <element signature="method#createWrapperField#0;class#CodeGenerator#0" />
+                <element signature="e#5637#5777#1" />
+                <element signature="e#5812#5957#1" />
+                <element signature="e#5989#6130#1" />
+                <element signature="e#6160#6300#1" />
+                <element signature="e#6334#6477#1" />
+                <element signature="method#getCode#0;class#CodeGenerator#0" />
+                <element signature="e#6881#6996#1" />
+                <element signature="e#7257#7480#1" />
+                <element signature="e#7667#7875#1" />
+                <element signature="e#7696#7746#1" />
+                <element signature="e#7752#7810#1" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/Math.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9150">
+              <caret line="666" column="22" selection-start-line="666" selection-start-column="22" selection-end-line="666" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -192,9 +359,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>'f</find>
-      <find>'s'</find>
-      <find>onMouseDra</find>
       <find>'a'</find>
       <find>'i'</find>
       <find>'z'</find>
@@ -222,6 +386,9 @@
       <find>name</find>
       <find>focus</find>
       <find>setDx</find>
+      <find>round</find>
+      <find>.setInputText(&quot;&quot;)</find>
+      <find>setInputText(</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/GObjects/src/TestField</dir>
@@ -244,15 +411,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Tests/src/Common/_DraggedMouseTest.java" />
-        <option value="$PROJECT_DIR$/PaintCode/src/PaintCode/DrawComponentManager.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PRectangle.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/RectangleWrapper.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/EllipseWrapper.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/LineWrapper.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/PointWrapper.java" />
         <option value="$PROJECT_DIR$/Common/src/PGUIObject/ColorSelector.java" />
-        <option value="$PROJECT_DIR$/Common/src/PGUIObject/Console.java" />
         <option value="$PROJECT_DIR$/Common/src/PGUIObject/MovingTextBox.java" />
         <option value="$PROJECT_DIR$/Common/src/PGUIObject/MultiLineTextBox.java" />
         <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_MovingTextBoxTest.java" />
@@ -271,7 +435,6 @@
         <option value="$PROJECT_DIR$/Common/src/PGUIObject/PGuiManager.java" />
         <option value="$PROJECT_DIR$/Tests/src/Common/_TextWrapperTest.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/TextWrapper.java" />
-        <option value="$PROJECT_DIR$/Common/src/Common/Tools.java" />
         <option value="$PROJECT_DIR$/Common/src/P2DPrimitiveWrappers/ImageWrapper.java" />
         <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/CodeGenerator.java" />
         <option value="$PROJECT_DIR$/PaintCode/src/WrapperPainter/RectangleWrapperPainterObject.java" />
@@ -295,13 +458,17 @@
         <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_DrawBoardTest.java" />
         <option value="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/bla.java" />
         <option value="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java" />
+        <option value="$PROJECT_DIR$/Common/src/Common/Tools.java" />
+        <option value="$PROJECT_DIR$/Common/src/PGUIObject/Console.java" />
+        <option value="$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="724" />
+    <option name="height" value="709" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -311,80 +478,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="P2DPrimitiveWrappers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
-              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
-          <expand>
-            <path>
-              <item name="MyProcessingTools" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="ProcessingTools" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="MyProcessingTools" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="ProcessingTools" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -412,18 +505,103 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Production'; set:Production; class com.intellij.psi.search.scope.ProjectProductionScope">
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="ProcessingTools" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="ProcessingTools" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PGUIObject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GObjectTests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyProcessingTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProcessingTools" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="WrapperPainter" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550905843992" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551221357329" />
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.125" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
@@ -474,6 +652,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="_ConsoleTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GObjectTests._ConsoleTest" />
+      <module name="ProcessingTools.Tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GObjectTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="_DrawBoardTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GObjectTests._DrawBoardTest" />
       <module name="ProcessingTools.Tests" />
@@ -500,19 +691,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="_TextWrapperTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Common._TextWrapperTest" />
-      <module name="ProcessingTools.Tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Common.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="_keys" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Common._keys" />
       <module name="ProcessingTools.Common" />
@@ -529,10 +707,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.WrapperPainter" />
+        <item itemvalue="Application._ConsoleTest" />
         <item itemvalue="Application._DrawBoardTest" />
         <item itemvalue="Application._keys" />
         <item itemvalue="Application._TestOpenBrowser" />
-        <item itemvalue="Application._TextWrapperTest" />
       </list>
     </recent_temporary>
   </component>
@@ -700,9 +878,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="724" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="709" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.26132685" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49315068" visible="true" weight="0.29045308" />
       <window_info id="Structure" order="1" sideWeight="0.50410956" side_tool="true" weight="0.23909532" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -711,19 +889,19 @@
       <window_info id="Learn" order="6" weight="0.32956383" />
       <window_info id="Favorites" order="7" sideWeight="0.5068493" side_tool="true" weight="0.23909532" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32385466" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39240506" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32252836" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24959481" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39059967" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3270142" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.328594" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.32771084" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49928468" weight="0.096518986" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31962025" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49928468" visible="true" weight="0.49918962" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31928688" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.328594" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Maven" order="4" />
@@ -852,12 +1030,6 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java</url>
-          <line>51</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Tests/src/GObjectTests/_ColorSelectorTest.java</url>
           <line>34</line>
           <properties />
@@ -887,52 +1059,26 @@
           <properties />
           <option name="timeStamp" value="100" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Common/src/PGUIObject/Console.java</url>
+          <line>136</line>
+          <properties />
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Common/src/PGUIObject/Console.java</url>
+          <line>89</line>
+          <properties />
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_EllipseTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="e#1000#1001#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/src/Common/_DraggedMouseTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="36" column="34" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/Console.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
-          <folding>
-            <element signature="e#564#873#1" />
-            <element signature="e#730#859#1" />
-            <element signature="e#879#967#1" />
-            <element signature="e#1833#1906#1" />
-            <element signature="e#1912#1966#1" />
-            <element signature="method#initializeLayout#0;class#Console#0" />
-            <element signature="method#draw#0;class#Console#0" />
-            <element signature="e#2925#2970#1" />
-            <element signature="method#print#0;class#Console#0" />
-            <element signature="docComment;method#getInputText#0;class#Console#0" />
-            <element signature="method#setOnInputEnteredHandler#0;class#Console#0" />
-            <element signature="class#OnInputEnteredHandler#0;class#Console#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/FocusEffect.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -977,16 +1123,6 @@
           <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding>
-            <element signature="method#draw#0;class#_ConsoleTest#0" />
           </folding>
         </state>
       </provider>
@@ -1369,13 +1505,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/bla.java" />
-    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/GuidedBoard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1393,6 +1522,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../Libraries_and_Dependencies/Java/ProcessingCore/core.jar!/processing/core/PApplet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="1743" column="33" selection-start-line="1743" selection-start-column="28" selection-end-line="1743" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WPObjectsManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4200">
@@ -1400,10 +1536,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/WrapperPainter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1524" selection-start-line="1524" selection-end-line="1524" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/GObjectTests/_ConsoleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+          <folding>
+            <element signature="method#draw#0;class#_ConsoleTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/Console.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1455">
+          <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
+          <folding>
+            <element signature="e#3236#3237#0" expanded="true" />
+            <element signature="e#3286#3287#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Common/src/PGUIObject/PGuiManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="5445">
+          <caret line="407" selection-start-line="407" selection-end-line="407" />
         </state>
       </provider>
     </entry>
@@ -1439,8 +1603,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Common/src/Common/Tools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="149" column="39" selection-start-line="149" selection-start-column="39" selection-end-line="149" selection-end-column="39" />
+        <state relative-caret-position="4410">
+          <caret line="425" column="23" selection-start-line="425" selection-start-column="23" selection-end-line="425" selection-end-column="23" />
           <folding>
             <element signature="docComment;method#fixTextLength#0;class#Tools#0" />
             <element signature="method#fixTextLength#0;class#Tools#0" />
@@ -1461,14 +1625,16 @@
             <element signature="method#step#0;class#TimeOscillator#0;class#Tools#0" />
             <element signature="e#2794#3043#1" />
             <element signature="e#3049#3158#1" />
-            <element signature="class#KeyScanner#0;class#Tools#0" />
             <element signature="method#KeyScanner#0;class#KeyScanner#0;class#Tools#0" />
             <element signature="docComment;method#scan#0;class#KeyScanner#0;class#Tools#0" />
-            <element signature="method#scan#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="e#13329#13330#0" expanded="true" />
+            <element signature="e#13405#13406#0" expanded="true" />
             <element signature="docComment;method#getLastLine#0;class#KeyScanner#0;class#Tools#0" />
             <element signature="docComment;method#getBufferedLine#0;class#KeyScanner#0;class#Tools#0" />
             <element signature="docComment;method#setValidCharsRegex#0;class#KeyScanner#0;class#Tools#0" />
             <element signature="docComment;method#newLineJustHappen#0;class#KeyScanner#0;class#Tools#0" />
+            <element signature="e#14877#14878#0" expanded="true" />
+            <element signature="e#14915#14916#0" expanded="true" />
             <element signature="method#clearAll#0;class#KeyScanner#0;class#Tools#0" />
             <element signature="method#clearHistory#0;class#KeyScanner#0;class#Tools#0" />
             <element signature="class#Zoom#0;class#Tools#0" />
@@ -1488,8 +1654,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WrapperPainter/src/WrapperPainter/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        <state relative-caret-position="135">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="method#initializeWrapper#0;class#CodeGenerator#0" />
+            <element signature="e#421#500#1" />
+            <element signature="e#534#616#1" />
+            <element signature="e#646#725#1" />
+            <element signature="e#760#839#1" />
+            <element signature="e#871#950#1" />
+            <element signature="method#initializeLineWrapper#0;class#CodeGenerator#0" />
+            <element signature="method#initializeTextWrapper#0;class#CodeGenerator#0" />
+            <element signature="method#initializeRectWrapper#0;class#CodeGenerator#0" />
+            <element signature="method#initializeImageWrapper#0;class#CodeGenerator#0" />
+            <element signature="method#initializeEllipseWrapper#0;class#CodeGenerator#0" />
+            <element signature="method#initializeWrapperLayout#0;class#CodeGenerator#0" />
+            <element signature="method#createWrapperField#0;class#CodeGenerator#0" />
+            <element signature="e#5637#5777#1" />
+            <element signature="e#5812#5957#1" />
+            <element signature="e#5989#6130#1" />
+            <element signature="e#6160#6300#1" />
+            <element signature="e#6334#6477#1" />
+            <element signature="method#getCode#0;class#CodeGenerator#0" />
+            <element signature="e#6881#6996#1" />
+            <element signature="e#7257#7480#1" />
+            <element signature="e#7667#7875#1" />
+            <element signature="e#7696#7746#1" />
+            <element signature="e#7752#7810#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9150">
+          <caret line="666" column="22" selection-start-line="666" selection-start-column="22" selection-end-line="666" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1504,7 +1703,7 @@
             <option name="proportions">
               <list>
                 <option value="0.125" />
-                <option value="0.65861344" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

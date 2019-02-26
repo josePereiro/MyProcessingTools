@@ -12,37 +12,26 @@ public class Console extends PGuiObject {
         @Override
         public boolean handlePEvent(KeyEvent event, PGuiObject pGuiObject) {
             Console console = (Console) pGuiObject;
-            boolean scanResult = console.scanner.scan(console.context.key);
-            if (console.scanner.newLineJustHappen()) {
-                console.println(console.scanner.getLastLine());
-                console.setInputText("");
-                if (console.onInputEnteredHandler != null){
-                    return console.onInputEnteredHandler.handlePEvent(console,console.scanner.getLastLine());
-                }
-            } else {
-                console.setInputText(console.scanner.getBufferedLine());
-            }
-
-            return scanResult;
-
+            return console.read(console.context.key);
         }
     };
+
     private static final OnMouseWheelHandler DEFAULT_ON_MOUSE_WHEEL_HANDLER = new OnMouseWheelHandler() {
 
 
         @Override
         public boolean handlePEvent(MouseEvent event, PGuiObject pGuiObject) {
             MultiLineTextBox multiLineTextBox = ((Console) pGuiObject).outputBox;
-            return multiLineTextBox.getOnMouseWheelHandler().handlePEvent(event,multiLineTextBox);
+            return multiLineTextBox.getOnMouseWheelHandler().handlePEvent(event, multiLineTextBox);
         }
     };
-    private final int maxVisibleLinesCount;
 
+    private final int maxVisibleLinesCount;
     private MultiLineTextBox outputBox;
+
     private SingleLineTextBox inputBox;
     private Tools.KeyScanner scanner;
     private String prompt = "$:";
-
 
     public Console(int maxVisibleLinesCount, float x, float y,
                    float width, float height, PApplet context) {
@@ -65,7 +54,7 @@ public class Console extends PGuiObject {
         setOnMouseWheelHandler(DEFAULT_ON_MOUSE_WHEEL_HANDLER);
     }
 
-    void initializeLayout() {
+    private void initializeLayout() {
         float multiLineBoxHeight = (height * (maxVisibleLinesCount - 1)) / maxVisibleLinesCount;
         outputBox = new MultiLineTextBox(this.maxVisibleLinesCount - 1, x, y, width,
                 multiLineBoxHeight, context);
@@ -90,6 +79,38 @@ public class Console extends PGuiObject {
         return maxVisibleLinesCount;
     }
 
+    //Public IO
+    public void clearInput() {
+        inputBox.setText(prompt);
+        scanner.clearBuffer();
+    }
+
+    public boolean read(char key) {
+        boolean scanResult = scanner.scan(key);
+        if (scanner.newLineJustHappen()) {
+            println(scanner.getLastLine());
+            inputBox.setText(prompt);
+            if (onInputEnteredHandler != null) {
+                return onInputEnteredHandler.handlePEvent(this, scanner.getLastLine());
+            }
+        } else {
+            inputBox.setText(prompt + scanner.getBufferedLine());
+            inputBox.fixTextLength();
+        }
+        return scanResult;
+    }
+
+    public void enter() {
+        read((char) Tools.KeyCodes.RETURN);
+    }
+
+    public boolean read(String s) {
+        for (int ci = 0; ci < s.length(); ci++) {
+            if (!read(s.charAt(ci))) return false;
+        }
+        return true;
+    }
+
     public void print(String s) {
         outputBox.addText(s);
         outputBox.scrollTillBottom();
@@ -100,7 +121,7 @@ public class Console extends PGuiObject {
     }
 
     public void println() {
-        print( '\n' + prompt);
+        print('\n' + prompt);
     }
 
     /**
@@ -108,20 +129,9 @@ public class Console extends PGuiObject {
      *
      * @return
      */
-    public String getInputText() {
+    public String getTextOnInput() {
         return inputBox.getText().substring(prompt.length());
     }
-
-    public void setInputText(String s) {
-        inputBox.setText(prompt + s);
-        scanner.clearBuffer();
-        for (int ci = 0; ci < s.length(); ci++) {
-            scanner.scan(s.charAt(ci));
-        }
-        inputBox.fixTextLength();
-    }
-
-    private OnInputEnteredHandler onInputEnteredHandler;
 
     public OnInputEnteredHandler getOnInputEnteredHandler() {
         return onInputEnteredHandler;
@@ -135,4 +145,6 @@ public class Console extends PGuiObject {
 
         public abstract boolean handlePEvent(PGuiObject pGuiObject, String input);
     }
+
+    private OnInputEnteredHandler onInputEnteredHandler;
 }

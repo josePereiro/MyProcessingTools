@@ -611,7 +611,7 @@ public class WrapperPainter extends PApplet {
     private void changeFillEnable(ArrayList<WPObject> focusedComponents) {
         if (focusedComponents.size() > 0) {
             console.println("Change fill alpha: " + focusedComponents.size() + " objects");
-            console.setInputText("");
+            console.clearInput();
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -642,7 +642,7 @@ public class WrapperPainter extends PApplet {
         if (focusedComponents.size() > 0) {
             console.println("Change fill enable: " + focusedComponents.size() + " objects. Press \'y\' " +
                     "to enable or anything else to disable!");
-            console.setInputText("");
+            console.clearInput();
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -673,7 +673,7 @@ public class WrapperPainter extends PApplet {
         if (focusedComponents.size() > 0) {
             console.println("Change stroke enable: " + focusedComponents.size() + " objects. Press \'y\' " +
                     "to enable or anything else to disable!");
-            console.setInputText("");
+            console.clearInput();
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -737,7 +737,7 @@ public class WrapperPainter extends PApplet {
     private void changeStrokeWeight(ArrayList<WPObject> focusedComponents) {
         if (focusedComponents.size() > 0) {
             console.println("Change stroke weight: " + focusedComponents.size() + " objects");
-            console.setInputText("");
+            console.clearInput();
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -767,7 +767,7 @@ public class WrapperPainter extends PApplet {
     private void changeStrokeAlpha(ArrayList<WPObject> focusedComponents) {
         if (focusedComponents.size() > 0) {
             console.println("Change stroke alpha: " + focusedComponents.size() + " objects");
-            console.setInputText("");
+            console.clearInput();
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -799,7 +799,7 @@ public class WrapperPainter extends PApplet {
             console.println("Change " + focusedComponents.get(0).getName() + " text!");
 
             TextWPObject textWrapperPainterObject = (TextWPObject) focusedComponents.get(0);
-            console.setInputText(textWrapperPainterObject.getWrapper().getText());
+            console.read(textWrapperPainterObject.getWrapper().getText());
 
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
@@ -825,7 +825,7 @@ public class WrapperPainter extends PApplet {
         if (focusedComponents.size() == 1 && focusedComponents.get(0).isAText()) {
             console.println("Change " + focusedComponents.get(0).getName() + " textSize!");
             TextWPObject textWrapperPainterObject = (TextWPObject) focusedComponents.get(0);
-            console.setInputText(textWrapperPainterObject.getWrapper().getTextSize() + "");
+            console.read(textWrapperPainterObject.getWrapper().getTextSize() + "");
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
 
@@ -851,7 +851,7 @@ public class WrapperPainter extends PApplet {
     private void rename(ArrayList<WPObject> focusedComponents) {
         if (focusedComponents.size() == 1) {
             console.println("Rename " + focusedComponents.get(0).getName());
-            console.setInputText(focusedComponents.get(0).getName());
+            console.read(focusedComponents.get(0).getName());
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
             console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
@@ -870,7 +870,7 @@ public class WrapperPainter extends PApplet {
             });
         } else {
             console.println("Renaming " + focusedComponents.size() + " objects ");
-            console.setInputText("");
+            console.clearInput();
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
             console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
@@ -896,9 +896,9 @@ public class WrapperPainter extends PApplet {
     private void findByName() {
         console.println("Search objects by name:");
         if (WPObjectsManager.getFocusedObjects().size() > 0) {
-            console.setInputText(WPObjectsManager.getFocusedObjects().get(0).getName());
+            console.read(WPObjectsManager.getFocusedObjects().get(0).getName());
         } else {
-            console.setInputText("");
+            console.clearInput();
         }
         console.setFocusable(true);
         pGuiManager.setFocusTo(console);
@@ -957,9 +957,9 @@ public class WrapperPainter extends PApplet {
             console.println("Write the name for the saveIntoFile file!");
 
             if (openedFile != null) {
-                console.setInputText(openedFile.getName());
+                console.read(openedFile.getName());
             } else {
-                console.setInputText("save_" + System.currentTimeMillis() + ".txt");
+                console.read("save_" + System.currentTimeMillis() + ".txt");
             }
             console.setFocusable(true);
             pGuiManager.setFocusTo(console);
@@ -1385,7 +1385,7 @@ public class WrapperPainter extends PApplet {
 
                     //Event Handler
                     drawBoard.setOnMouseClickedHandler(null);
-                    console.setInputText(WPObjectsManager.suggestNewName(type));
+                    console.read(WPObjectsManager.suggestNewName(type));
                     console.setFocusable(true);
                     pGuiManager.setFocusTo(console);
                     console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
@@ -1495,7 +1495,7 @@ public class WrapperPainter extends PApplet {
 
                     //Event Handler
                     drawBoard.setOnMouseClickedHandler(null);
-                    console.setInputText(WPObjectsManager.suggestNewName(type));
+                    console.read(WPObjectsManager.suggestNewName(type));
                     console.setFocusable(true);
                     pGuiManager.setFocusTo(console);
                     console.setOnInputEnteredHandler(new Console.OnInputEnteredHandler() {
